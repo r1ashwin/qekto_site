@@ -1,0 +1,124 @@
+:root {
+  --bg-0: #070a0f;
+  --bg-1: #0c121c;
+  --ink: #e8eef7;
+  --muted: #8b9bb0;
+  --line: rgba(120, 160, 220, 0.12);
+  --accent: #5eead4;
+  --glow: rgba(94, 234, 212, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, var(--glow), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 80%, rgba(56, 120, 200, 0.12), transparent 50%),
+    linear-gradient(180deg, var(--bg-0), var(--bg-1));
+  display: grid;
+  place-items: center;
+  overflow-x: hidden;
+}
+
+.grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 20%, transparent 75%);
+  pointer-events: none;
+  animation: drift 28s linear infinite;
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 520px);
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  animation: rise 0.9s ease-out both;
+}
+
+.mark {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.75rem;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 9vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 2rem;
+}
+
+.family {
+  list-style: none;
+  display: grid;
+  gap: 0.85rem;
+  margin-bottom: 2.25rem;
+}
+
+.family li {
+  font-size: clamp(1.25rem, 4vw, 1.65rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  padding: 0.65rem 0;
+  border-top: 1px solid var(--line);
+  animation: rise 0.8s ease-out both;
+}
+
+.family li:nth-child(1) { animation-delay: 0.12s; }
+.family li:nth-child(2) { animation-delay: 0.2s; }
+.family li:nth-child(3) { animation-delay: 0.28s; }
+.family li:nth-child(4) { animation-delay: 0.36s; border-bottom: 1px solid var(--line); }
+
+.note {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  animation: rise 0.9s ease-out 0.45s both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 48px 48px, 48px 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid,
+  .stage,
+  .family li,
+  .note {
+    animation: none;
+  }
+}
