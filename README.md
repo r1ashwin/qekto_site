@@ -1,17 +1,7 @@
 # qekto.com
 
-Cinematic coming-soon page for the family.
-
-## Local
-
-Open `index.html`, or:
-
-```bash
-npx serve .
-```
+Professional coming-soon page.
 
 ## Vercel
 
-1. Import this repo
-2. Framework: Other
-3. Attach `qekto.com`
+Import this repo → Framework: Other → attach `qekto.com`.
