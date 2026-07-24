@@ -3,28 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>qekto</title>
-    <meta name="description" content="Hi there — Ashwin, Aishu, Appa, Amma." />
+    <title>qekto — coming soon</title>
+    <meta
+      name="description"
+      content="Hi there — Ashwin, Aishu, Appa, Amma. Something beautiful is on the way."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="grid" aria-hidden="true"></div>
-    <main class="stage">
-      <p class="mark">qekto</p>
+    <div class="sky" aria-hidden="true">
+      <div class="aurora a1"></div>
+      <div class="aurora a2"></div>
+      <div class="aurora a3"></div>
+      <div class="stars"></div>
+      <div class="horizon"></div>
+      <div class="orb"></div>
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="cursor-glow" id="glow"></div>
+    </div>
+
+    <main class="hero">
+      <p class="brand">qekto</p>
+      <p class="status">
+        <span class="pulse"></span>
+        coming soon
+      </p>
       <h1>Hi there!</h1>
-      <ul class="family">
-        <li>Ashwin</li>
-        <li>Aishu</li>
-        <li>Appa</li>
-        <li>Amma</li>
+      <p class="lead">A little corner of the internet, built for our family.</p>
+      <ul class="family" aria-label="Our family">
+        <li><span>Ashwin</span></li>
+        <li><span>Aishu</span></li>
+        <li><span>Appa</span></li>
+        <li><span>Amma</span></li>
       </ul>
-      <p class="note">home for our little crew</p>
+      <p class="footer-line">
+        <span class="mono">something amazing is loading</span>
+      </p>
     </main>
+
+    <script>
+      const glow = document.getElementById("glow");
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduce && glow) {
+        let x = window.innerWidth / 2;
+        let y = window.innerHeight / 2;
+        let tx = x;
+        let ty = y;
+        window.addEventListener("pointermove", (e) => {
+          tx = e.clientX;
+          ty = e.clientY;
+        });
+        const tick = () => {
+          x += (tx - x) * 0.08;
+          y += (ty - y) * 0.08;
+          glow.style.transform = `translate(${x}px, ${y}px)`;
+          requestAnimationFrame(tick);
+        };
+        tick();
+      }
+    </script>
   </body>
 </html>

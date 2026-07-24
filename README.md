@@ -1,10 +1,10 @@
 # qekto.com
 
-Simple family landing page.
+Cinematic coming-soon page for the family.
 
 ## Local
 
-Open `index.html` in a browser, or:
+Open `index.html`, or:
 
 ```bash
 npx serve .
@@ -12,7 +12,6 @@ npx serve .
 
 ## Vercel
 
-1. Import this repo in Vercel
-2. Framework preset: Other
-3. Root directory: `.`
-4. Attach domain `qekto.com`
+1. Import this repo
+2. Framework: Other
+3. Attach `qekto.com`
