@@ -438,9 +438,22 @@ body::after {
 }
 
 .page-main {
-  max-width: 760px;
+  max-width: 920px;
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
+  padding: 1.5rem 1.5rem 5rem;
+}
+
+.page-hero {
+  padding: 1.75rem 0 2.75rem;
+}
+
+.page-audience {
+  font-size: clamp(3.75rem, 14vw, 7.5rem);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 0.92;
+  color: var(--ink);
+  margin: 0 0 1.35rem;
 }
 
 .page-kicker {
@@ -453,26 +466,82 @@ body::after {
 }
 
 .page-title {
-  font-size: clamp(1.85rem, 4vw, 2.6rem);
+  font-size: clamp(1.85rem, 4.2vw, 2.85rem);
   font-weight: 600;
   letter-spacing: -0.04em;
-  line-height: 1.15;
+  line-height: 1.12;
   color: var(--ink);
-  margin-bottom: 0.85rem;
+  margin-bottom: 1rem;
+  max-width: 18ch;
 }
 
 .page-lead {
-  font-size: 16px;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
   line-height: 1.55;
   color: var(--body);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
+  max-width: 36rem;
 }
 
 .page-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  gap: 1rem 1.25rem;
+}
+
+.feature-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.feature {
+  padding: 1.75rem 1.6rem 1.85rem;
+  border-radius: 20px;
+  border: 1px solid var(--hairline);
+}
+
+.feature-teal {
+  background: color-mix(in srgb, var(--signal-teal) 11%, var(--surface));
+  border-color: color-mix(in srgb, var(--signal-teal) 28%, var(--hairline));
+}
+
+.feature-yellow {
+  background: color-mix(in srgb, var(--signal-yellow) 12%, var(--surface));
+  border-color: color-mix(in srgb, var(--signal-yellow) 32%, var(--hairline));
+}
+
+.feature-red {
+  background: color-mix(in srgb, var(--signal-red) 10%, var(--surface));
+  border-color: color-mix(in srgb, var(--signal-red) 26%, var(--hairline));
+}
+
+.feature-step {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 0.85rem;
+}
+
+.feature h2 {
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 0.55rem;
+}
+
+.feature p {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--body);
+  max-width: 38rem;
+}
+
+.feature .btn {
+  margin-top: 1.15rem;
 }
 
 .page-section {
@@ -496,19 +565,20 @@ body::after {
 
 .price-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.15rem;
+  margin-top: 0.25rem;
 }
 
 .price-card {
   background: var(--surface);
   border: 1px solid var(--hairline);
-  border-radius: 10px;
-  padding: 1.15rem 1.15rem 1.25rem;
+  border-radius: 18px;
+  padding: 1.45rem 1.3rem 1.4rem;
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
+  min-height: 18rem;
 }
 
 .price-card-accent {
@@ -523,14 +593,14 @@ body::after {
 }
 
 .price-amount {
-  font-size: 28px;
+  font-size: clamp(1.75rem, 3vw, 2.15rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   color: var(--ink);
 }
 
 .price-note {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--mute);
   line-height: 1.4;
 }
@@ -539,21 +609,43 @@ body::after {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  font-size: 13px;
+  gap: 0.4rem;
+  font-size: 14px;
   color: var(--body);
-  margin: 0.35rem 0 0.5rem;
+  margin: 0.45rem 0 0.65rem;
   flex: 1;
 }
 
+.price-list li {
+  padding-left: 0.85rem;
+  position: relative;
+}
+
 .price-list li::before {
-  content: "·";
-  margin-right: 0.4rem;
-  color: var(--mute);
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink);
+  opacity: 0.35;
 }
 
 .price-card .btn {
-  width: 100%;
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+@media (max-width: 820px) {
+  .price-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-title {
+    max-width: none;
+  }
 }
 
 .logo .triad {
