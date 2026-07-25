@@ -1,65 +1,126 @@
 (() => {
-  const stage = document.querySelector(".stage");
-  if (!stage) return;
+  const rail = document.querySelector(".rail");
+  if (!rail) return;
 
-  const panels = [...stage.querySelectorAll(".panel")];
-  const dots = [...stage.querySelectorAll(".step-dot")];
-  const total = panels.length;
+  const beats = [...rail.querySelectorAll(".beat")];
+  const dots = [...document.querySelectorAll(".desktop-stepper .step-dot")];
+  const mq = window.matchMedia("(min-width: 900px)");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   let index = 0;
   let timer = null;
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const dwell = 3200;
+  let observers = [];
 
-  function show(next) {
-    index = ((next % total) + total) % total;
-    stage.dataset.step = String(index);
-
-    panels.forEach((panel, i) => {
-      const on = i === index;
-      panel.classList.toggle("is-active", on);
-      // retrigger CSS animations on viz children
-      if (on) {
-        panel.querySelectorAll(".meter-fill, .placement, .lift-line, .lift-dot.end").forEach((el) => {
-          el.style.animation = "none";
-          void el.offsetWidth;
-          el.style.animation = "";
-        });
-      }
+  function restartAnims(beat) {
+    beat.querySelectorAll(".bar, .pub-pick, .lift-line").forEach((el) => {
+      el.style.animation = "none";
+      void el.offsetWidth;
+      el.style.animation = "";
     });
+  }
 
+  function showDesktop(next) {
+    index = ((next % beats.length) + beats.length) % beats.length;
+    rail.dataset.step = String(index);
+    beats.forEach((beat, i) => {
+      const on = i === index;
+      beat.classList.toggle("is-active", on);
+      beat.classList.toggle("is-on-screen", on);
+      if (on) restartAnims(beat);
+    });
     dots.forEach((dot, i) => {
       dot.classList.toggle("is-active", i === index);
-      dot.setAttribute("aria-selected", i === index ? "true" : "false");
     });
   }
 
   function play() {
-    if (reduceMotion) return;
+    if (reduceMotion || !mq.matches) return;
     stop();
-    timer = window.setInterval(() => show(index + 1), dwell);
+    timer = window.setInterval(() => showDesktop(index + 1), 4200);
   }
 
   function stop() {
     if (timer) {
-      window.clearInterval(timer);
+      clearInterval(timer);
       timer = null;
     }
   }
 
+  function clearMobileObservers() {
+    observers.forEach((o) => o.disconnect());
+    observers = [];
+  }
+
+  function setupMobile() {
+    document.body.classList.remove("desktop-lock");
+    stop();
+    clearMobileObservers();
+    beats.forEach((beat) => {
+      beat.classList.remove("is-active");
+      beat.classList.add("is-on-screen");
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.45) {
+            entry.target.classList.add("is-on-screen");
+            restartAnims(entry.target);
+          }
+        });
+      },
+      { threshold: [0.45, 0.6] }
+    );
+
+    beats.forEach((beat) => io.observe(beat));
+    observers.push(io);
+  }
+
+  function setupDesktop() {
+    document.body.classList.add("desktop-lock");
+    clearMobileObservers();
+    beats.forEach((beat) => beat.classList.remove("is-on-screen"));
+    showDesktop(index);
+    play();
+  }
+
+  function applyMode() {
+    if (mq.matches) setupDesktop();
+    else setupMobile();
+  }
+
   dots.forEach((dot) => {
     dot.addEventListener("click", () => {
-      show(Number(dot.dataset.go));
+      if (!mq.matches) return;
+      showDesktop(Number(dot.dataset.go));
       play();
     });
   });
 
-  stage.addEventListener("mouseenter", stop);
-  stage.addEventListener("mouseleave", play);
-  stage.addEventListener("focusin", stop);
-  stage.addEventListener("focusout", (e) => {
-    if (!stage.contains(e.relatedTarget)) play();
+  rail.addEventListener("mouseenter", () => {
+    if (mq.matches) stop();
+  });
+  rail.addEventListener("mouseleave", () => {
+    if (mq.matches) play();
   });
 
-  show(0);
-  play();
+  // Desktop: wheel advances steps instead of scrolling the page
+  let wheelLock = false;
+  window.addEventListener(
+    "wheel",
+    (e) => {
+      if (!mq.matches || wheelLock) return;
+      e.preventDefault();
+      wheelLock = true;
+      showDesktop(index + (e.deltaY > 0 ? 1 : -1));
+      play();
+      window.setTimeout(() => {
+        wheelLock = false;
+      }, 700);
+    },
+    { passive: false }
+  );
+
+  mq.addEventListener("change", applyMode);
+  applyMode();
 })();

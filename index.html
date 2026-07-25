@@ -32,109 +32,198 @@
       </nav>
     </header>
 
-    <main class="stage" data-step="0">
-      <p class="brand-line">
-        Qekto
-        <span class="triad triad-lg" aria-hidden="true">
-          <span class="dot teal"></span>
-          <span class="dot yellow"></span>
-          <span class="dot red"></span>
-        </span>
-      </p>
-
-      <div class="story" aria-live="polite">
-        <article class="panel is-active" data-panel="0">
-          <p class="step-tag teal-text">01</p>
-          <h1>Measure</h1>
-          <p class="lead">
-            See how often agents name you vs competitors — per query, per
-            agent.
+    <div class="rail" data-step="0">
+      <section class="beat is-active" data-beat="0" id="measure">
+        <div class="beat-copy">
+          <p class="brand-line desktop-only">
+            Qekto
+            <span class="triad triad-lg" aria-hidden="true">
+              <span class="dot teal"></span>
+              <span class="dot yellow"></span>
+              <span class="dot red"></span>
+            </span>
           </p>
-          <div class="viz measure-viz" aria-hidden="true">
-            <div class="meter">
-              <span class="meter-fill"></span>
-            </div>
-            <div class="meter-meta">
-              <span>You</span>
-              <span class="meter-num">38%</span>
-            </div>
-            <div class="meter faint">
-              <span class="meter-fill short"></span>
-            </div>
-            <div class="meter-meta mute-row">
-              <span>Peer</span>
-              <span>22%</span>
-            </div>
+          <p class="step-tag teal-text">01 — Measure</p>
+          <h1 class="teal-text">Measure</h1>
+          <p class="lead">
+            See how often agents name you vs the category — share of voice,
+            mention rate, queries won and lost.
+          </p>
+          <div class="actions desktop-only">
+            <a class="btn" href="https://qekto.app/login?mode=signup">Sign up</a>
+            <a class="link" href="https://qekto.app/login">Log in</a>
           </div>
-        </article>
+        </div>
 
-        <article class="panel" data-panel="1">
-          <p class="step-tag yellow-text">02</p>
-          <h1>Place content</h1>
-          <p class="lead">
-            Put your brand into the pages agents actually read and cite —
-            labeled, on the open web.
-          </p>
-          <div class="viz place-viz" aria-hidden="true">
-            <div class="page-line"></div>
-            <div class="page-line mid"></div>
-            <div class="page-line short"></div>
-            <div class="placement">
-              <span class="placement-dot"></span>
-              Sponsored pick — in the HTML agents fetch
+        <div class="instance" aria-hidden="true">
+          <div class="ui-card">
+            <div class="ui-top">
+              <div>
+                <p class="ui-eyebrow">AI visibility</p>
+                <p class="ui-brand">Wakefit · Mattresses</p>
+              </div>
+              <p class="ui-agents">ChatGPT · Claude</p>
             </div>
-            <div class="page-line mid"></div>
-            <div class="page-line"></div>
+            <div class="ui-stats">
+              <div>
+                <p class="ui-stat-num teal-text">44%</p>
+                <p class="ui-stat-label">Named in answers</p>
+              </div>
+              <div>
+                <p class="ui-stat-num teal-text">31%</p>
+                <p class="ui-stat-label">Share of voice</p>
+              </div>
+              <div>
+                <p class="ui-stat-num">#2</p>
+                <p class="ui-stat-label">In category</p>
+              </div>
+            </div>
+            <p class="ui-section">Mention rate by brand</p>
+            <ul class="sov-list">
+              <li>
+                <span>Sleepyhead</span>
+                <span class="bar-track"><span class="bar" style="--w: 52%"></span></span>
+                <span class="pct">52%</span>
+              </li>
+              <li class="you">
+                <span>Wakefit</span>
+                <span class="bar-track"><span class="bar you-bar" style="--w: 44%"></span></span>
+                <span class="pct teal-text">44%</span>
+              </li>
+              <li>
+                <span>The Sleep Company</span>
+                <span class="bar-track"><span class="bar" style="--w: 38%"></span></span>
+                <span class="pct">38%</span>
+              </li>
+              <li>
+                <span>SleepyCat</span>
+                <span class="bar-track"><span class="bar" style="--w: 29%"></span></span>
+                <span class="pct">29%</span>
+              </li>
+              <li>
+                <span>Emma</span>
+                <span class="bar-track"><span class="bar" style="--w: 21%"></span></span>
+                <span class="pct">21%</span>
+              </li>
+              <li>
+                <span>Flo</span>
+                <span class="bar-track"><span class="bar" style="--w: 14%"></span></span>
+                <span class="pct">14%</span>
+              </li>
+            </ul>
+            <p class="ui-section">Queries</p>
+            <ul class="query-list">
+              <li><span class="q-dot win"></span> Best mattress for back pain India</li>
+              <li><span class="q-dot mid"></span> Orthopedic mattress under 20000</li>
+              <li><span class="q-dot miss"></span> Best hybrid mattress for couples</li>
+            </ul>
           </div>
-        </article>
+        </div>
+      </section>
 
-        <article class="panel" data-panel="2">
-          <p class="step-tag red-text">03</p>
-          <h1>Prove the lift</h1>
+      <section class="beat" data-beat="1" id="place">
+        <div class="beat-copy">
+          <p class="step-tag yellow-text">02 — Place</p>
+          <h1 class="yellow-text">Place content</h1>
           <p class="lead">
-            Re-check after the campaign. Show the before and after — the
-            receipt brands pay for again.
+            Get into the pages agents cite — labeled sponsored content in the
+            raw HTML bots fetch, not a hidden trick.
           </p>
-          <div class="viz prove-viz" aria-hidden="true">
-            <svg viewBox="0 0 280 88" class="lift-chart" role="img">
+          <div class="actions desktop-only">
+            <a class="btn" href="https://qekto.app/login?mode=signup">Sign up</a>
+            <a class="link" href="https://qekto.app/login">Log in</a>
+          </div>
+        </div>
+
+        <div class="instance" aria-hidden="true">
+          <div class="ui-card publisher">
+            <div class="pub-chrome">
+              <span class="pub-pill"></span>
+              <span class="pub-url">sleepguide.in/best-mattress-india</span>
+            </div>
+            <p class="pub-kicker">Buying guide · Updated this week</p>
+            <p class="pub-title">Best mattresses in India for back pain</p>
+            <p class="pub-body">
+              Agents reading this page pull brand names from the ranked shortlist
+              below — including labeled picks woven into the article.
+            </p>
+            <div class="pub-pick">
+              <p class="pub-pick-label">Sponsored</p>
+              <p class="pub-pick-name">Wakefit Orthopedic Memory Foam</p>
+              <p class="pub-pick-why">
+                Firm support, 10-year warranty, strong fit for side sleepers with
+                lower-back pain — cited on long-tail back-pain queries.
+              </p>
+            </div>
+            <ol class="pub-list">
+              <li>Sleepyhead Adaptive</li>
+              <li>The Sleep Company SmartGRID</li>
+              <li>SleepyCat Dual Comfort</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="beat" data-beat="2" id="prove">
+        <div class="beat-copy">
+          <p class="step-tag red-text">03 — Prove</p>
+          <h1 class="red-text">Prove the lift</h1>
+          <p class="lead">
+            Re-run the same checks after placement. Show the before and after —
+            the receipt that makes brands come back.
+          </p>
+          <div class="actions">
+            <a class="btn" href="https://qekto.app/login?mode=signup">Sign up</a>
+            <a class="link" href="https://qekto.app/login">Log in</a>
+          </div>
+        </div>
+
+        <div class="instance" aria-hidden="true">
+          <div class="ui-card">
+            <div class="ui-top">
+              <div>
+                <p class="ui-eyebrow">Campaign receipt</p>
+                <p class="ui-brand">Wakefit · Mattresses</p>
+              </div>
+              <p class="ui-agents">14-day window</p>
+            </div>
+            <div class="lift-row">
+              <div>
+                <p class="ui-stat-label">Before</p>
+                <p class="ui-stat-num">11%</p>
+              </div>
+              <div class="lift-bridge" aria-hidden="true"></div>
+              <div>
+                <p class="ui-stat-label">After</p>
+                <p class="ui-stat-num red-text">38%</p>
+              </div>
+            </div>
+            <svg viewBox="0 0 320 110" class="lift-chart" role="img">
+              <line x1="16" y1="90" x2="304" y2="90" stroke="#d9d3c8" stroke-width="1" />
               <polyline
                 class="lift-line"
-                points="8,72 48,68 88,64 128,52 168,40 208,28 248,18 272,12"
+                points="16,82 56,80 96,78 136,70 176,58 216,42 256,28 304,18"
                 fill="none"
                 stroke-width="2"
               />
-              <circle class="lift-dot" cx="8" cy="72" r="3" />
-              <circle class="lift-dot end" cx="272" cy="12" r="3.5" />
+              <circle cx="16" cy="82" r="3" fill="#787066" />
+              <circle class="lift-end" cx="304" cy="18" r="4" fill="#c25a50" />
             </svg>
-            <div class="lift-meta">
-              <span>11%</span>
-              <span class="lift-arrow" aria-hidden="true"></span>
-              <span class="lift-after">38%</span>
-            </div>
+            <ul class="lift-notes">
+              <li>Named in answers +27 pts</li>
+              <li>Won “best mattress for back pain”</li>
+              <li>Claude cite rate up on long-tail</li>
+            </ul>
           </div>
-        </article>
-      </div>
+        </div>
+      </section>
+    </div>
 
-      <div class="stepper" role="tablist" aria-label="Product loop">
-        <button type="button" class="step-dot is-active" data-go="0" aria-label="Measure"></button>
-        <button type="button" class="step-dot" data-go="1" aria-label="Place content"></button>
-        <button type="button" class="step-dot" data-go="2" aria-label="Prove the lift"></button>
-      </div>
-
-      <div class="actions stage-actions">
-        <a class="btn" href="https://qekto.app/login?mode=signup">Sign up</a>
-        <a class="link" href="https://qekto.app/login">Log in</a>
-      </div>
-
-      <figure class="report-strip">
-        <img
-          src="assets/report-still.png"
-          alt="Sample AI visibility report"
-          width="1224"
-          height="665"
-        />
-      </figure>
-    </main>
+    <div class="desktop-stepper" role="tablist" aria-label="Product loop">
+      <button type="button" class="step-dot is-active" data-go="0" aria-label="Measure"></button>
+      <button type="button" class="step-dot" data-go="1" aria-label="Place content"></button>
+      <button type="button" class="step-dot" data-go="2" aria-label="Prove the lift"></button>
+    </div>
 
     <footer class="foot">
       <p class="foot-line">Status is the wedge. The ad network is the company.</p>
