@@ -1,7 +1,7 @@
 # qekto.com
 
-Professional coming-soon page.
+Plain marketing shell. Login/signup go to the app on `qekto.app`.
 
 ## Vercel
 
-Import this repo → Framework: Other → attach `qekto.com`.
+Import this repo → Framework: Other → Production domain: `qekto.com`.
