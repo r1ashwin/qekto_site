@@ -155,6 +155,17 @@
     { passive: true }
   );
 
+  function beatFromHash() {
+    const id = window.location.hash.replace("#", "");
+    if (!id) return;
+    const i = beats.findIndex((beat) => beat.id === id);
+    if (i < 0) return;
+    showBeat(i);
+    if (mq.matches) play();
+  }
+
+  window.addEventListener("hashchange", beatFromHash);
   mq.addEventListener("change", applyMode);
   applyMode();
+  beatFromHash();
 })();
