@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Qekto — the ad layer for AI agents</title>
+    <title>Qekto — measure, place, prove</title>
     <meta
       name="description"
-      content="Measure how AI agents recommend your brand, place content they read, and prove lift."
+      content="Measure how AI agents recommend you, place content they read, and prove the lift."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,58 +32,109 @@
       </nav>
     </header>
 
-    <section class="hero">
-      <div class="hero-copy motion-in">
-        <p class="brand-line">
-          Qekto
-          <span class="triad triad-lg" aria-hidden="true">
-            <span class="dot teal"></span>
-            <span class="dot yellow"></span>
-            <span class="dot red"></span>
-          </span>
-        </p>
-        <h1>
-          The ad layer for <span class="accent-word">AI agents</span>
-        </h1>
-        <p class="sub">
-          Measure how agents recommend you, place content they read, and prove
-          the lift.
-        </p>
-        <div class="actions">
-          <a class="btn" href="https://qekto.app/login?mode=signup">Sign up</a>
-          <a class="link" href="https://qekto.app/login">Log in</a>
-        </div>
+    <main class="stage" data-step="0">
+      <p class="brand-line">
+        Qekto
+        <span class="triad triad-lg" aria-hidden="true">
+          <span class="dot teal"></span>
+          <span class="dot yellow"></span>
+          <span class="dot red"></span>
+        </span>
+      </p>
+
+      <div class="story" aria-live="polite">
+        <article class="panel is-active" data-panel="0">
+          <p class="step-tag teal-text">01</p>
+          <h1>Measure</h1>
+          <p class="lead">
+            See how often agents name you vs competitors — per query, per
+            agent.
+          </p>
+          <div class="viz measure-viz" aria-hidden="true">
+            <div class="meter">
+              <span class="meter-fill"></span>
+            </div>
+            <div class="meter-meta">
+              <span>You</span>
+              <span class="meter-num">38%</span>
+            </div>
+            <div class="meter faint">
+              <span class="meter-fill short"></span>
+            </div>
+            <div class="meter-meta mute-row">
+              <span>Peer</span>
+              <span>22%</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel" data-panel="1">
+          <p class="step-tag yellow-text">02</p>
+          <h1>Place content</h1>
+          <p class="lead">
+            Put your brand into the pages agents actually read and cite —
+            labeled, on the open web.
+          </p>
+          <div class="viz place-viz" aria-hidden="true">
+            <div class="page-line"></div>
+            <div class="page-line mid"></div>
+            <div class="page-line short"></div>
+            <div class="placement">
+              <span class="placement-dot"></span>
+              Sponsored pick — in the HTML agents fetch
+            </div>
+            <div class="page-line mid"></div>
+            <div class="page-line"></div>
+          </div>
+        </article>
+
+        <article class="panel" data-panel="2">
+          <p class="step-tag red-text">03</p>
+          <h1>Prove the lift</h1>
+          <p class="lead">
+            Re-check after the campaign. Show the before and after — the
+            receipt brands pay for again.
+          </p>
+          <div class="viz prove-viz" aria-hidden="true">
+            <svg viewBox="0 0 280 88" class="lift-chart" role="img">
+              <polyline
+                class="lift-line"
+                points="8,72 48,68 88,64 128,52 168,40 208,28 248,18 272,12"
+                fill="none"
+                stroke-width="2"
+              />
+              <circle class="lift-dot" cx="8" cy="72" r="3" />
+              <circle class="lift-dot end" cx="272" cy="12" r="3.5" />
+            </svg>
+            <div class="lift-meta">
+              <span>11%</span>
+              <span class="lift-arrow" aria-hidden="true"></span>
+              <span class="lift-after">38%</span>
+            </div>
+          </div>
+        </article>
       </div>
-      <figure class="hero-visual motion-in delay-1">
+
+      <div class="stepper" role="tablist" aria-label="Product loop">
+        <button type="button" class="step-dot is-active" data-go="0" aria-label="Measure"></button>
+        <button type="button" class="step-dot" data-go="1" aria-label="Place content"></button>
+        <button type="button" class="step-dot" data-go="2" aria-label="Prove the lift"></button>
+      </div>
+
+      <div class="actions stage-actions">
+        <a class="btn" href="https://qekto.app/login?mode=signup">Sign up</a>
+        <a class="link" href="https://qekto.app/login">Log in</a>
+      </div>
+
+      <figure class="report-strip">
         <img
           src="assets/report-still.png"
-          alt="Sample AI visibility report showing mention rates and share of voice"
+          alt="Sample AI visibility report"
           width="1224"
           height="665"
         />
       </figure>
-    </section>
-
-    <section class="loop">
-      <p class="eyebrow motion-in">How it works</p>
-      <ol class="beats">
-        <li class="beat motion-in delay-1">
-          <span class="beat-label">Measure</span>
-          <p>See how often ChatGPT, Claude, and other agents name you vs competitors.</p>
-          <span class="beat-bar" aria-hidden="true"></span>
-        </li>
-        <li class="beat motion-in delay-2">
-          <span class="beat-label">Place</span>
-          <p>Run campaigns that put your brand into the pages agents actually cite.</p>
-          <span class="beat-bar" aria-hidden="true"></span>
-        </li>
-        <li class="beat motion-in delay-3">
-          <span class="beat-label">Prove</span>
-          <p>Re-check and show the lift — the receipt that makes brands come back.</p>
-          <span class="beat-bar" aria-hidden="true"></span>
-        </li>
-      </ol>
-    </section>
+    </main>
 
     <footer class="foot">
       <p class="foot-line">Status is the wedge. The ad network is the company.</p>
@@ -92,5 +143,7 @@
         <a class="link" href="https://qekto.app/login">Log in</a>
       </div>
     </footer>
+
+    <script src="stage.js" defer></script>
   </body>
 </html>
