@@ -858,10 +858,7 @@ body::after {
   .sov-list li:nth-child(n + 4),
   .query-list,
   .ui-section:has(+ .query-list),
-  .pub-chrome,
-  .pub-kicker,
   .pub-body,
-  .pub-list,
   .lift-notes {
     display: none;
   }
@@ -871,6 +868,29 @@ body::after {
     background: color-mix(in srgb, var(--ink) 9%, transparent);
   }
 
+  /* Place: article context around the sponsored pick — not pick-only. */
+  .publisher .pub-chrome {
+    flex: 0 0 auto;
+    display: flex;
+    margin-bottom: 0;
+    padding-bottom: clamp(0.4rem, 1.2dvh, 0.6rem);
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  }
+
+  .publisher .pub-url {
+    font-size: clamp(10px, 1.35dvh, 12px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .publisher .pub-kicker {
+    flex: 0 0 auto;
+    display: block;
+    font-size: clamp(10px, 1.3dvh, 12px);
+    margin: 0;
+  }
+
   .publisher .pub-title {
     flex: 0 0 auto;
     font-size: clamp(15px, 2.4dvh, 18px);
@@ -878,10 +898,10 @@ body::after {
   }
 
   .pub-pick {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     width: 100%;
     min-height: 0;
-    padding: clamp(0.7rem, 2dvh, 1.1rem) clamp(0.75rem, 3vw, 1rem);
+    padding: clamp(0.65rem, 1.8dvh, 0.95rem) clamp(0.75rem, 3vw, 1rem);
     margin: 0;
     border-radius: 8px;
     border: 1px solid color-mix(in srgb, var(--signal-yellow) 45%, transparent);
@@ -902,9 +922,18 @@ body::after {
   .pub-pick-why {
     font-size: clamp(11px, 1.55dvh, 13px);
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .publisher .pub-list {
+    flex: 0 0 auto;
+    display: flex;
+    margin: 0;
+    margin-left: 1rem;
+    font-size: clamp(12px, 1.6dvh, 14px);
+    gap: clamp(0.25rem, 1dvh, 0.45rem);
   }
 
   .lift-row {
