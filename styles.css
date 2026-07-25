@@ -203,11 +203,6 @@ body::after {
   gap: 3px;
 }
 
-.triad-lg .dot {
-  width: 10px;
-  height: 10px;
-}
-
 .dot {
   display: block;
   width: 8px;
@@ -308,18 +303,6 @@ body::after {
 
 .red-text {
   color: var(--signal-red);
-}
-
-.brand-line {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  color: var(--ink);
-  margin-bottom: 1.5rem;
 }
 
 .step-tag {
