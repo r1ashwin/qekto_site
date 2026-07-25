@@ -12,7 +12,7 @@
   --signal-yellow: #b8892d;
   --signal-red: #c25a50;
   --surface: #faf8f4;
-  --header-h: 4.25rem;
+  --header-h: 5.25rem;
   --dock-h: 5.25rem;
 }
 
@@ -188,6 +188,18 @@ body::after {
   letter-spacing: 0.04em;
   line-height: 1;
   text-transform: lowercase;
+}
+
+.logo-pitch {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--mute);
+  text-transform: none;
+  max-width: 16rem;
 }
 
 .logo .triad {
@@ -697,7 +709,7 @@ body::after {
   body.mobile-lock {
     overflow: hidden;
     height: 100dvh;
-    --header-h: 4.85rem;
+    --header-h: 5.65rem;
     --dock-h: 5rem;
   }
 
