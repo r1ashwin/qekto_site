@@ -683,7 +683,7 @@ body::after {
     top: 0;
     width: 100%;
     max-width: none;
-    padding: 0.75rem 1.1rem;
+    padding: 0.75rem 1.35rem;
     border-bottom: none;
   }
 
@@ -713,7 +713,7 @@ body::after {
     bottom: var(--dock-h);
     max-width: none;
     margin: 0;
-    padding: 0 1.1rem;
+    padding: 0 1.35rem;
   }
 
   .beat {
@@ -722,7 +722,7 @@ body::after {
     height: auto;
     min-height: 0;
     max-height: none;
-    padding: 0.35rem 0 0.5rem;
+    padding: 0.35rem 0.15rem 0.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -922,7 +922,7 @@ body::after {
     right: 0;
     bottom: 0;
     z-index: 30;
-    padding: 0.65rem 1.1rem calc(0.7rem + env(safe-area-inset-bottom));
+    padding: 0.65rem 1.35rem calc(0.7rem + env(safe-area-inset-bottom));
     background: color-mix(in srgb, var(--canvas) 88%, transparent);
     border-top: 1px solid var(--hairline);
     backdrop-filter: blur(14px);
