@@ -868,13 +868,27 @@ body::after {
     background: color-mix(in srgb, var(--ink) 9%, transparent);
   }
 
-  /* Place: article context around the sponsored pick — not pick-only. */
+  /* Place: one packed article snippet — no space-between gaps. */
+  .ui-card.publisher {
+    flex: 0 1 auto;
+    justify-content: flex-start;
+    gap: clamp(0.4rem, 1.3dvh, 0.65rem);
+    margin-top: clamp(0.35rem, 1.5dvh, 0.75rem);
+  }
+
+  .instance:has(.publisher) {
+    justify-content: flex-start;
+  }
+
   .publisher .pub-chrome {
     flex: 0 0 auto;
     display: flex;
-    margin-bottom: 0;
-    padding-bottom: clamp(0.4rem, 1.2dvh, 0.6rem);
-    border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
   }
 
   .publisher .pub-url {
@@ -894,21 +908,23 @@ body::after {
   .publisher .pub-title {
     flex: 0 0 auto;
     font-size: clamp(15px, 2.4dvh, 18px);
-    margin-bottom: 0;
+    margin: 0;
+    line-height: 1.25;
   }
 
   .pub-pick {
-    flex: 0 1 auto;
+    flex: 0 0 auto;
     width: 100%;
     min-height: 0;
     padding: clamp(0.65rem, 1.8dvh, 0.95rem) clamp(0.75rem, 3vw, 1rem);
-    margin: 0;
+    margin: clamp(0.15rem, 0.6dvh, 0.35rem) 0;
     border-radius: 8px;
     border: 1px solid color-mix(in srgb, var(--signal-yellow) 45%, transparent);
     background: color-mix(in srgb, var(--signal-yellow) 12%, transparent);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 0.2rem;
   }
 
   .pub-pick-label {
@@ -933,7 +949,7 @@ body::after {
     margin: 0;
     margin-left: 1rem;
     font-size: clamp(12px, 1.6dvh, 14px);
-    gap: clamp(0.25rem, 1dvh, 0.45rem);
+    gap: clamp(0.25rem, 1dvh, 0.4rem);
   }
 
   .lift-row {
