@@ -286,7 +286,7 @@ body::after {
   transform: rotate(225deg) translateY(-1px);
 }
 
-/* Stripe-style white mega panel under the bar */
+/* Stripe-style white mega panel — same width as the nav pill */
 .mega-layer {
   position: absolute;
   left: 0;
@@ -302,19 +302,19 @@ body::after {
 
 .mega {
   position: relative;
-  left: 50%;
-  transform: translateX(-50%) translateY(8px);
-  width: min(860px, calc(100vw - 2rem));
-  margin: 0 auto;
+  left: auto;
+  width: 100%;
+  margin: 0;
   padding: 1.25rem 1.3rem 1.35rem;
   background: #fff;
   border: 1px solid var(--hairline);
-  border-radius: 16px;
+  border-radius: 20px;
   box-shadow: 0 18px 50px rgba(26, 24, 20, 0.14);
   z-index: 300;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transform: translateY(8px);
   transition:
     opacity 0.18s ease,
     transform 0.18s ease,
@@ -325,7 +325,7 @@ body::after {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 
 .mega[hidden] {
@@ -1988,7 +1988,7 @@ body::after {
   }
 
   .company-pitch {
-    padding: 1.15rem 1.5rem 0.4rem;
+    padding: 0.85rem 1.5rem 0.25rem;
   }
 
   .site-header {
