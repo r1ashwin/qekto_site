@@ -34,13 +34,14 @@
       const fill = dot.querySelector(".step-fill");
       if (!fill) return;
       fill.style.animation = "none";
+      fill.style.width = "";
+      fill.style.height = "";
       void fill.offsetWidth;
       if (dot.classList.contains("is-active") && mq.matches && !reduceMotion) {
         fill.style.animation = `step-progress ${dwell}ms linear forwards`;
       } else if (dot.classList.contains("is-active")) {
+        fill.style.height = "100%";
         fill.style.width = "100%";
-      } else {
-        fill.style.width = "";
       }
     });
   }

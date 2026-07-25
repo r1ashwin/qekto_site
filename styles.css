@@ -1164,7 +1164,7 @@ body::after {
     height: 100dvh;
     --header-h: 4.6rem;
     --pitch-h: 5.6rem;
-    --dock-h: 5rem;
+    --dock-h: 4.85rem;
   }
 
   .site-header {
@@ -1316,7 +1316,7 @@ body::after {
     height: auto;
     min-height: 0;
     max-height: none;
-    padding: 0.75rem max(1.65rem, env(safe-area-inset-right)) 0.5rem
+    padding: 0.75rem max(2.35rem, calc(env(safe-area-inset-right) + 1.35rem)) 0.5rem
       max(1.65rem, env(safe-area-inset-left));
     display: flex;
     flex-direction: column;
@@ -1595,21 +1595,56 @@ body::after {
   }
 
   .scroll-cue {
-    display: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    margin: 0 auto 0.15rem;
+    color: var(--mute);
+    pointer-events: none;
+  }
+
+  .scroll-cue-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .scroll-cue-chevron {
+    width: 10px;
+    height: 10px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    animation: scroll-nudge 1.4s ease-in-out infinite;
+  }
+
+  @keyframes scroll-nudge {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: rotate(45deg) translateY(-2px);
+    }
+    50% {
+      opacity: 1;
+      transform: rotate(45deg) translateY(3px);
+    }
   }
 
   .dock {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 0.55rem;
+    gap: 0.35rem;
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 30;
-    padding: 0.55rem max(1.65rem, env(safe-area-inset-right))
-      calc(0.6rem + env(safe-area-inset-bottom)) max(1.65rem, env(safe-area-inset-left));
+    padding: 0.4rem max(1.65rem, env(safe-area-inset-right))
+      calc(0.55rem + env(safe-area-inset-bottom)) max(1.65rem, env(safe-area-inset-left));
     background: color-mix(in srgb, var(--canvas) 88%, transparent);
     border-top: 1px solid var(--hairline);
     backdrop-filter: blur(14px);
@@ -1617,9 +1652,15 @@ body::after {
 
   .stepper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
+    position: fixed;
+    right: max(0.55rem, env(safe-area-inset-right));
+    top: 52%;
+    transform: translateY(-50%);
+    z-index: 40;
     padding: 0;
     background: none;
     border: none;
@@ -1644,14 +1685,14 @@ body::after {
 
   .step-dot {
     position: relative;
-    width: 2.5rem;
-    height: 3px;
+    width: 3px;
+    height: 2.15rem;
     border: none;
     padding: 0;
     border-radius: 1px;
     cursor: pointer;
     overflow: hidden;
-    transition: width 0.25s ease;
+    transition: height 0.25s ease;
   }
 
   .step-dot:nth-child(1) {
@@ -1667,13 +1708,17 @@ body::after {
   }
 
   .step-dot.is-active {
-    width: 3.25rem;
+    height: 2.85rem;
+    width: 3px;
   }
 
   .step-fill {
     position: absolute;
-    inset: 0 auto 0 0;
-    width: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0;
     border-radius: 1px;
   }
 
@@ -1690,7 +1735,7 @@ body::after {
   }
 
   .step-dot.is-active .step-fill {
-    width: 100%;
+    height: 100%;
   }
 
   .rail[data-step="0"] .step-dot.is-active,
@@ -1877,12 +1922,17 @@ body::after {
 
   .stepper {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 0.55rem;
     padding: 0 0 0.55rem;
     margin-top: -0.35rem;
     position: relative;
+    right: auto;
+    top: auto;
+    left: auto;
+    transform: none;
     z-index: 5;
   }
 
@@ -1913,12 +1963,18 @@ body::after {
 
   .step-dot.is-active {
     width: 3.5rem;
+    height: 3px;
   }
 
   .step-fill {
     position: absolute;
     inset: 0 auto 0 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
     width: 0;
+    height: 100%;
     border-radius: 1px;
   }
 
