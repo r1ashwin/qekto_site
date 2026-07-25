@@ -1195,6 +1195,19 @@ body::after {
     border-bottom: none !important;
   }
 
+  /* Content pages: keep nav in flow so titles never hide under it. */
+  .page .site-header {
+    position: sticky;
+  }
+
+  .page .page-main {
+    padding-top: 0.85rem;
+  }
+
+  .page .page-hero {
+    padding-top: 0.35rem;
+  }
+
   .top {
     position: relative;
     left: auto;
