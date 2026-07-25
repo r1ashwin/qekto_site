@@ -62,7 +62,7 @@
         </nav>
 
         <button type="button" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
-          <span></span><span></span>
+          <span></span><span></span><span></span>
         </button>
         </div>
 
@@ -155,6 +155,109 @@
         </div>
       </div>
     </header>
+
+<div class="mobile-drawer" id="mobile-drawer" hidden>
+      <div class="mobile-drawer-bar">
+        <button type="button" class="mobile-back" hidden aria-hidden="true">
+          <span class="mobile-back-chevron" aria-hidden="true"></span>
+          Back
+        </button>
+        <a class="mobile-drawer-logo" href="/">Qekto</a>
+        <button type="button" class="mobile-close" aria-label="Close menu">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="mobile-drawer-body">
+        <div class="mobile-panel is-active" data-panel="root">
+          <button type="button" class="mobile-row" data-go="platform">
+            <span>Platform</span>
+            <span class="mobile-row-chevron" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="mobile-row" data-go="brands">
+            <span>Brands</span>
+            <span class="mobile-row-chevron" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="mobile-row" data-go="publishers">
+            <span>Publishers</span>
+            <span class="mobile-row-chevron" aria-hidden="true"></span>
+          </button>
+          <a class="mobile-row" href="/pricing.html">Pricing</a>
+          <a class="mobile-row mobile-row-quiet" href="https://qekto.app/login">Sign in</a>
+        </div>
+
+        <div class="mobile-panel" data-panel="platform" hidden>
+          <div class="mobile-section">
+            <p class="mobile-section-title">The loop</p>
+            <a class="mobile-link" href="/#measure">
+              <span class="mobile-link-title teal-text">Measure</span>
+              <span class="mobile-link-desc">See how agents name you vs the category.</span>
+            </a>
+            <a class="mobile-link" href="/#place">
+              <span class="mobile-link-title yellow-text">Place</span>
+              <span class="mobile-link-desc">Labeled content on pages agents cite.</span>
+            </a>
+            <a class="mobile-link" href="/#prove">
+              <span class="mobile-link-title red-text">Prove</span>
+              <span class="mobile-link-desc">Before/after receipt on the same checks.</span>
+            </a>
+          </div>
+          <div class="mobile-section">
+            <p class="mobile-section-title">Coming next</p>
+            <a class="mobile-link" href="/brands.html#alerts">
+              <span class="mobile-link-title">Alerts</span>
+              <span class="mobile-link-desc">Know when share of voice moves.</span>
+            </a>
+            <a class="mobile-link" href="/brands.html#campaigns">
+              <span class="mobile-link-title">Campaigns</span>
+              <span class="mobile-link-desc">Approve a recommended place → prove run.</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="mobile-panel" data-panel="brands" hidden>
+          <div class="mobile-section">
+            <p class="mobile-section-title">For brands</p>
+            <a class="mobile-link" href="/brands.html">
+              <span class="mobile-link-title">Overview</span>
+              <span class="mobile-link-desc">Status is the wedge. The ad network is the company.</span>
+            </a>
+            <a class="mobile-link" href="/brands.html#status">
+              <span class="mobile-link-title">AI visibility</span>
+              <span class="mobile-link-desc">Share of voice, queries won and lost.</span>
+            </a>
+            <a class="mobile-link" href="/brands.html#campaigns">
+              <span class="mobile-link-title">Run a campaign</span>
+              <span class="mobile-link-desc">Place where agents read. Prove lift.</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="mobile-panel" data-panel="publishers" hidden>
+          <div class="mobile-section">
+            <p class="mobile-section-title">For publishers</p>
+            <a class="mobile-link" href="/publishers.html">
+              <span class="mobile-link-title">Overview</span>
+              <span class="mobile-link-desc">Host labeled placements agents already read.</span>
+            </a>
+            <a class="mobile-link" href="/publishers.html#earn">
+              <span class="mobile-link-title">Earn</span>
+              <span class="mobile-link-desc">Brands pay to place. You keep the page real.</span>
+            </a>
+            <a class="mobile-link" href="/publishers.html#apply">
+              <span class="mobile-link-title">Apply</span>
+              <span class="mobile-link-desc">Pilot network — invitation first.</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-drawer-auth">
+        <a class="btn" href="https://qekto.app/login?mode=signup">Sign up</a>
+        <a class="btn btn-outline" href="https://qekto.app/login">Log in</a>
+      </div>
+    </div>
+
     <main class="page-main">
       <section class="page-hero">
         <p class="page-audience yellow-text">Publishers</p>
