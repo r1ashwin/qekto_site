@@ -145,9 +145,10 @@ body::after {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: transparent;
-  backdrop-filter: none;
-  border-bottom: none;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: none;
   overflow: visible;
 }
 
@@ -176,7 +177,7 @@ body::after {
   gap: 1rem;
   width: 100%;
   padding: 0.45rem 0.55rem 0.45rem 1rem;
-  background: var(--surface);
+  background: #fff;
   border: 1px solid var(--hairline);
   border-radius: 999px;
   box-shadow: 0 8px 28px rgba(26, 24, 20, 0.06);
@@ -1171,7 +1172,9 @@ body::after {
     left: 0;
     right: 0;
     top: 0;
-    border-bottom: 1px solid var(--hairline);
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border-bottom: none !important;
   }
 
   .top {
@@ -1716,6 +1719,12 @@ body::after {
 
   .company-pitch {
     padding: 1.15rem 1.5rem 0.4rem;
+  }
+
+  .site-header {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border-bottom: none !important;
   }
 
   .top {
