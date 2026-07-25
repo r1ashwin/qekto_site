@@ -148,17 +148,6 @@ nav .btn:hover {
   background: var(--accent-hover);
 }
 
-.link {
-  color: var(--ink);
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.link:hover {
-  text-decoration: underline;
-}
-
 .teal-text {
   color: var(--signal-teal);
 }
