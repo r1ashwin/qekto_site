@@ -1,4 +1,4 @@
-/* Match ycf26 / DESIGN.md tokens — plain shell, same colors. */
+/* Match ycf26 DESIGN.md — oatmeal chrome + Qekto signal triad. */
 :root {
   --accent: #2f7f7a;
   --accent-hover: #256861;
@@ -7,7 +7,9 @@
   --body: #4a453c;
   --mute: #787066;
   --hairline: #d9d3c8;
-  --hairline-strong: #c4bdb2;
+  --signal-blue: #5b6f94;
+  --signal-yellow: #b8892e;
+  --signal-red: #8c4a42;
 }
 
 * {
@@ -40,6 +42,9 @@ body {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 15px;
   font-weight: 600;
   color: var(--ink);
@@ -48,6 +53,31 @@ body {
 
 .logo:hover {
   opacity: 0.8;
+}
+
+.triad {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.dot {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+}
+
+.dot.blue {
+  background: var(--signal-blue);
+}
+
+.dot.yellow {
+  background: var(--signal-yellow);
+}
+
+.dot.red {
+  background: var(--signal-red);
 }
 
 nav {
@@ -76,12 +106,20 @@ main {
 }
 
 h1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
   font-size: 40px;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.1;
   color: var(--ink);
   margin-bottom: 0.75rem;
+}
+
+h1 .dot {
+  width: 10px;
+  height: 10px;
 }
 
 .sub {
