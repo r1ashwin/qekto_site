@@ -10,8 +10,8 @@
 
   let index = 0;
   let timer = null;
-  let observers = [];
   let wheelLock = false;
+  let touchStartY = null;
 
   function restartAnims(beat) {
     beat.querySelectorAll(".bar, .pub-pick, .lift-line").forEach((el) => {
@@ -37,17 +37,15 @@
       void fill.offsetWidth;
       if (dot.classList.contains("is-active") && mq.matches && !reduceMotion) {
         fill.style.animation = `step-progress ${dwell}ms linear forwards`;
-      } else if (dot.classList.contains("is-active") && !mq.matches) {
+      } else if (dot.classList.contains("is-active")) {
         fill.style.width = "100%";
-      } else if (!mq.matches) {
-        fill.style.width = "";
       } else {
         fill.style.width = "";
       }
     });
   }
 
-  function showDesktop(next) {
+  function showBeat(next) {
     index = ((next % beats.length) + beats.length) % beats.length;
     setActiveDot(index);
     beats.forEach((beat, i) => {
@@ -63,7 +61,7 @@
     if (reduceMotion || !mq.matches) return;
     stop();
     restartProgress();
-    timer = window.setInterval(() => showDesktop(index + 1), dwell);
+    timer = window.setInterval(() => showBeat(index + 1), dwell);
   }
 
   function stop() {
@@ -73,54 +71,17 @@
     }
   }
 
-  function clearMobileObservers() {
-    observers.forEach((o) => o.disconnect());
-    observers = [];
-  }
-
   function setupMobile() {
     document.body.classList.remove("desktop-lock");
+    document.body.classList.add("mobile-lock");
     stop();
-    clearMobileObservers();
-    beats.forEach((beat) => {
-      beat.classList.remove("is-active");
-      beat.classList.remove("is-on-screen");
-    });
-    if (beats[0]) beats[0].classList.add("is-on-screen");
-    setActiveDot(0);
-    restartProgress();
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        let best = null;
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          if (!best || entry.intersectionRatio > best.intersectionRatio) {
-            best = entry;
-          }
-        });
-        if (!best || best.intersectionRatio < 0.55) return;
-        const i = Number(best.target.dataset.beat);
-        if (Number.isNaN(i)) return;
-        beats.forEach((beat, bi) => {
-          beat.classList.toggle("is-on-screen", bi === i);
-        });
-        setActiveDot(i);
-        restartAnims(best.target);
-        restartProgress();
-      },
-      { threshold: [0.55, 0.7, 0.85] }
-    );
-
-    beats.forEach((beat) => io.observe(beat));
-    observers.push(io);
+    showBeat(index);
   }
 
   function setupDesktop() {
+    document.body.classList.remove("mobile-lock");
     document.body.classList.add("desktop-lock");
-    clearMobileObservers();
-    beats.forEach((beat) => beat.classList.remove("is-on-screen"));
-    showDesktop(index);
+    showBeat(index);
     play();
   }
 
@@ -132,17 +93,12 @@
   dots.forEach((dot) => {
     dot.addEventListener("click", () => {
       const go = Number(dot.dataset.go);
-      if (mq.matches) {
-        showDesktop(go);
-        play();
-        return;
-      }
-      const target = beats[go];
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (Number.isNaN(go)) return;
+      showBeat(go);
+      if (mq.matches) play();
     });
   });
 
-  // Desktop: wheel / trackpad advances beats immediately — don't wait for countdown.
   window.addEventListener(
     "wheel",
     (event) => {
@@ -152,8 +108,8 @@
       if (Math.abs(event.deltaY) < 8) return;
 
       wheelLock = true;
-      if (event.deltaY > 0) showDesktop(index + 1);
-      else showDesktop(index - 1);
+      if (event.deltaY > 0) showBeat(index + 1);
+      else showBeat(index - 1);
       play();
 
       window.setTimeout(() => {
@@ -167,14 +123,37 @@
     if (!mq.matches) return;
     if (event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ") {
       event.preventDefault();
-      showDesktop(index + 1);
+      showBeat(index + 1);
       play();
     } else if (event.key === "ArrowUp" || event.key === "PageUp") {
       event.preventDefault();
-      showDesktop(index - 1);
+      showBeat(index - 1);
       play();
     }
   });
+
+  // Phone: swipe up/down switches beats on the same screen.
+  window.addEventListener(
+    "touchstart",
+    (event) => {
+      if (mq.matches) return;
+      touchStartY = event.changedTouches[0].clientY;
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "touchend",
+    (event) => {
+      if (mq.matches || touchStartY == null) return;
+      const dy = event.changedTouches[0].clientY - touchStartY;
+      touchStartY = null;
+      if (Math.abs(dy) < 48) return;
+      if (dy < 0) showBeat(index + 1);
+      else showBeat(index - 1);
+    },
+    { passive: true }
+  );
 
   mq.addEventListener("change", applyMode);
   applyMode();

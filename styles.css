@@ -12,8 +12,8 @@
   --signal-yellow: #b8892d;
   --signal-red: #c25a50;
   --surface: #faf8f4;
-  --header-h: 4.75rem;
-  --dock-h: 5.5rem;
+  --header-h: 4.25rem;
+  --dock-h: 5.25rem;
 }
 
 * {
@@ -665,15 +665,15 @@ body::after {
   }
 }
 
-/* ========== MOBILE: one full-screen beat at a time ========== */
+/* ========== MOBILE: locked stage — swipe between beats ========== */
 @media (max-width: 899px) {
   .desktop-only {
     display: none !important;
   }
 
-  html {
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
+  body.mobile-lock {
+    overflow: hidden;
+    height: 100dvh;
   }
 
   .top {
@@ -683,8 +683,8 @@ body::after {
     top: 0;
     width: 100%;
     max-width: none;
-    scroll-snap-align: none;
-    padding: 0.85rem 1.15rem;
+    padding: 0.75rem 1.1rem;
+    border-bottom: none;
   }
 
   .top-nav {
@@ -692,34 +692,58 @@ body::after {
   }
 
   .logo-mark {
-    font-size: 28px;
+    font-size: 22px;
   }
 
   .logo .dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
   }
 
   .logo-tag {
-    font-size: 12px;
-    letter-spacing: 0.06em;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+
+  .rail {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--header-h);
+    bottom: var(--dock-h);
+    max-width: none;
+    margin: 0;
+    padding: 0 1.1rem;
   }
 
   .beat {
-    position: relative;
-    /* Full viewport each — settled scroll never shows a slice of the next beat. */
-    height: 100dvh;
-    min-height: 100dvh;
-    max-height: 100dvh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    padding: calc(var(--header-h) + 0.45rem) 1.15rem calc(var(--dock-h) + 0.75rem);
+    position: absolute;
+    inset: 0;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 0.35rem 0 0.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.75rem;
     overflow: hidden;
     border-bottom: none;
     box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(14px);
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease,
+      visibility 0.4s;
+  }
+
+  .beat.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .beat-copy {
@@ -727,18 +751,17 @@ body::after {
   }
 
   .beat-copy h1 {
-    font-size: clamp(1.85rem, 8vw, 2.35rem);
-    margin-bottom: 0.4rem;
+    font-size: clamp(2rem, 9vw, 2.5rem);
+    margin-bottom: 0.35rem;
   }
 
   .beat-copy .lead {
-    font-size: 13px;
-    line-height: 1.4;
+    font-size: 14px;
+    line-height: 1.45;
     margin-bottom: 0;
-    max-width: none;
+    max-width: 22rem;
   }
 
-  /* Mock is a fixed phone composition — never an inner scroll. */
   .instance {
     flex: 1 1 auto;
     min-height: 0;
@@ -748,199 +771,133 @@ body::after {
   }
 
   .ui-card {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     min-height: 0;
     overflow: hidden;
-    padding: 0.7rem 0.75rem 0.75rem;
-    border-radius: 8px;
-    font-size: 11px;
+    padding: 0.85rem 0.9rem 0.9rem;
+    border-radius: 10px;
+    font-size: 12px;
     display: flex;
     flex-direction: column;
+    gap: 0;
   }
 
   .ui-top {
-    margin-bottom: 0.55rem;
-    gap: 0.5rem;
+    margin-bottom: 0.7rem;
   }
 
   .ui-eyebrow {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .ui-brand {
-    font-size: 13px;
-    margin-top: 0.1rem;
+    font-size: 14px;
   }
 
   .ui-agents {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .ui-stats {
-    gap: 0.4rem;
-    margin-bottom: 0.55rem;
-    padding-bottom: 0.55rem;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+    padding-bottom: 0.7rem;
   }
 
   .ui-stat-num {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .ui-stat-label {
-    font-size: 9px;
-    margin-top: 0.15rem;
+    font-size: 10px;
   }
 
   .ui-section {
-    font-size: 9px;
-    margin: 0 0 0.35rem;
+    font-size: 10px;
+    margin: 0 0 0.4rem;
   }
 
   .sov-list {
-    gap: 0.28rem;
-    flex: 1 1 auto;
-    min-height: 0;
+    gap: 0.4rem;
   }
 
   .sov-list li {
-    grid-template-columns: 5.4rem 1fr 2rem;
-    gap: 0.35rem;
-    font-size: 11px;
+    grid-template-columns: 5.6rem 1fr 2.1rem;
+    font-size: 12px;
   }
 
-  /* Keep the mock to a phone-sized shortlist — no scroll needed. */
-  .sov-list li:nth-child(n + 5) {
-    display: none;
-  }
-
+  .sov-list li:nth-child(n + 4),
   .query-list,
-  .query-list + .ui-section,
-  .ui-section:has(+ .query-list) {
+  .ui-section:has(+ .query-list),
+  .pub-body,
+  .pub-list,
+  .lift-notes li:nth-child(n + 3) {
     display: none;
   }
 
-  .bar-track {
-    height: 5px;
-  }
-
-  .pct {
-    font-size: 11px;
-  }
-
-  .publisher .pub-chrome {
-    margin-bottom: 0.45rem;
-    padding-bottom: 0.4rem;
+  .pub-chrome {
+    margin-bottom: 0.55rem;
+    padding-bottom: 0.5rem;
   }
 
   .pub-url {
-    font-size: 10px;
+    font-size: 11px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  .pub-kicker {
-    font-size: 10px;
-    margin-bottom: 0.2rem;
-  }
-
   .pub-title {
-    font-size: 14px;
-    margin-bottom: 0.35rem;
-  }
-
-  .pub-body {
-    font-size: 11px;
-    line-height: 1.35;
-    margin-bottom: 0.5rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .pub-pick {
-    padding: 0.5rem 0.6rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .pub-pick-label {
-    font-size: 9px;
-  }
-
-  .pub-pick-name {
-    font-size: 12px;
-    margin-bottom: 0.15rem;
-  }
-
-  .pub-pick-why {
-    font-size: 11px;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .pub-list {
-    font-size: 11px;
-    gap: 0.2rem;
-    margin-left: 1rem;
-  }
-
-  .lift-row {
-    gap: 0.65rem;
+    font-size: 15px;
     margin-bottom: 0.55rem;
   }
 
+  .pub-pick {
+    margin-bottom: 0;
+  }
+
+  .pub-pick-why {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .lift-row {
+    margin-bottom: 0.65rem;
+  }
+
   .lift-chart {
-    max-height: 72px;
-    margin-bottom: 0.45rem;
+    max-height: 88px;
+    margin-bottom: 0.55rem;
   }
 
   .lift-notes {
-    gap: 0.2rem;
-    font-size: 11px;
-    padding-top: 0.45rem;
+    font-size: 12px;
+    padding-top: 0.55rem;
   }
 
+  .beat.is-active .bar,
   .beat.is-on-screen .bar {
     animation: bar-fill 0.85s ease-out forwards;
   }
 
   .scroll-cue {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: calc(var(--dock-h) + 0.35rem);
-    width: 2.5rem;
-    height: 2.5rem;
-    margin: 0 auto;
-    border: none;
-    background: color-mix(in srgb, var(--ink) 8%, transparent);
-    border-radius: 999px;
-    text-decoration: none;
-    opacity: 0.55;
-    animation: cue-bob 1.8s ease-in-out infinite;
-    z-index: 2;
+    display: none !important;
   }
 
-  /* Fixed bottom: progress + auth stay while Measure / Place / Prove scroll. */
   .dock {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 0.7rem;
+    gap: 0.65rem;
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: 30;
-    padding: 0.7rem 1.15rem calc(0.75rem + env(safe-area-inset-bottom));
-    background: color-mix(in srgb, var(--canvas) 82%, transparent);
+    padding: 0.65rem 1.1rem calc(0.7rem + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--canvas) 88%, transparent);
     border-top: 1px solid var(--hairline);
     backdrop-filter: blur(14px);
   }
@@ -949,35 +906,32 @@ body::after {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.55rem;
-    position: static;
+    gap: 0.5rem;
     padding: 0;
     background: none;
     border: none;
-    backdrop-filter: none;
   }
 
   .dock-auth {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.65rem;
   }
 
   .dock-auth .link {
     flex: 0 0 auto;
-    padding: 0 0.35rem;
-    white-space: nowrap;
+    padding: 0 0.25rem;
   }
 
   .dock-auth .btn {
     flex: 1 1 auto;
-    height: 2.65rem;
+    height: 2.55rem;
     font-size: 15px;
   }
 
   .step-dot {
     position: relative;
-    width: 2.75rem;
+    width: 2.5rem;
     height: 3px;
     border: none;
     padding: 0;
@@ -1000,7 +954,7 @@ body::after {
   }
 
   .step-dot.is-active {
-    width: 3.5rem;
+    width: 3.25rem;
   }
 
   .step-fill {
@@ -1030,26 +984,6 @@ body::after {
   .rail[data-step="1"] .step-dot.is-active,
   .rail[data-step="2"] .step-dot.is-active {
     background: color-mix(in srgb, var(--hairline) 55%, transparent);
-  }
-
-  .scroll-cue-icon {
-    width: 10px;
-    height: 10px;
-    border-right: 1.5px solid var(--ink);
-    border-bottom: 1.5px solid var(--ink);
-    transform: rotate(45deg) translateY(-2px);
-  }
-}
-
-@keyframes cue-bob {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.45;
-  }
-  50% {
-    transform: translateY(5px);
-    opacity: 0.7;
   }
 }
 
