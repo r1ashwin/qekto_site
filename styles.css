@@ -858,7 +858,6 @@ body::after {
   .sov-list li:nth-child(n + 4),
   .query-list,
   .ui-section:has(+ .query-list),
-  .pub-body,
   .lift-notes {
     display: none;
   }
@@ -868,16 +867,17 @@ body::after {
     background: color-mix(in srgb, var(--ink) 9%, transparent);
   }
 
-  /* Place: one packed article snippet — no space-between gaps. */
+  /* Place: full article snippet that fills the tall phone stage. */
   .ui-card.publisher {
-    flex: 0 1 auto;
+    flex: 1 1 auto;
     justify-content: flex-start;
-    gap: clamp(0.4rem, 1.3dvh, 0.65rem);
-    margin-top: clamp(0.35rem, 1.5dvh, 0.75rem);
+    gap: clamp(0.35rem, 1.2dvh, 0.6rem);
+    margin-top: 0;
+    min-height: 0;
   }
 
   .instance:has(.publisher) {
-    justify-content: flex-start;
+    justify-content: stretch;
   }
 
   .publisher .pub-chrome {
@@ -886,8 +886,9 @@ body::after {
     align-items: center;
     gap: 0.45rem;
     margin: 0;
-    padding: 0;
+    padding: 0 0 clamp(0.35rem, 1dvh, 0.55rem);
     border: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
     background: none;
   }
 
@@ -907,9 +908,19 @@ body::after {
 
   .publisher .pub-title {
     flex: 0 0 auto;
-    font-size: clamp(15px, 2.4dvh, 18px);
+    font-size: clamp(15px, 2.3dvh, 18px);
     margin: 0;
     line-height: 1.25;
+  }
+
+  .publisher .pub-body {
+    flex: 1 1 auto;
+    display: block;
+    min-height: 0;
+    margin: 0;
+    font-size: clamp(12px, 1.65dvh, 14px);
+    line-height: 1.45;
+    overflow: hidden;
   }
 
   .pub-pick {
@@ -917,7 +928,7 @@ body::after {
     width: 100%;
     min-height: 0;
     padding: clamp(0.65rem, 1.8dvh, 0.95rem) clamp(0.75rem, 3vw, 1rem);
-    margin: clamp(0.15rem, 0.6dvh, 0.35rem) 0;
+    margin: 0;
     border-radius: 8px;
     border: 1px solid color-mix(in srgb, var(--signal-yellow) 45%, transparent);
     background: color-mix(in srgb, var(--signal-yellow) 12%, transparent);
@@ -938,7 +949,7 @@ body::after {
   .pub-pick-why {
     font-size: clamp(11px, 1.55dvh, 13px);
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
