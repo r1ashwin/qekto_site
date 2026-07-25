@@ -1192,6 +1192,77 @@ body::after {
     transform: translateY(0);
   }
 
+  /* Same right-panel demo frame for Measure / Place / Prove. */
+  .instance {
+    height: min(34rem, calc(100dvh - var(--header-h) - 7.5rem));
+    min-height: 28rem;
+    max-height: 36rem;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .ui-card {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .ui-card .ui-top,
+  .ui-card .ui-stats,
+  .ui-card .ui-section,
+  .ui-card .pub-chrome,
+  .ui-card .pub-kicker,
+  .ui-card .pub-title {
+    flex-shrink: 0;
+  }
+
+  .ui-card .sov-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    justify-content: space-evenly;
+  }
+
+  .ui-card .query-list {
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+
+  .ui-card.publisher {
+    justify-content: flex-start;
+    gap: 0.75rem;
+  }
+
+  .ui-card.publisher .pub-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+  }
+
+  .ui-card.publisher .pub-pick {
+    flex-shrink: 0;
+  }
+
+  .ui-card.publisher .pub-list {
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+
+  .ui-card.lift-card .lift-chart {
+    flex: 1 1 auto;
+    min-height: 0;
+    margin-bottom: 0;
+  }
+
+  .ui-card.lift-card .lift-notes {
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+
   .dock {
     display: block;
     position: relative;
