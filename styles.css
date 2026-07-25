@@ -12,7 +12,8 @@
   --signal-yellow: #b8892d;
   --signal-red: #c25a50;
   --surface: #faf8f4;
-  --header-h: 6.5rem;
+  --header-h: 4.75rem;
+  --pitch-h: 3.25rem;
   --dock-h: 5.25rem;
 }
 
@@ -185,13 +186,18 @@ body::after {
 .company-pitch {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0.65rem 1.5rem 0.95rem;
-  font-size: 16px;
+  padding: 1rem 1.5rem 0.55rem;
+  font-size: clamp(1.35rem, 2.8vw, 1.95rem);
   font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.35;
+  letter-spacing: -0.035em;
+  line-height: 1.25;
   color: var(--ink);
   text-align: center;
+}
+
+.page .company-pitch {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  padding: 0.85rem 1.5rem 1.1rem;
 }
 
 .logo {
@@ -1063,7 +1069,8 @@ body::after {
   body.mobile-lock {
     overflow: hidden;
     height: 100dvh;
-    --header-h: 7.25rem;
+    --header-h: 4.35rem;
+    --pitch-h: 3.1rem;
     --dock-h: 5rem;
   }
 
@@ -1081,7 +1088,7 @@ body::after {
     top: auto;
     width: auto;
     max-width: none;
-    padding: 0.55rem max(1rem, env(safe-area-inset-right)) 0.25rem
+    padding: 0.55rem max(1rem, env(safe-area-inset-right)) 0.45rem
       max(1rem, env(safe-area-inset-left));
     border-bottom: none;
   }
@@ -1093,11 +1100,25 @@ body::after {
   }
 
   .company-pitch {
-    padding: 0.55rem max(1.65rem, env(safe-area-inset-right)) 0.8rem
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--header-h);
+    z-index: 90;
+    padding: 0.55rem max(1.65rem, env(safe-area-inset-right)) 0.65rem
       max(1.65rem, env(safe-area-inset-left));
-    font-size: 15px;
+    font-size: clamp(1.05rem, 4.2vw, 1.25rem);
     font-weight: 600;
     text-align: left;
+    background: color-mix(in srgb, var(--canvas) 88%, transparent);
+    backdrop-filter: blur(10px);
+  }
+
+  .page .company-pitch {
+    position: static;
+    background: transparent;
+    backdrop-filter: none;
+    font-size: clamp(1.05rem, 4vw, 1.2rem);
   }
 
   .top-nav {
@@ -1179,7 +1200,7 @@ body::after {
     position: fixed;
     left: 0;
     right: 0;
-    top: var(--header-h);
+    top: calc(var(--header-h) + var(--pitch-h));
     bottom: var(--dock-h);
     max-width: none;
     margin: 0;
@@ -1578,6 +1599,8 @@ body::after {
   body.desktop-lock {
     overflow: hidden;
     height: 100dvh;
+    --header-h: 4.75rem;
+    --pitch-h: 3.5rem;
   }
 
   .desktop-only {
@@ -1586,6 +1609,10 @@ body::after {
 
   .scroll-cue {
     display: none !important;
+  }
+
+  .company-pitch {
+    padding: 1.15rem 1.5rem 0.4rem;
   }
 
   .top {
@@ -1609,7 +1636,7 @@ body::after {
     position: relative;
     max-width: 1100px;
     margin: 0 auto;
-    height: calc(100dvh - var(--header-h) - 2.85rem);
+    height: calc(100dvh - var(--header-h) - var(--pitch-h) - 1.5rem);
     padding: 0 1.5rem;
   }
 
@@ -1621,8 +1648,8 @@ body::after {
     max-height: none;
     padding: 0;
     display: grid;
-    grid-template-columns: minmax(280px, 0.9fr) minmax(340px, 1.15fr);
-    gap: 2.75rem;
+    grid-template-columns: minmax(260px, 1fr) minmax(280px, 0.95fr);
+    gap: 2.25rem;
     align-items: center;
     opacity: 0;
     visibility: hidden;
@@ -1644,11 +1671,14 @@ body::after {
     transform: translateY(0);
   }
 
-  /* Same right-panel demo frame for Measure / Place / Prove. */
+  /* Same right-panel demo frame for Measure / Place / Prove — compact. */
   .instance {
-    height: min(34rem, calc(100dvh - var(--header-h) - 7.5rem));
-    min-height: 28rem;
-    max-height: 36rem;
+    height: min(24rem, calc(100dvh - var(--header-h) - var(--pitch-h) - 6.5rem));
+    min-height: 16.5rem;
+    max-height: 26rem;
+    max-width: 27rem;
+    width: 100%;
+    margin-left: auto;
     display: flex;
     align-items: stretch;
   }
@@ -1661,6 +1691,8 @@ body::after {
     flex-direction: column;
     overflow: hidden;
     box-sizing: border-box;
+    font-size: 12.5px;
+    padding: 0.9rem 0.95rem 1rem;
   }
 
   .ui-card .ui-top,
