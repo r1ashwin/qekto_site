@@ -1098,10 +1098,6 @@ body::after {
     display: none !important;
   }
 
-  .brand-line.desktop-only {
-    display: inline-flex;
-  }
-
   .top {
     position: sticky;
     left: auto;
