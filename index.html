@@ -163,7 +163,7 @@
         </div>
 
         <div class="instance" aria-hidden="true">
-          <div class="ui-card">
+          <div class="ui-card lift-card">
             <div class="ui-top">
               <div>
                 <p class="ui-eyebrow">Campaign receipt</p>
@@ -171,27 +171,59 @@
               </div>
               <p class="ui-agents">14-day window</p>
             </div>
-            <div class="lift-row">
+            <div class="ui-stats lift-stats">
               <div>
-                <p class="ui-stat-label">Before</p>
-                <p class="ui-stat-num">11%</p>
+                <p class="ui-stat-num">11% → <span class="red-text">38%</span></p>
+                <p class="ui-stat-label">Named in answers</p>
               </div>
-              <div class="lift-bridge" aria-hidden="true"></div>
               <div>
-                <p class="ui-stat-label">After</p>
-                <p class="ui-stat-num red-text">38%</p>
+                <p class="ui-stat-num red-text">+27 pts</p>
+                <p class="ui-stat-label">Absolute lift</p>
+              </div>
+              <div>
+                <p class="ui-stat-num">#6 → <span class="red-text">#2</span></p>
+                <p class="ui-stat-label">Category rank</p>
               </div>
             </div>
-            <svg viewBox="0 0 320 110" class="lift-chart" role="img">
-              <line x1="16" y1="90" x2="304" y2="90" stroke="#d9d3c8" stroke-width="1" />
+            <p class="ui-section">Named in answers · 14 days</p>
+            <svg
+              viewBox="0 0 360 168"
+              class="lift-chart"
+              role="img"
+              aria-label="Named-in-answers rate rising from 11 percent to 38 percent over 14 days"
+            >
+              <defs>
+                <linearGradient id="lift-fill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#c25a50" stop-opacity="0.22" />
+                  <stop offset="100%" stop-color="#c25a50" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <line x1="40" y1="28" x2="340" y2="28" class="lift-grid" />
+              <line x1="40" y1="60" x2="340" y2="60" class="lift-grid" />
+              <line x1="40" y1="92" x2="340" y2="92" class="lift-grid" />
+              <line x1="40" y1="124" x2="340" y2="124" class="lift-grid" />
+              <text x="34" y="32" class="lift-axis" text-anchor="end">40%</text>
+              <text x="34" y="64" class="lift-axis" text-anchor="end">30%</text>
+              <text x="34" y="96" class="lift-axis" text-anchor="end">20%</text>
+              <text x="34" y="128" class="lift-axis" text-anchor="end">10%</text>
+              <text x="40" y="148" class="lift-axis">Day 1</text>
+              <text x="190" y="148" class="lift-axis" text-anchor="middle">Day 7</text>
+              <text x="340" y="148" class="lift-axis" text-anchor="end">Day 14</text>
+              <path
+                class="lift-area"
+                d="M40,120.5 L80,118 L120,114 L160,102 L200,86 L240,64 L280,48 L340,34.4 L340,124 L40,124 Z"
+                fill="url(#lift-fill)"
+              />
               <polyline
                 class="lift-line"
-                points="16,82 56,80 96,78 136,70 176,58 216,42 256,28 304,18"
+                points="40,120.5 80,118 120,114 160,102 200,86 240,64 280,48 340,34.4"
                 fill="none"
-                stroke-width="2"
+                stroke-width="2.25"
               />
-              <circle cx="16" cy="82" r="3" fill="#787066" />
-              <circle class="lift-end" cx="304" cy="18" r="4" fill="#c25a50" />
+              <circle cx="40" cy="120.5" r="3.5" fill="#787066" />
+              <circle class="lift-end" cx="340" cy="34.4" r="4.5" fill="#c25a50" />
+              <text x="48" y="118" class="lift-point">11%</text>
+              <text x="332" y="28" class="lift-point lift-point-end" text-anchor="end">38%</text>
             </svg>
             <ul class="lift-notes">
               <li>Named in answers +27 pts</li>

@@ -14,7 +14,7 @@
   let touchStartY = null;
 
   function restartAnims(beat) {
-    beat.querySelectorAll(".bar, .pub-pick, .lift-line").forEach((el) => {
+    beat.querySelectorAll(".bar, .pub-pick, .lift-line, .lift-area").forEach((el) => {
       el.style.animation = "none";
       void el.offsetWidth;
       el.style.animation = "";
