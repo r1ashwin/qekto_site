@@ -574,7 +574,7 @@ nav .btn:hover {
   }
 }
 
-/* ========== MOBILE: one beat per viewport, same place ========== */
+/* ========== MOBILE: one full-screen beat at a time ========== */
 @media (max-width: 899px) {
   .desktop-only {
     display: none !important;
@@ -582,33 +582,42 @@ nav .btn:hover {
 
   html {
     scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
   }
 
   .top {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    max-width: none;
     scroll-snap-align: none;
-  }
-
-  .rail {
-    /* beats snap; rail itself doesn't scroll independently */
   }
 
   .beat {
     position: relative;
-    height: calc(100dvh - var(--header-h));
-    min-height: calc(100dvh - var(--header-h));
-    max-height: calc(100dvh - var(--header-h));
+    /* Full viewport each — settled scroll never shows a slice of the next beat. */
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    padding: 1.35rem 1.35rem 4.25rem;
+    padding: calc(var(--header-h) + 0.85rem) 1.35rem 4.5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     overflow: hidden;
     border-bottom: none;
+    box-sizing: border-box;
   }
 
   .beat-copy {
     flex-shrink: 0;
+  }
+
+  .beat-copy .lead {
+    margin-bottom: 0.85rem;
   }
 
   .instance {
@@ -616,6 +625,7 @@ nav .btn:hover {
     min-height: 0;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 
   .ui-card {
@@ -738,9 +748,12 @@ nav .btn:hover {
   .foot {
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    min-height: calc(100dvh - var(--header-h));
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+    box-sizing: border-box;
     justify-content: center;
-    padding: 3rem 1.5rem 5rem;
+    padding: calc(var(--header-h) + 1.5rem) 1.5rem 5rem;
   }
 
   .foot-actions {

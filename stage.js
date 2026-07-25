@@ -81,24 +81,33 @@
     clearMobileObservers();
     beats.forEach((beat) => {
       beat.classList.remove("is-active");
-      beat.classList.add("is-on-screen");
+      beat.classList.remove("is-on-screen");
     });
+    if (beats[0]) beats[0].classList.add("is-on-screen");
     setActiveDot(0);
     restartProgress();
 
     const io = new IntersectionObserver(
       (entries) => {
+        // Pick the most-visible beat so only one drives the stepper.
+        let best = null;
         entries.forEach((entry) => {
-          if (!entry.isIntersecting || entry.intersectionRatio < 0.45) return;
-          const i = Number(entry.target.dataset.beat);
-          if (Number.isNaN(i)) return;
-          entry.target.classList.add("is-on-screen");
-          setActiveDot(i);
-          restartAnims(entry.target);
-          restartProgress();
+          if (!entry.isIntersecting) return;
+          if (!best || entry.intersectionRatio > best.intersectionRatio) {
+            best = entry;
+          }
         });
+        if (!best || best.intersectionRatio < 0.55) return;
+        const i = Number(best.target.dataset.beat);
+        if (Number.isNaN(i)) return;
+        beats.forEach((beat, bi) => {
+          beat.classList.toggle("is-on-screen", bi === i);
+        });
+        setActiveDot(i);
+        restartAnims(best.target);
+        restartProgress();
       },
-      { threshold: [0.45, 0.6] }
+      { threshold: [0.55, 0.7, 0.85] }
     );
 
     beats.forEach((beat) => io.observe(beat));
