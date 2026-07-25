@@ -7,7 +7,7 @@
   const menuToggle = header.querySelector(".menu-toggle");
   const siteNav = header.querySelector(".site-nav");
   const desktop = window.matchMedia("(min-width: 900px)");
-  let hoverTimer = null;
+  let closeTimer = null;
 
   function closeAll() {
     triggers.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
@@ -25,6 +25,8 @@
     closeAll();
     trigger.setAttribute("aria-expanded", "true");
     panel.hidden = false;
+    // Force paint so transition runs.
+    void panel.offsetWidth;
     panel.classList.add("is-open");
     header.classList.add("mega-open");
   }
@@ -39,45 +41,35 @@
     openPanel(name);
   }
 
+  function cancelClose() {
+    window.clearTimeout(closeTimer);
+  }
+
+  function scheduleClose() {
+    if (!desktop.matches) return;
+    cancelClose();
+    closeTimer = window.setTimeout(() => closeAll(), 200);
+  }
+
   triggers.forEach((btn) => {
     const name = btn.dataset.panel;
 
     btn.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
+      cancelClose();
       togglePanel(name);
     });
 
     btn.addEventListener("mouseenter", () => {
       if (!desktop.matches) return;
-      window.clearTimeout(hoverTimer);
+      cancelClose();
       openPanel(name);
     });
-
-    const item = btn.closest(".nav-item");
-    if (!item) return;
-
-    item.addEventListener("mouseleave", () => {
-      if (!desktop.matches) return;
-      hoverTimer = window.setTimeout(() => closeAll(), 160);
-    });
-
-    item.addEventListener("mouseenter", () => {
-      if (!desktop.matches) return;
-      window.clearTimeout(hoverTimer);
-    });
   });
 
-  panels.forEach((panel) => {
-    panel.addEventListener("mouseenter", () => {
-      if (!desktop.matches) return;
-      window.clearTimeout(hoverTimer);
-    });
-    panel.addEventListener("mouseleave", () => {
-      if (!desktop.matches) return;
-      hoverTimer = window.setTimeout(() => closeAll(), 160);
-    });
-  });
+  header.addEventListener("mouseleave", scheduleClose);
+  header.addEventListener("mouseenter", cancelClose);
 
   document.addEventListener("click", (event) => {
     if (!header.contains(event.target)) closeAll();
