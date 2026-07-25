@@ -631,6 +631,12 @@ body::after {
   color: #fff;
 }
 
+.top-nav .btn {
+  height: 2.15rem;
+  padding: 0 0.95rem;
+  border-radius: 999px;
+}
+
 .top-nav .btn:hover,
 .dock-auth .btn:hover {
   color: #fff;
