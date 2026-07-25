@@ -11,6 +11,7 @@
   let index = 0;
   let timer = null;
   let observers = [];
+  let userPaused = false;
 
   function restartAnims(beat) {
     beat.querySelectorAll(".bar, .pub-pick, .lift-line").forEach((el) => {
@@ -34,33 +35,49 @@
       if (!fill) return;
       fill.style.animation = "none";
       void fill.offsetWidth;
-      if (dot.classList.contains("is-active") && mq.matches && !reduceMotion) {
+      if (dot.classList.contains("is-active") && mq.matches && !reduceMotion && !userPaused) {
         fill.style.animation = `step-progress ${dwell}ms linear forwards`;
-      } else if (dot.classList.contains("is-active") && !mq.matches) {
+      } else if (dot.classList.contains("is-active")) {
         fill.style.width = "100%";
-      } else if (!mq.matches) {
+      } else {
         fill.style.width = "";
       }
     });
   }
 
-  function showDesktop(next) {
-    index = ((next % beats.length) + beats.length) % beats.length;
-    setActiveDot(index);
-    beats.forEach((beat, i) => {
-      const on = i === index;
+  function scrollToBeat(i, behavior = "smooth") {
+    const target = beats[i];
+    if (!target) return;
+    target.scrollIntoView({ behavior, block: "start" });
+  }
+
+  function activateBeat(i, { fromUser = false } = {}) {
+    if (Number.isNaN(i) || i < 0 || i >= beats.length) return;
+    setActiveDot(i);
+    beats.forEach((beat, bi) => {
+      const on = bi === i;
       beat.classList.toggle("is-active", on);
       beat.classList.toggle("is-on-screen", on);
       if (on) restartAnims(beat);
     });
+    if (fromUser) {
+      userPaused = true;
+      stop();
+    }
     restartProgress();
   }
 
   function play() {
-    if (reduceMotion || !mq.matches) return;
+    if (reduceMotion || !mq.matches || userPaused) return;
     stop();
     restartProgress();
-    timer = window.setInterval(() => showDesktop(index + 1), dwell);
+    timer = window.setInterval(() => {
+      if (index >= beats.length - 1) {
+        stop();
+        return;
+      }
+      scrollToBeat(index + 1);
+    }, dwell);
   }
 
   function stop() {
@@ -70,26 +87,15 @@
     }
   }
 
-  function clearMobileObservers() {
+  function clearObservers() {
     observers.forEach((o) => o.disconnect());
     observers = [];
   }
 
-  function setupMobile() {
-    document.body.classList.remove("desktop-lock");
-    stop();
-    clearMobileObservers();
-    beats.forEach((beat) => {
-      beat.classList.remove("is-active");
-      beat.classList.remove("is-on-screen");
-    });
-    if (beats[0]) beats[0].classList.add("is-on-screen");
-    setActiveDot(0);
-    restartProgress();
-
+  function setupScrollWatch() {
+    clearObservers();
     const io = new IntersectionObserver(
       (entries) => {
-        // Pick the most-visible beat so only one drives the stepper.
         let best = null;
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
@@ -97,28 +103,38 @@
             best = entry;
           }
         });
-        if (!best || best.intersectionRatio < 0.55) return;
+        if (!best || best.intersectionRatio < 0.45) return;
         const i = Number(best.target.dataset.beat);
-        if (Number.isNaN(i)) return;
-        beats.forEach((beat, bi) => {
-          beat.classList.toggle("is-on-screen", bi === i);
-        });
-        setActiveDot(i);
-        restartAnims(best.target);
-        restartProgress();
+        if (Number.isNaN(i) || i === index) return;
+        activateBeat(i);
+        if (mq.matches && !userPaused) play();
       },
-      { threshold: [0.55, 0.7, 0.85] }
+      { threshold: [0.45, 0.6, 0.75] }
     );
 
     beats.forEach((beat) => io.observe(beat));
     observers.push(io);
   }
 
+  function setupMobile() {
+    document.body.classList.remove("desktop-lock");
+    stop();
+    userPaused = true;
+    beats.forEach((beat) => {
+      beat.classList.remove("is-active");
+      beat.classList.remove("is-on-screen");
+    });
+    if (beats[0]) beats[0].classList.add("is-on-screen");
+    setActiveDot(0);
+    restartProgress();
+    setupScrollWatch();
+  }
+
   function setupDesktop() {
-    document.body.classList.add("desktop-lock");
-    clearMobileObservers();
-    beats.forEach((beat) => beat.classList.remove("is-on-screen"));
-    showDesktop(index);
+    document.body.classList.remove("desktop-lock");
+    userPaused = false;
+    activateBeat(Math.min(index, beats.length - 1));
+    setupScrollWatch();
     play();
   }
 
@@ -130,15 +146,30 @@
   dots.forEach((dot) => {
     dot.addEventListener("click", () => {
       const go = Number(dot.dataset.go);
-      if (mq.matches) {
-        showDesktop(go);
-        play();
-        return;
-      }
-      const target = beats[go];
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (Number.isNaN(go)) return;
+      userPaused = true;
+      stop();
+      scrollToBeat(go);
+      activateBeat(go, { fromUser: true });
     });
   });
+
+  let wheelLock = false;
+  window.addEventListener(
+    "wheel",
+    () => {
+      if (!mq.matches) return;
+      userPaused = true;
+      stop();
+      restartProgress();
+      if (wheelLock) return;
+      wheelLock = true;
+      window.setTimeout(() => {
+        wheelLock = false;
+      }, 400);
+    },
+    { passive: true }
+  );
 
   mq.addEventListener("change", applyMode);
   applyMode();
