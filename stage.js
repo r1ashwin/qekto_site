@@ -6,6 +6,7 @@
   const dots = [...document.querySelectorAll(".desktop-stepper .step-dot")];
   const mq = window.matchMedia("(min-width: 900px)");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const dwell = 3800;
 
   let index = 0;
   let timer = null;
@@ -16,6 +17,18 @@
       el.style.animation = "none";
       void el.offsetWidth;
       el.style.animation = "";
+    });
+  }
+
+  function restartProgress() {
+    dots.forEach((dot) => {
+      const fill = dot.querySelector(".step-fill");
+      if (!fill) return;
+      fill.style.animation = "none";
+      void fill.offsetWidth;
+      if (dot.classList.contains("is-active") && mq.matches && !reduceMotion) {
+        fill.style.animation = `step-progress ${dwell}ms linear forwards`;
+      }
     });
   }
 
@@ -31,12 +44,14 @@
     dots.forEach((dot, i) => {
       dot.classList.toggle("is-active", i === index);
     });
+    restartProgress();
   }
 
   function play() {
     if (reduceMotion || !mq.matches) return;
     stop();
-    timer = window.setInterval(() => showDesktop(index + 1), 4200);
+    restartProgress();
+    timer = window.setInterval(() => showDesktop(index + 1), dwell);
   }
 
   function stop() {
@@ -96,30 +111,6 @@
       play();
     });
   });
-
-  rail.addEventListener("mouseenter", () => {
-    if (mq.matches) stop();
-  });
-  rail.addEventListener("mouseleave", () => {
-    if (mq.matches) play();
-  });
-
-  // Desktop: wheel advances steps instead of scrolling the page
-  let wheelLock = false;
-  window.addEventListener(
-    "wheel",
-    (e) => {
-      if (!mq.matches || wheelLock) return;
-      e.preventDefault();
-      wheelLock = true;
-      showDesktop(index + (e.deltaY > 0 ? 1 : -1));
-      play();
-      window.setTimeout(() => {
-        wheelLock = false;
-      }, 700);
-    },
-    { passive: false }
-  );
 
   mq.addEventListener("change", applyMode);
   applyMode();
