@@ -3,7 +3,7 @@
   if (!rail) return;
 
   const beats = [...rail.querySelectorAll(".beat")];
-  const dots = [...document.querySelectorAll(".desktop-stepper .step-dot")];
+  const dots = [...document.querySelectorAll(".stepper .step-dot")];
   const mq = window.matchMedia("(min-width: 900px)");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const dwell = 3800;
@@ -20,6 +20,14 @@
     });
   }
 
+  function setActiveDot(i) {
+    index = i;
+    rail.dataset.step = String(i);
+    dots.forEach((dot, di) => {
+      dot.classList.toggle("is-active", di === i);
+    });
+  }
+
   function restartProgress() {
     dots.forEach((dot) => {
       const fill = dot.querySelector(".step-fill");
@@ -28,21 +36,22 @@
       void fill.offsetWidth;
       if (dot.classList.contains("is-active") && mq.matches && !reduceMotion) {
         fill.style.animation = `step-progress ${dwell}ms linear forwards`;
+      } else if (dot.classList.contains("is-active") && !mq.matches) {
+        fill.style.width = "100%";
+      } else if (!mq.matches) {
+        fill.style.width = "";
       }
     });
   }
 
   function showDesktop(next) {
     index = ((next % beats.length) + beats.length) % beats.length;
-    rail.dataset.step = String(index);
+    setActiveDot(index);
     beats.forEach((beat, i) => {
       const on = i === index;
       beat.classList.toggle("is-active", on);
       beat.classList.toggle("is-on-screen", on);
       if (on) restartAnims(beat);
-    });
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("is-active", i === index);
     });
     restartProgress();
   }
@@ -74,14 +83,19 @@
       beat.classList.remove("is-active");
       beat.classList.add("is-on-screen");
     });
+    setActiveDot(0);
+    restartProgress();
 
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.45) {
-            entry.target.classList.add("is-on-screen");
-            restartAnims(entry.target);
-          }
+          if (!entry.isIntersecting || entry.intersectionRatio < 0.45) return;
+          const i = Number(entry.target.dataset.beat);
+          if (Number.isNaN(i)) return;
+          entry.target.classList.add("is-on-screen");
+          setActiveDot(i);
+          restartAnims(entry.target);
+          restartProgress();
         });
       },
       { threshold: [0.45, 0.6] }
@@ -106,9 +120,14 @@
 
   dots.forEach((dot) => {
     dot.addEventListener("click", () => {
-      if (!mq.matches) return;
-      showDesktop(Number(dot.dataset.go));
-      play();
+      const go = Number(dot.dataset.go);
+      if (mq.matches) {
+        showDesktop(go);
+        play();
+        return;
+      }
+      const target = beats[go];
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
 
