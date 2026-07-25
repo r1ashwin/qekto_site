@@ -11,7 +11,7 @@
   let index = 0;
   let timer = null;
   let observers = [];
-  let userPaused = false;
+  let wheelLock = false;
 
   function restartAnims(beat) {
     beat.querySelectorAll(".bar, .pub-pick, .lift-line").forEach((el) => {
@@ -35,49 +35,35 @@
       if (!fill) return;
       fill.style.animation = "none";
       void fill.offsetWidth;
-      if (dot.classList.contains("is-active") && mq.matches && !reduceMotion && !userPaused) {
+      if (dot.classList.contains("is-active") && mq.matches && !reduceMotion) {
         fill.style.animation = `step-progress ${dwell}ms linear forwards`;
-      } else if (dot.classList.contains("is-active")) {
+      } else if (dot.classList.contains("is-active") && !mq.matches) {
         fill.style.width = "100%";
+      } else if (!mq.matches) {
+        fill.style.width = "";
       } else {
         fill.style.width = "";
       }
     });
   }
 
-  function scrollToBeat(i, behavior = "smooth") {
-    const target = beats[i];
-    if (!target) return;
-    target.scrollIntoView({ behavior, block: "start" });
-  }
-
-  function activateBeat(i, { fromUser = false } = {}) {
-    if (Number.isNaN(i) || i < 0 || i >= beats.length) return;
-    setActiveDot(i);
-    beats.forEach((beat, bi) => {
-      const on = bi === i;
+  function showDesktop(next) {
+    index = ((next % beats.length) + beats.length) % beats.length;
+    setActiveDot(index);
+    beats.forEach((beat, i) => {
+      const on = i === index;
       beat.classList.toggle("is-active", on);
       beat.classList.toggle("is-on-screen", on);
       if (on) restartAnims(beat);
     });
-    if (fromUser) {
-      userPaused = true;
-      stop();
-    }
     restartProgress();
   }
 
   function play() {
-    if (reduceMotion || !mq.matches || userPaused) return;
+    if (reduceMotion || !mq.matches) return;
     stop();
     restartProgress();
-    timer = window.setInterval(() => {
-      if (index >= beats.length - 1) {
-        stop();
-        return;
-      }
-      scrollToBeat(index + 1);
-    }, dwell);
+    timer = window.setInterval(() => showDesktop(index + 1), dwell);
   }
 
   function stop() {
@@ -87,13 +73,23 @@
     }
   }
 
-  function clearObservers() {
+  function clearMobileObservers() {
     observers.forEach((o) => o.disconnect());
     observers = [];
   }
 
-  function setupScrollWatch() {
-    clearObservers();
+  function setupMobile() {
+    document.body.classList.remove("desktop-lock");
+    stop();
+    clearMobileObservers();
+    beats.forEach((beat) => {
+      beat.classList.remove("is-active");
+      beat.classList.remove("is-on-screen");
+    });
+    if (beats[0]) beats[0].classList.add("is-on-screen");
+    setActiveDot(0);
+    restartProgress();
+
     const io = new IntersectionObserver(
       (entries) => {
         let best = null;
@@ -103,38 +99,28 @@
             best = entry;
           }
         });
-        if (!best || best.intersectionRatio < 0.45) return;
+        if (!best || best.intersectionRatio < 0.55) return;
         const i = Number(best.target.dataset.beat);
-        if (Number.isNaN(i) || i === index) return;
-        activateBeat(i);
-        if (mq.matches && !userPaused) play();
+        if (Number.isNaN(i)) return;
+        beats.forEach((beat, bi) => {
+          beat.classList.toggle("is-on-screen", bi === i);
+        });
+        setActiveDot(i);
+        restartAnims(best.target);
+        restartProgress();
       },
-      { threshold: [0.45, 0.6, 0.75] }
+      { threshold: [0.55, 0.7, 0.85] }
     );
 
     beats.forEach((beat) => io.observe(beat));
     observers.push(io);
   }
 
-  function setupMobile() {
-    document.body.classList.remove("desktop-lock");
-    stop();
-    userPaused = true;
-    beats.forEach((beat) => {
-      beat.classList.remove("is-active");
-      beat.classList.remove("is-on-screen");
-    });
-    if (beats[0]) beats[0].classList.add("is-on-screen");
-    setActiveDot(0);
-    restartProgress();
-    setupScrollWatch();
-  }
-
   function setupDesktop() {
-    document.body.classList.remove("desktop-lock");
-    userPaused = false;
-    activateBeat(Math.min(index, beats.length - 1));
-    setupScrollWatch();
+    document.body.classList.add("desktop-lock");
+    clearMobileObservers();
+    beats.forEach((beat) => beat.classList.remove("is-on-screen"));
+    showDesktop(index);
     play();
   }
 
@@ -146,30 +132,49 @@
   dots.forEach((dot) => {
     dot.addEventListener("click", () => {
       const go = Number(dot.dataset.go);
-      if (Number.isNaN(go)) return;
-      userPaused = true;
-      stop();
-      scrollToBeat(go);
-      activateBeat(go, { fromUser: true });
+      if (mq.matches) {
+        showDesktop(go);
+        play();
+        return;
+      }
+      const target = beats[go];
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
 
-  let wheelLock = false;
+  // Desktop: wheel / trackpad advances beats immediately — don't wait for countdown.
   window.addEventListener(
     "wheel",
-    () => {
+    (event) => {
       if (!mq.matches) return;
-      userPaused = true;
-      stop();
-      restartProgress();
+      event.preventDefault();
       if (wheelLock) return;
+      if (Math.abs(event.deltaY) < 8) return;
+
       wheelLock = true;
+      if (event.deltaY > 0) showDesktop(index + 1);
+      else showDesktop(index - 1);
+      play();
+
       window.setTimeout(() => {
         wheelLock = false;
-      }, 400);
+      }, 520);
     },
-    { passive: true }
+    { passive: false }
   );
+
+  window.addEventListener("keydown", (event) => {
+    if (!mq.matches) return;
+    if (event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ") {
+      event.preventDefault();
+      showDesktop(index + 1);
+      play();
+    } else if (event.key === "ArrowUp" || event.key === "PageUp") {
+      event.preventDefault();
+      showDesktop(index - 1);
+      play();
+    }
+  });
 
   mq.addEventListener("change", applyMode);
   applyMode();

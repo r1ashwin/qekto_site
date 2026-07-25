@@ -1115,11 +1115,11 @@ body::after {
   }
 }
 
-/* ========== DESKTOP: scroll through full-screen beats ========== */
+/* ========== DESKTOP: one screen, wheel advances beats ========== */
 @media (min-width: 900px) {
-  html {
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
+  body.desktop-lock {
+    overflow: hidden;
+    height: 100dvh;
   }
 
   .desktop-only {
@@ -1135,60 +1135,63 @@ body::after {
   }
 
   .top {
-    position: fixed;
-    left: 0;
-    right: 0;
+    position: sticky;
+    left: auto;
+    right: auto;
     top: 0;
-    width: 100%;
-    max-width: none;
-    scroll-snap-align: none;
+    width: auto;
+    max-width: 1100px;
   }
 
   .rail {
     position: relative;
     max-width: 1100px;
     margin: 0 auto;
-    height: auto;
-    padding: 0;
+    height: calc(100dvh - var(--header-h) - 3.75rem);
+    padding: 0 1.5rem;
   }
 
   .beat {
-    position: relative;
-    height: 100dvh;
-    min-height: 36rem;
+    position: absolute;
+    inset: 0;
+    height: auto;
+    min-height: 0;
     max-height: none;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+    padding: 0;
     display: grid;
     grid-template-columns: minmax(280px, 0.9fr) minmax(340px, 1.15fr);
     gap: 2.75rem;
     align-items: center;
-    padding: calc(var(--header-h) + 0.5rem) 1.5rem 4.5rem;
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(16px);
     overflow: hidden;
     box-sizing: border-box;
+    scroll-snap-align: none;
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s ease,
+      visibility 0.45s;
   }
 
   .beat.is-active {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: none;
+    transform: translateY(0);
   }
 
   .dock {
     display: block;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 30;
-    background: color-mix(in srgb, var(--canvas) 82%, transparent);
-    backdrop-filter: blur(14px);
-    border-top: 1px solid var(--hairline);
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    z-index: 5;
+    background: none;
+    backdrop-filter: none;
+    border-top: none;
   }
 
   .dock-auth {
@@ -1200,7 +1203,7 @@ body::after {
     justify-content: center;
     align-items: center;
     gap: 0.55rem;
-    padding: 0.75rem 0 calc(0.85rem + env(safe-area-inset-bottom));
+    padding: 0.35rem 0 1rem;
     position: relative;
     z-index: 5;
   }
@@ -1273,19 +1276,7 @@ body::after {
   }
 
   .foot {
-    display: flex;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    height: 100dvh;
-    min-height: 100dvh;
-    max-height: 100dvh;
-    box-sizing: border-box;
-    justify-content: center;
-    padding: calc(var(--header-h) + 2rem) 1.5rem 5rem;
-  }
-
-  .foot-line {
-    font-size: 16px;
+    display: none;
   }
 }
 
