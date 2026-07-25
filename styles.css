@@ -305,14 +305,6 @@ body::after {
   color: var(--signal-red);
 }
 
-.step-tag {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
-}
-
 .beat-copy h1 {
   font-size: clamp(2.75rem, 7vw, 4.25rem);
   font-weight: 600;
@@ -732,11 +724,6 @@ body::after {
 
   .beat-copy {
     flex-shrink: 0;
-  }
-
-  .beat-copy .step-tag {
-    font-size: 11px;
-    margin-bottom: 0.35rem;
   }
 
   .beat-copy h1 {
