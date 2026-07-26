@@ -1280,6 +1280,22 @@ body::after {
   background: color-mix(in srgb, var(--signal-yellow) 55%, #b8b0a4);
 }
 
+.track-chip {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  height: 1.35rem;
+  padding: 0 0.45rem;
+  border: 1px solid #2d6b52;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #2d6b52;
+  background: transparent;
+  white-space: nowrap;
+}
+
 .new-tag {
   display: inline-block;
   margin-left: 0.3rem;
