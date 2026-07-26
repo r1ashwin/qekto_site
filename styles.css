@@ -1322,8 +1322,8 @@ body::after {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.65rem;
-  margin-top: 0.35rem;
-  padding-top: 0.65rem;
+  margin-top: 0.15rem;
+  padding-top: 0.55rem;
   border-top: 1px solid var(--hairline);
   flex-shrink: 0;
 }
@@ -2670,6 +2670,7 @@ body::after {
     font-size: 12.5px;
     padding: 0.9rem 0.95rem 1rem;
     gap: 0.35rem;
+    justify-content: flex-start;
   }
 
   .ui-card .ui-top,
@@ -2682,7 +2683,7 @@ body::after {
   }
 
   .ui-card .sov-list {
-    flex: 1 1 auto;
+    flex: 0 0 auto;
     min-height: 0;
     justify-content: flex-start;
     gap: 0.4rem;
@@ -2707,12 +2708,14 @@ body::after {
 
   .ui-card .why-grid {
     flex-shrink: 0;
-    margin-top: auto;
+    margin-top: 0.15rem;
   }
 
-  .ui-card .sov-list {
-    flex: 1 1 auto;
-    min-height: 0;
+  /* Measure card: pack content — no empty band between bars and why. */
+  .instance > .ui-card:not(.lift-card):not(.publisher) {
+    height: auto;
+    max-height: 100%;
+    align-self: center;
   }
 
   .ui-card.publisher {
