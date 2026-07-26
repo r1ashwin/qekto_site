@@ -11,8 +11,8 @@
   let index = 0;
   let timer = null;
   let paused = false;
-  let wheelLock = false;
   let wheelAccum = 0;
+  let wheelIgnoreUntil = 0;
   let wheelCooldownTimer = null;
   let touchStartY = null;
 
@@ -143,26 +143,33 @@
       if (!mq.matches) return;
       event.preventDefault();
 
-      // While cooling down, ignore further events — do not refresh the timer
-      // (trackpad inertia was keeping the lock forever until the mouse moved).
-      if (wheelLock) return;
+      const now = Date.now();
+      // Hard ignore covers the whole trackpad gesture + inertia.
+      if (now < wheelIgnoreUntil) return;
 
-      wheelAccum += event.deltaY;
-      if (Math.abs(wheelAccum) < 28) return;
+      // Normalize line/page deltas so one notch isn’t huge on some mice.
+      let dy = event.deltaY;
+      if (event.deltaMode === 1) dy *= 16;
+      if (event.deltaMode === 2) dy *= 48;
 
-      wheelLock = true;
+      wheelAccum += dy;
+      if (Math.abs(wheelAccum) < 60) return;
+
       const goingDown = wheelAccum > 0;
       wheelAccum = 0;
+      // Block everything until this gesture is done, then a short residual gap.
+      wheelIgnoreUntil = now + 1250;
+      stop();
       if (goingDown) showBeat(index + 1);
       else showBeat(index - 1);
-      if (!paused) play();
 
       if (wheelCooldownTimer) window.clearTimeout(wheelCooldownTimer);
       wheelCooldownTimer = window.setTimeout(() => {
-        wheelLock = false;
         wheelAccum = 0;
+        wheelIgnoreUntil = Date.now() + 280;
         wheelCooldownTimer = null;
-      }, 700);
+        if (!paused) play();
+      }, 1250);
     },
     { passive: false }
   );
