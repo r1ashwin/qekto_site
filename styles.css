@@ -2198,7 +2198,7 @@ body::after {
     gap: 0.05rem;
     position: fixed;
     left: 50%;
-    bottom: calc(0.7rem + env(safe-area-inset-bottom));
+    bottom: calc(var(--dock-h) + 0.2rem);
     transform: translateX(-50%);
     z-index: 32;
     margin: 0;
