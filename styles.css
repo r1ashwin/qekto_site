@@ -1909,10 +1909,14 @@ body::after {
   }
 
   .beat-copy .lead {
-    font-size: 13px;
-    line-height: 1.4;
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: var(--ink);
     margin-bottom: 0;
     max-width: none;
+    white-space: nowrap;
   }
 
   /* Same demo frame for Measure / Place / Prove. */
@@ -2459,10 +2463,15 @@ body::after {
   }
 
   .beat-copy .lead {
-    max-width: 16rem;
+    max-width: none;
+    width: max-content;
     margin-bottom: 0;
-    font-size: 15px;
-    line-height: 1.5;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    white-space: nowrap;
   }
 
   /* Demo docks right — same size on Measure / Place / Prove. */
