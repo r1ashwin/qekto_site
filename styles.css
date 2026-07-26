@@ -671,7 +671,7 @@ body::after {
   display: inline-flex;
   align-items: flex-end;
   gap: 3px;
-  height: 1em;
+  height: 0.78em;
   margin-top: 0;
 }
 
@@ -1868,7 +1868,7 @@ body::after {
   }
 
   .logo .triad {
-    height: 1em;
+    height: 0.78em;
     gap: 0.14em;
   }
 
