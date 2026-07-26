@@ -669,27 +669,55 @@ body::after {
 
 .logo .triad {
   display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 1px;
+  align-items: flex-end;
+  gap: 3px;
+  height: 14px;
+  margin-top: 0;
 }
 
 .triad {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 3px;
+  height: 12px;
 }
 
+/* Mini progress bars: measure → place → prove */
 .dot {
   display: block;
-  width: 8px;
-  height: 8px;
+  width: 5px;
   border-radius: 1px;
 }
 
-.logo .dot {
-  width: 9px;
+.dot.teal {
+  height: 5px;
+  background: var(--signal-teal);
+}
+
+.dot.yellow {
   height: 9px;
+  background: var(--signal-yellow);
+}
+
+.dot.red {
+  height: 14px;
+  background: var(--signal-red);
+}
+
+.logo .dot {
+  width: 5px;
+}
+
+.logo .dot.teal {
+  height: 5px;
+}
+
+.logo .dot.yellow {
+  height: 9px;
+}
+
+.logo .dot.red {
+  height: 14px;
 }
 
 .top-nav {
@@ -705,18 +733,6 @@ body::after {
 
 .dock-auth {
   display: none;
-}
-
-.dot.teal {
-  background: var(--signal-teal);
-}
-
-.dot.yellow {
-  background: var(--signal-yellow);
-}
-
-.dot.red {
-  background: var(--signal-red);
 }
 
 .top-nav a {
@@ -1850,9 +1866,25 @@ body::after {
     font-size: 22px;
   }
 
+  .logo .triad {
+    height: 12px;
+    gap: 2.5px;
+  }
+
   .logo .dot {
-    width: 8px;
-    height: 8px;
+    width: 4.5px;
+  }
+
+  .logo .dot.teal {
+    height: 4px;
+  }
+
+  .logo .dot.yellow {
+    height: 7.5px;
+  }
+
+  .logo .dot.red {
+    height: 12px;
   }
 
   .logo-tag {
