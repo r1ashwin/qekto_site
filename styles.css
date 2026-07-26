@@ -2243,11 +2243,13 @@ body::after {
     height: auto;
     min-height: 0;
     max-height: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: minmax(200px, 17.5rem) minmax(0, 1fr);
-    gap: 1.5rem;
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
     align-items: center;
+    gap: 2.25rem;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -2268,31 +2270,46 @@ body::after {
     transform: translateY(0);
   }
 
-  .beat-copy .lead {
-    max-width: 17rem;
+  .beat-copy {
+    flex: 0 0 auto;
+    width: min(16.5rem, 28vw);
+    max-width: 16.5rem;
   }
 
-  /* Same right-panel demo frame for Measure / Place / Prove. */
+  .beat-copy h1 {
+    font-size: clamp(2.6rem, 4.2vw, 3.75rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .beat-copy .lead {
+    max-width: 15.5rem;
+    margin-bottom: 0;
+    font-size: 15px;
+  }
+
+  /* Same demo frame for Measure / Place / Prove — sized to content, centered with copy. */
   .instance {
+    flex: 0 1 auto;
     height: min(34rem, calc(100dvh - var(--header-h) - var(--pitch-h) - 5.5rem));
     min-height: 22rem;
     max-height: 36rem;
-    max-width: none;
-    width: 100%;
-    margin-left: 0;
+    width: min(34rem, 52vw);
+    max-width: 34rem;
+    margin: 0;
     display: flex;
     align-items: stretch;
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .instance .screen-frame {
-    max-width: 34rem;
+    max-width: none;
     width: 100%;
-    margin-left: 0;
+    margin: 0;
   }
 
   .instance-place {
-    max-width: none;
+    width: min(46rem, 62vw);
+    max-width: 46rem;
   }
 
   .instance-place .screen-frame {
@@ -2302,7 +2319,7 @@ body::after {
 
   .place-stage {
     width: 100%;
-    max-width: 46rem;
+    max-width: none;
   }
 
   .phone-frame {
