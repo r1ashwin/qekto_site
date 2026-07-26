@@ -1318,6 +1318,64 @@ body::after {
   gap: 0.45rem;
 }
 
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-top: 0.35rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--hairline);
+  flex-shrink: 0;
+}
+
+.why-col .ui-section {
+  margin: 0 0 0.4rem;
+}
+
+.why-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--body);
+}
+
+.why-list li {
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+.why-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.4em;
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+}
+
+.why-yes .why-list li::before {
+  background: var(--signal-teal);
+}
+
+.why-no .why-list li::before {
+  background: var(--mute-soft, #a39c92);
+  border: 1px solid var(--mute);
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.why-yes .ui-section {
+  color: var(--signal-teal);
+}
+
+.why-no .ui-section {
+  color: var(--mute);
+}
+
 .q-dot {
   width: 7px;
   height: 7px;
@@ -2074,6 +2132,22 @@ body::after {
     display: none;
   }
 
+  .why-grid {
+    margin-top: 0.15rem;
+    padding-top: 0.45rem;
+    gap: 0.45rem;
+  }
+
+  .why-list {
+    font-size: 10.5px;
+    gap: 0.25rem;
+  }
+
+  .why-col .ui-section {
+    font-size: 8.5px;
+    margin-bottom: 0.25rem;
+  }
+
   .bar-track {
     height: 6px;
     background: color-mix(in srgb, var(--ink) 9%, transparent);
@@ -2629,6 +2703,16 @@ body::after {
     flex-shrink: 0;
     margin-top: 0;
     gap: 0.35rem;
+  }
+
+  .ui-card .why-grid {
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+
+  .ui-card .sov-list {
+    flex: 1 1 auto;
+    min-height: 0;
   }
 
   .ui-card.publisher {
