@@ -12,6 +12,7 @@
   let timer = null;
   let paused = false;
   let wheelLock = false;
+  let wheelAccum = 0;
   let wheelIdleTimer = null;
   let touchStartY = null;
 
@@ -142,19 +143,24 @@
       if (!mq.matches) return;
       event.preventDefault();
 
-      // Keep the gesture locked until the trackpad/wheel goes idle —
-      // one swipe / flick = one beat, no matter how many events fire.
+      // Unlock only after the gesture goes quiet (trackpad inertia finished).
       if (wheelIdleTimer) window.clearTimeout(wheelIdleTimer);
       wheelIdleTimer = window.setTimeout(() => {
         wheelLock = false;
+        wheelAccum = 0;
         wheelIdleTimer = null;
-      }, 220);
+      }, 280);
 
       if (wheelLock) return;
-      if (Math.abs(event.deltaY) < 4) return;
+
+      // Pixel trackpads send tiny deltas — accumulate until one clear step.
+      wheelAccum += event.deltaY;
+      if (Math.abs(wheelAccum) < 28) return;
 
       wheelLock = true;
-      if (event.deltaY > 0) showBeat(index + 1);
+      const goingDown = wheelAccum > 0;
+      wheelAccum = 0;
+      if (goingDown) showBeat(index + 1);
       else showBeat(index - 1);
       if (!paused) play();
     },
