@@ -13,7 +13,7 @@
   let paused = false;
   let wheelLock = false;
   let wheelAccum = 0;
-  let wheelIdleTimer = null;
+  let wheelCooldownTimer = null;
   let touchStartY = null;
 
   function restartAnims(beat) {
@@ -143,17 +143,10 @@
       if (!mq.matches) return;
       event.preventDefault();
 
-      // Unlock only after the gesture goes quiet (trackpad inertia finished).
-      if (wheelIdleTimer) window.clearTimeout(wheelIdleTimer);
-      wheelIdleTimer = window.setTimeout(() => {
-        wheelLock = false;
-        wheelAccum = 0;
-        wheelIdleTimer = null;
-      }, 280);
-
+      // While cooling down, ignore further events — do not refresh the timer
+      // (trackpad inertia was keeping the lock forever until the mouse moved).
       if (wheelLock) return;
 
-      // Pixel trackpads send tiny deltas — accumulate until one clear step.
       wheelAccum += event.deltaY;
       if (Math.abs(wheelAccum) < 28) return;
 
@@ -163,6 +156,13 @@
       if (goingDown) showBeat(index + 1);
       else showBeat(index - 1);
       if (!paused) play();
+
+      if (wheelCooldownTimer) window.clearTimeout(wheelCooldownTimer);
+      wheelCooldownTimer = window.setTimeout(() => {
+        wheelLock = false;
+        wheelAccum = 0;
+        wheelCooldownTimer = null;
+      }, 700);
     },
     { passive: false }
   );
