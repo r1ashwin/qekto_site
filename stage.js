@@ -158,7 +158,7 @@
       const goingDown = wheelAccum > 0;
       wheelAccum = 0;
       // Block everything until this gesture is done, then a short residual gap.
-      wheelIgnoreUntil = now + 1250;
+      wheelIgnoreUntil = now + 780;
       stop();
       if (goingDown) showBeat(index + 1);
       else showBeat(index - 1);
@@ -166,10 +166,10 @@
       if (wheelCooldownTimer) window.clearTimeout(wheelCooldownTimer);
       wheelCooldownTimer = window.setTimeout(() => {
         wheelAccum = 0;
-        wheelIgnoreUntil = Date.now() + 280;
+        wheelIgnoreUntil = Date.now() + 180;
         wheelCooldownTimer = null;
         if (!paused) play();
-      }, 1250);
+      }, 780);
     },
     { passive: false }
   );
