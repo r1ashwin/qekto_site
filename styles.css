@@ -1290,8 +1290,8 @@ body::after {
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--signal-yellow);
-  background: color-mix(in srgb, var(--signal-yellow) 14%, transparent);
+  color: var(--signal-red);
+  background: color-mix(in srgb, var(--signal-red) 14%, transparent);
   vertical-align: middle;
 }
 
