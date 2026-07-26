@@ -2207,18 +2207,19 @@ body::after {
     display: block;
     width: 10px;
     height: 10px;
-    border-right: 1.5px solid currentColor;
-    border-bottom: 1.5px solid currentColor;
+    border-left: 1.5px solid currentColor;
+    border-top: 1.5px solid currentColor;
     transform: rotate(45deg);
     opacity: 0.35;
   }
 
+  /* Lower chevron leads — reads as “swipe up”. */
   .scroll-cue-chevron:nth-child(1) {
-    animation: scroll-chevron-fade 1.6s ease-in-out infinite;
+    animation: scroll-chevron-fade 1.6s ease-in-out 0.28s infinite;
   }
 
   .scroll-cue-chevron:nth-child(2) {
-    animation: scroll-chevron-fade 1.6s ease-in-out 0.28s infinite;
+    animation: scroll-chevron-fade 1.6s ease-in-out infinite;
   }
 
   @keyframes scroll-cue-drift {
@@ -2227,7 +2228,7 @@ body::after {
       transform: translateX(-50%) translateY(0);
     }
     50% {
-      transform: translateX(-50%) translateY(6px);
+      transform: translateX(-50%) translateY(-6px);
     }
   }
 
