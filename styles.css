@@ -419,7 +419,7 @@ body::after {
   width: 2.4rem;
   height: 2.4rem;
   border: none;
-  background: color-mix(in srgb, var(--signal-teal) 12%, #fff);
+  background: color-mix(in srgb, var(--ink) 6%, #fff);
   padding: 0;
   cursor: pointer;
   flex-direction: column;
@@ -434,7 +434,7 @@ body::after {
   display: block;
   width: 14px;
   height: 1.5px;
-  background: var(--signal-teal);
+  background: var(--ink);
   border-radius: 1px;
 }
 
@@ -805,6 +805,198 @@ body::after {
 }
 
 /* ---- Instance / mock UI ---- */
+
+.screen-frame {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background: #ebe6dc;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(26, 24, 20, 0.08);
+}
+
+.screen-chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  padding: 0.55rem 0.75rem;
+  background: color-mix(in srgb, var(--canvas-soft, #ebe6dc) 70%, #fff);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.traffic {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.tl {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+}
+
+.tl-close {
+  background: #ff5f57;
+}
+
+.tl-min {
+  background: #febc2e;
+}
+
+.tl-max {
+  background: #28c840;
+}
+
+.screen-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--mute);
+  font-family: ui-monospace, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  padding-right: 2.1rem;
+}
+
+.screen-frame .ui-card {
+  flex: 1 1 auto;
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.place-stage {
+  display: flex;
+  align-items: stretch;
+  gap: 0.85rem;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.place-stage .screen-frame {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.phone-frame {
+  display: none;
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+.phone-bezel {
+  width: 11.5rem;
+  height: 100%;
+  max-height: 32rem;
+  min-height: 22rem;
+  background: #1a1814;
+  border-radius: 1.35rem;
+  padding: 0.55rem 0.4rem 0.65rem;
+  box-shadow: 0 12px 28px rgba(26, 24, 20, 0.18);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.phone-island {
+  width: 3.4rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  background: #2c2924;
+  margin: 0.15rem auto 0.55rem;
+  flex-shrink: 0;
+}
+
+.phone-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 0.85rem;
+  padding: 0.7rem 0.65rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.phone-site {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.phone-kicker {
+  font-size: 10px;
+  color: var(--mute);
+}
+
+.phone-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.phone-body {
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--body);
+}
+
+.phone-pick {
+  border: 1px solid var(--signal-yellow);
+  border-radius: 7px;
+  padding: 0.5rem 0.55rem;
+  background: color-mix(in srgb, var(--signal-yellow) 10%, #fff);
+  margin-top: 0.15rem;
+}
+
+.phone-pick-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--signal-yellow);
+  margin-bottom: 0.15rem;
+}
+
+.phone-pick-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+
+.phone-pick-why {
+  font-size: 10px;
+  line-height: 1.35;
+  color: var(--body);
+}
+
+.phone-list {
+  margin: 0.25rem 0 0 0.95rem;
+  font-size: 11px;
+  color: var(--body);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
 
 .ui-card {
   background: var(--surface);
@@ -1325,8 +1517,8 @@ body::after {
   .mobile-back-chevron {
     width: 8px;
     height: 8px;
-    border-left: 1.5px solid currentColor;
-    border-bottom: 1.5px solid currentColor;
+    border-left: 1.5px solid var(--ink);
+    border-bottom: 1.5px solid var(--ink);
     transform: rotate(45deg);
   }
 
@@ -1347,7 +1539,7 @@ body::after {
     height: 2.4rem;
     border: none;
     border-radius: 10px;
-    background: color-mix(in srgb, var(--signal-teal) 12%, #fff);
+    background: color-mix(in srgb, var(--ink) 6%, #fff);
     position: relative;
     cursor: pointer;
     margin-left: auto;
@@ -1360,7 +1552,7 @@ body::after {
     top: 50%;
     width: 12px;
     height: 1.5px;
-    background: var(--signal-teal);
+    background: var(--ink);
     border-radius: 1px;
   }
 
@@ -1571,6 +1763,29 @@ body::after {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+  }
+
+  .screen-frame {
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(26, 24, 20, 0.06);
+  }
+
+  .screen-chrome {
+    padding: 0.45rem 0.65rem;
+  }
+
+  .screen-title {
+    font-size: 10px;
+    padding-right: 1.6rem;
+  }
+
+  .phone-frame {
+    display: none;
+  }
+
+  .place-stage {
+    height: 100%;
   }
 
   .ui-card {
@@ -2016,7 +2231,7 @@ body::after {
 
   .rail {
     position: relative;
-    max-width: 1100px;
+    max-width: 1180px;
     margin: 0 auto;
     height: calc(100dvh - var(--header-h) - var(--pitch-h) - 1.5rem);
     padding: 0 1.5rem;
@@ -2030,8 +2245,8 @@ body::after {
     max-height: none;
     padding: 0;
     display: grid;
-    grid-template-columns: minmax(260px, 1fr) minmax(280px, 0.95fr);
-    gap: 2.25rem;
+    grid-template-columns: minmax(200px, 17.5rem) minmax(0, 1fr);
+    gap: 1.5rem;
     align-items: center;
     opacity: 0;
     visibility: hidden;
@@ -2053,16 +2268,58 @@ body::after {
     transform: translateY(0);
   }
 
+  .beat-copy .lead {
+    max-width: 17rem;
+  }
+
   /* Same right-panel demo frame for Measure / Place / Prove. */
   .instance {
-    height: min(32rem, calc(100dvh - var(--header-h) - var(--pitch-h) - 5.5rem));
+    height: min(34rem, calc(100dvh - var(--header-h) - var(--pitch-h) - 5.5rem));
     min-height: 22rem;
-    max-height: 34rem;
-    max-width: 28rem;
+    max-height: 36rem;
+    max-width: none;
     width: 100%;
-    margin-left: auto;
+    margin-left: 0;
     display: flex;
     align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .instance .screen-frame {
+    max-width: 34rem;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .instance-place {
+    max-width: none;
+  }
+
+  .instance-place .screen-frame {
+    max-width: none;
+    flex: 1 1 auto;
+  }
+
+  .place-stage {
+    width: 100%;
+    max-width: 46rem;
+  }
+
+  .phone-frame {
+    display: none;
+  }
+
+  @media (min-width: 1080px) {
+    .phone-frame {
+      display: flex;
+      height: 100%;
+    }
+
+    .phone-bezel {
+      height: 100%;
+      max-height: none;
+      width: 10.75rem;
+    }
   }
 
   .ui-card {
