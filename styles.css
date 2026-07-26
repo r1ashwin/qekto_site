@@ -1373,7 +1373,7 @@ body::after {
 }
 
 .why-no .ui-section {
-  color: var(--mute);
+  color: var(--ink);
 }
 
 .q-dot {
