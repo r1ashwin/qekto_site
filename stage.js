@@ -12,6 +12,7 @@
   let timer = null;
   let paused = false;
   let wheelLock = false;
+  let wheelIdleTimer = null;
   let touchStartY = null;
 
   function restartAnims(beat) {
@@ -140,17 +141,22 @@
     (event) => {
       if (!mq.matches) return;
       event.preventDefault();
+
+      // Keep the gesture locked until the trackpad/wheel goes idle —
+      // one swipe / flick = one beat, no matter how many events fire.
+      if (wheelIdleTimer) window.clearTimeout(wheelIdleTimer);
+      wheelIdleTimer = window.setTimeout(() => {
+        wheelLock = false;
+        wheelIdleTimer = null;
+      }, 220);
+
       if (wheelLock) return;
-      if (Math.abs(event.deltaY) < 8) return;
+      if (Math.abs(event.deltaY) < 4) return;
 
       wheelLock = true;
       if (event.deltaY > 0) showBeat(index + 1);
       else showBeat(index - 1);
       if (!paused) play();
-
-      window.setTimeout(() => {
-        wheelLock = false;
-      }, 520);
     },
     { passive: false }
   );
