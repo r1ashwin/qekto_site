@@ -2404,10 +2404,10 @@ body::after {
 
   .rail {
     position: relative;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     height: calc(100dvh - var(--header-h) - var(--pitch-h) - 1.5rem);
-    padding: 0 1.5rem;
+    padding: 0 1.75rem;
   }
 
   .beat {
@@ -2416,11 +2416,11 @@ body::after {
     height: auto;
     min-height: 0;
     max-height: none;
-    padding: 0;
+    padding: 0 0.25rem;
     display: grid;
-    grid-template-columns: 16rem 34rem;
-    column-gap: 2rem;
-    justify-content: center;
+    grid-template-columns: minmax(15rem, 18rem) minmax(0, 1fr);
+    column-gap: clamp(2.5rem, 5vw, 4.5rem);
+    justify-content: stretch;
     align-items: center;
     justify-items: stretch;
     opacity: 0;
@@ -2444,34 +2444,37 @@ body::after {
   }
 
   .beat-copy {
-    width: 16rem;
-    max-width: 16rem;
+    width: 100%;
+    max-width: 18rem;
+    justify-self: start;
     align-self: center;
+    padding-left: 0.25rem;
   }
 
   .beat-copy h1 {
-    font-size: 3.15rem;
+    font-size: clamp(2.75rem, 3.4vw, 3.35rem);
     line-height: 1.02;
     margin-bottom: 0.7rem;
     white-space: nowrap;
   }
 
   .beat-copy .lead {
-    max-width: 15rem;
+    max-width: 16rem;
     margin-bottom: 0;
     font-size: 15px;
     line-height: 1.5;
   }
 
-  /* Shared demo slot — same box on Measure / Place / Prove so slides don’t jump. */
+  /* Demo docks right — same size on Measure / Place / Prove. */
   .instance,
   .instance-place {
-    width: 34rem;
+    width: min(34rem, 100%);
     max-width: 34rem;
     height: min(32rem, calc(100dvh - var(--header-h) - var(--pitch-h) - 6rem));
     min-height: 24rem;
     max-height: 32rem;
     margin: 0;
+    justify-self: end;
     display: flex;
     align-items: stretch;
     justify-content: stretch;
@@ -2504,39 +2507,40 @@ body::after {
   @media (min-width: 1080px) {
     .phone-frame {
       display: block;
-      /* Overlap inside the shared stage so Place doesn’t shift wider. */
-      right: 0.85rem;
-      bottom: 0.55rem;
+      /* Hang off the right edge — light overlap, less clutter on the page. */
+      right: -2.75rem;
+      bottom: 0.65rem;
     }
 
     .phone-bezel {
-      width: 8.85rem;
+      width: 8.6rem;
     }
 
-    /* Let the handset peek without clipping the shared stage. */
     .beat[data-beat="1"].is-active {
       overflow: visible;
+    }
+
+    .instance-place {
+      margin-right: 1.75rem;
     }
   }
 
   @media (max-width: 1079px) {
     .beat {
-      grid-template-columns: 14.5rem minmax(0, 30rem);
-      column-gap: 1.5rem;
+      grid-template-columns: minmax(13rem, 15rem) minmax(0, 1fr);
+      column-gap: 1.75rem;
     }
 
     .beat-copy {
-      width: 14.5rem;
-      max-width: 14.5rem;
+      max-width: 15rem;
     }
 
     .beat-copy h1 {
-      font-size: 2.65rem;
+      font-size: 2.55rem;
     }
 
     .instance,
     .instance-place {
-      width: 100%;
       max-width: 30rem;
     }
   }
