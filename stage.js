@@ -10,6 +10,7 @@
 
   let index = 0;
   let timer = null;
+  let paused = false;
   let wheelLock = false;
   let touchStartY = null;
 
@@ -59,7 +60,7 @@
   }
 
   function play() {
-    if (reduceMotion || !mq.matches) return;
+    if (reduceMotion || !mq.matches || paused) return;
     stop();
     restartProgress();
     timer = window.setInterval(() => showBeat(index + 1), dwell);
@@ -72,9 +73,32 @@
     }
   }
 
+  function pauseAuto() {
+    paused = true;
+    stop();
+    // Freeze the active progress fill where it is.
+    dots.forEach((dot) => {
+      const fill = dot.querySelector(".step-fill");
+      if (!fill || !dot.classList.contains("is-active")) return;
+      const style = window.getComputedStyle(fill);
+      const width = style.width;
+      const height = style.height;
+      fill.style.animation = "none";
+      fill.style.width = width;
+      fill.style.height = height;
+    });
+  }
+
+  function resumeAuto() {
+    if (!mq.matches) return;
+    paused = false;
+    play();
+  }
+
   function setupMobile() {
     document.body.classList.remove("desktop-lock");
     document.body.classList.add("mobile-lock");
+    paused = false;
     stop();
     showBeat(index);
   }
@@ -82,6 +106,7 @@
   function setupDesktop() {
     document.body.classList.remove("mobile-lock");
     document.body.classList.add("desktop-lock");
+    paused = false;
     showBeat(index);
     play();
   }
@@ -96,8 +121,18 @@
       const go = Number(dot.dataset.go);
       if (Number.isNaN(go)) return;
       showBeat(go);
-      if (mq.matches) play();
+      if (mq.matches && !paused) play();
     });
+  });
+
+  // Pause auto-advance while reading the center demo.
+  rail.addEventListener("mouseenter", () => {
+    if (!mq.matches) return;
+    pauseAuto();
+  });
+  rail.addEventListener("mouseleave", () => {
+    if (!mq.matches) return;
+    resumeAuto();
   });
 
   window.addEventListener(
@@ -111,7 +146,7 @@
       wheelLock = true;
       if (event.deltaY > 0) showBeat(index + 1);
       else showBeat(index - 1);
-      play();
+      if (!paused) play();
 
       window.setTimeout(() => {
         wheelLock = false;
@@ -125,11 +160,11 @@
     if (event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ") {
       event.preventDefault();
       showBeat(index + 1);
-      play();
+      if (!paused) play();
     } else if (event.key === "ArrowUp" || event.key === "PageUp") {
       event.preventDefault();
       showBeat(index - 1);
-      play();
+      if (!paused) play();
     }
   });
 
@@ -162,7 +197,7 @@
     const i = beats.findIndex((beat) => beat.id === id);
     if (i < 0) return;
     showBeat(i);
-    if (mq.matches) play();
+    if (mq.matches && !paused) play();
   }
 
   window.addEventListener("hashchange", beatFromHash);
