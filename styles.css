@@ -1272,6 +1272,29 @@ body::after {
   font-weight: 500;
 }
 
+.sov-list li.detected {
+  color: var(--body);
+}
+
+.sov-list li.detected .bar {
+  background: color-mix(in srgb, var(--signal-yellow) 55%, #b8b0a4);
+}
+
+.new-tag {
+  display: inline-block;
+  margin-left: 0.3rem;
+  padding: 0.05rem 0.28rem;
+  border-radius: 3px;
+  font-style: normal;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--signal-yellow);
+  background: color-mix(in srgb, var(--signal-yellow) 14%, transparent);
+  vertical-align: middle;
+}
+
 .bar-track {
   height: 6px;
   background: var(--hairline);
@@ -2126,7 +2149,7 @@ body::after {
     font-size: 11px;
   }
 
-  .sov-list li:nth-child(n + 4),
+  .sov-list li:nth-child(n + 4):not(.detected),
   .query-list,
   .ui-section:has(+ .query-list) {
     display: none;
