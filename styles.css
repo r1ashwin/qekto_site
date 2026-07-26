@@ -671,7 +671,7 @@ body::after {
   display: inline-flex;
   align-items: flex-end;
   gap: 3px;
-  height: 14px;
+  height: 1em;
   margin-top: 0;
 }
 
@@ -690,34 +690,35 @@ body::after {
 }
 
 .dot.teal {
-  height: 5px;
+  height: 35%;
   background: var(--signal-teal);
 }
 
 .dot.yellow {
-  height: 9px;
+  height: 65%;
   background: var(--signal-yellow);
 }
 
 .dot.red {
-  height: 14px;
+  height: 100%;
   background: var(--signal-red);
 }
 
 .logo .dot {
-  width: 5px;
+  width: 0.28em;
+  min-width: 4px;
 }
 
 .logo .dot.teal {
-  height: 5px;
+  height: 35%;
 }
 
 .logo .dot.yellow {
-  height: 9px;
+  height: 65%;
 }
 
 .logo .dot.red {
-  height: 14px;
+  height: 100%;
 }
 
 .top-nav {
@@ -1867,24 +1868,12 @@ body::after {
   }
 
   .logo .triad {
-    height: 12px;
-    gap: 2.5px;
+    height: 1em;
+    gap: 0.14em;
   }
 
   .logo .dot {
-    width: 4.5px;
-  }
-
-  .logo .dot.teal {
-    height: 4px;
-  }
-
-  .logo .dot.yellow {
-    height: 7.5px;
-  }
-
-  .logo .dot.red {
-    height: 12px;
+    width: 0.26em;
   }
 
   .logo-tag {
