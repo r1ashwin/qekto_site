@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Get in touch | Qekto</title>
+    <meta
+      name="description"
+      content="Talk to Qekto before you sign up. Tell us about your brand and we'll reply."
+    />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/assets/favicon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/assets/favicon-192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="page page-contact">
+    <header class="site-header">
+      <div class="top">
+        <div class="nav-shell">
+          <a class="logo" href="/">
+            <span class="logo-mark">
+              Qekto
+              <span class="triad" aria-hidden="true">
+                <span class="dot teal"></span>
+                <span class="dot yellow"></span>
+                <span class="dot red"></span>
+              </span>
+            </span>
+            <span class="logo-tag" aria-hidden="true">
+              <span class="teal-text">measure</span>.
+              <span class="yellow-text">place</span>.
+              <span class="red-text">prove</span>
+            </span>
+          </a>
+
+          <nav class="top-nav" aria-label="Account">
+            <a href="https://qekto.app/login">Log in</a>
+            <a href="/contact.html" aria-current="page">Get in touch</a>
+            <a class="btn" href="https://qekto.app/login">Get started</a>
+          </nav>
+
+          <button type="button" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-drawer" hidden>
+      <div class="mobile-drawer-top">
+        <a class="logo" href="/">
+          <span class="logo-mark">
+            Qekto
+            <span class="triad" aria-hidden="true">
+              <span class="dot teal"></span>
+              <span class="dot yellow"></span>
+              <span class="dot red"></span>
+            </span>
+          </span>
+        </a>
+        <button type="button" class="menu-toggle is-open" aria-label="Close menu" aria-expanded="true">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="mobile-drawer-body">
+        <div class="mobile-panel is-active" data-panel="root">
+          <a class="mobile-row" href="/">Home</a>
+          <a class="mobile-row" href="/brands.html">Brands</a>
+          <a class="mobile-row" href="/pricing.html">Pricing</a>
+          <a class="mobile-row" href="/contact.html">Get in touch</a>
+        </div>
+      </div>
+      <div class="mobile-drawer-auth">
+        <a class="btn" href="https://qekto.app/login">Get started</a>
+        <a class="btn btn-outline" href="/contact.html">Get in touch</a>
+        <a class="mobile-auth-login" href="https://qekto.app/login">Log in</a>
+      </div>
+    </div>
+
+    <main class="page-main contact-main">
+      <section class="page-hero contact-hero">
+        <h1 class="page-title">Get in touch</h1>
+        <p class="page-lead">
+          Prefer to talk before signing up? Send a short note. We reply by email. No calendar
+          widget, no fake booking flow.
+        </p>
+      </section>
+
+      <p class="contact-sent" id="contact-sent" hidden>
+        Sent. Check your inbox for a confirmation if this is your first message, then we will
+        reply from our side.
+      </p>
+
+      <form
+        class="contact-form"
+        action="https://formsubmit.co/r1ashwindeshpande@gmail.com"
+        method="POST"
+      >
+        <input type="hidden" name="_subject" value="Qekto - get in touch" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://qekto.com/contact.html?sent=1" />
+        <input type="text" name="_honey" style="display: none" tabindex="-1" autocomplete="off" />
+
+        <label class="contact-label">
+          Your name
+          <input class="contact-input" type="text" name="name" required autocomplete="name" />
+        </label>
+
+        <label class="contact-label">
+          Work email
+          <input
+            class="contact-input"
+            type="email"
+            name="email"
+            required
+            autocomplete="email"
+            placeholder="you@company.com"
+          />
+        </label>
+
+        <label class="contact-label">
+          Brand / company
+          <input class="contact-input" type="text" name="company" autocomplete="organization" />
+        </label>
+
+        <label class="contact-label">
+          Message
+          <textarea
+            class="contact-input contact-textarea"
+            name="message"
+            required
+            rows="5"
+            placeholder="What do you sell, and what do you want to know about AI recommendations?"
+          ></textarea>
+        </label>
+
+        <button class="btn contact-submit" type="submit">Send message</button>
+      </form>
+
+      <p class="contact-note">
+        Or start measuring now:
+        <a href="https://qekto.app/login">Get started</a>
+      </p>
+    </main>
+
+    <script src="nav.js" defer></script>
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get("sent") === "1") {
+          var el = document.getElementById("contact-sent");
+          if (el) el.hidden = false;
+        }
+      })();
+    </script>
+  </body>
+</html>

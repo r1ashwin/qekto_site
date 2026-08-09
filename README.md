@@ -7,14 +7,18 @@ Marketing site for Qekto. Product lives on `qekto.app`.
 | Label | Target | Role |
 |---|---|---|
 | **Get started** | `https://qekto.app/login` | Primary. Signup entry for brands (same URL forever; default = brand). Not a separate “Sign up” button. |
-| **Get in touch** | `mailto:r1ashwindeshpande@gmail.com?subject=Qekto%20-%20get%20in%20touch` | Opens the visitor’s mail app. No calendar widget. |
+| **Get in touch** | `/contact.html` | Real contact form. Submits via FormSubmit to founder Gmail. No calendar widget. |
 | Log in | `https://qekto.app/login` | Returning users. |
 
 No fake calendar / demo-booking widget. Real scheduling (Calendly, Cal.com) is a later task.
 
-### Deferred (quiet setup, not outreach-night)
+### FormSubmit (one-time)
 
-When Cloudflare Email Routing for `contact@qekto.com` is live, swap the mailto target to that address. Same inbox for you; cleaner to cold-email visitors. Until then, personal Gmail is intentional and fine.
+First real submission sends an activation email to the FormSubmit destination inbox. Click activate once, then messages land normally.
+
+### Deferred (quiet setup)
+
+When Cloudflare Email Routing for `contact@qekto.com` is live, change the FormSubmit destination in `contact.html` to that address.
 
 ## Vercel
 
