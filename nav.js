@@ -80,7 +80,7 @@
     link.addEventListener("click", () => closeMega());
   });
 
-  /* —— Mobile Stripe-style drawer —— */
+  /* -- Mobile Stripe-style drawer -- */
   if (!drawer || !menuToggle) return;
 
   const backBtn = drawer.querySelector(".mobile-back");
