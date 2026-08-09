@@ -821,6 +821,14 @@ body::after {
   margin-bottom: 1.75rem;
 }
 
+.beat-copy .beat-note {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--mute);
+  max-width: 28rem;
+  margin: -1.15rem 0 1.75rem;
+}
+
 /* ---- Instance / mock UI ---- */
 
 /* Browser chrome — Place only (content placed on real webpages). */
@@ -2042,6 +2050,12 @@ body::after {
     white-space: normal;
   }
 
+  .beat-copy .beat-note {
+    margin: 0.35rem 0 0;
+    font-size: 11.5px;
+    max-width: none;
+  }
+
   /* Same demo frame for Measure / Place / Prove. */
   .instance {
     flex: 0 1 auto;
@@ -2610,6 +2624,13 @@ body::after {
     letter-spacing: -0.015em;
     color: var(--ink);
     white-space: nowrap;
+  }
+
+  .beat-copy .beat-note {
+    margin: 0.45rem 0 0;
+    max-width: 18rem;
+    width: auto;
+    white-space: normal;
   }
 
   /* Demo docks right — same size on Measure / Place / Prove. */
