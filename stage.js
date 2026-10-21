@@ -3,7 +3,7 @@
   if (!rail) return;
 
   const beats = [...rail.querySelectorAll(".beat")];
-  const dots = [...document.querySelectorAll(".stepper .step-dot")];
+  const dots = [...document.querySelectorAll(".hero-steps .hero-step")];
   const mq = window.matchMedia("(min-width: 900px)");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const dwell = 3800;
@@ -14,7 +14,7 @@
   let wheelAccum = 0;
   let wheelIgnoreUntil = 0;
   let wheelCooldownTimer = null;
-  let touchStartY = null;
+  let touchStartX = null;
 
   function restartAnims(beat) {
     beat.querySelectorAll(".bar, .pub-pick, .lift-line, .lift-area").forEach((el) => {
@@ -38,12 +38,10 @@
       if (!fill) return;
       fill.style.animation = "none";
       fill.style.width = "";
-      fill.style.height = "";
       void fill.offsetWidth;
       if (dot.classList.contains("is-active") && mq.matches && !reduceMotion) {
-        fill.style.animation = `step-progress ${dwell}ms linear forwards`;
+        fill.style.animation = `hero-step-progress ${dwell}ms linear forwards`;
       } else if (dot.classList.contains("is-active")) {
-        fill.style.height = "100%";
         fill.style.width = "100%";
       }
     });
@@ -82,12 +80,9 @@
     dots.forEach((dot) => {
       const fill = dot.querySelector(".step-fill");
       if (!fill || !dot.classList.contains("is-active")) return;
-      const style = window.getComputedStyle(fill);
-      const width = style.width;
-      const height = style.height;
+      const width = window.getComputedStyle(fill).width;
       fill.style.animation = "none";
       fill.style.width = width;
-      fill.style.height = height;
     });
   }
 
@@ -187,24 +182,24 @@
     }
   });
 
-  // Phone: swipe up/down switches beats on the same screen.
-  window.addEventListener(
+  // Phone: swipe left/right on the mockup; vertical stays page scroll.
+  rail.addEventListener(
     "touchstart",
     (event) => {
       if (mq.matches) return;
-      touchStartY = event.changedTouches[0].clientY;
+      touchStartX = event.changedTouches[0].clientX;
     },
     { passive: true }
   );
 
-  window.addEventListener(
+  rail.addEventListener(
     "touchend",
     (event) => {
-      if (mq.matches || touchStartY == null) return;
-      const dy = event.changedTouches[0].clientY - touchStartY;
-      touchStartY = null;
-      if (Math.abs(dy) < 48) return;
-      if (dy < 0) showBeat(index + 1);
+      if (mq.matches || touchStartX == null) return;
+      const dx = event.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(dx) < 48) return;
+      if (dx < 0) showBeat(index + 1);
       else showBeat(index - 1);
     },
     { passive: true }

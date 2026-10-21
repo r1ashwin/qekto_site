@@ -30,7 +30,7 @@
       }
     </script>
   </head>
-  <body>
+  <body class="home-landing">
     <header class="site-header">
       <div class="top">
         <div class="nav-shell">
@@ -72,13 +72,11 @@
             </button>
           </div>
 
-          <a class="nav-text" href="/pricing.html">Pricing</a>
         </nav>
 
         <nav class="top-nav" aria-label="Account">
-          <a href="https://qekto.app/login">Log in</a>
-          <a href="/contact.html">Get in touch</a>
-          <a class="btn" href="https://qekto.app/login">Get started</a>
+          <a class="btn btn-outline" href="https://qekto.app/login">Log in</a>
+          <a class="btn" href="/contact.html">Get in touch</a>
         </nav>
 
         <button type="button" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
@@ -91,17 +89,17 @@
             <div class="mega-grid">
               <div class="mega-col">
                 <p class="mega-heading">The loop</p>
-                <a class="mega-link" href="/#measure">
+                <a class="mega-link" href="/loop.html#measure">
                   <span class="mega-title teal-text">Measure</span>
-                  <span class="mega-desc">Gaps, competition, full market, and why AI won’t recommend you.</span>
+                  <span class="mega-desc">See your gaps, the competition, and why AI won’t recommend you.</span>
                 </a>
-                <a class="mega-link" href="/#place">
+                <a class="mega-link" href="/loop.html#place">
                   <span class="mega-title yellow-text">Place</span>
                   <span class="mega-desc">Run campaigns. Place labeled content agents cite.</span>
                 </a>
-                <a class="mega-link" href="/#prove">
+                <a class="mega-link" href="/loop.html#prove">
                   <span class="mega-title red-text">Prove</span>
-                  <span class="mega-desc">Re-run the same checks. Show the lift.</span>
+                  <span class="mega-desc">Track your lift as AI recommends you more.</span>
                 </a>
               </div>
               <div class="mega-col">
@@ -202,24 +200,23 @@
             <span>Publishers</span>
             <span class="mobile-row-chevron" aria-hidden="true"></span>
           </button>
-          <a class="mobile-row" href="/pricing.html">Pricing</a>
           <a class="mobile-row mobile-row-quiet" href="https://qekto.app/login">Sign in</a>
         </div>
 
         <div class="mobile-panel" data-panel="platform" hidden>
           <div class="mobile-section">
             <p class="mobile-section-title">The loop</p>
-            <a class="mobile-link" href="/#measure">
+            <a class="mobile-link" href="/loop.html#measure">
               <span class="mobile-link-title teal-text">Measure</span>
-              <span class="mobile-link-desc">Gaps, competition, full market, and why AI won’t recommend you.</span>
+              <span class="mobile-link-desc">See your gaps, the competition, and why AI won’t recommend you.</span>
             </a>
-            <a class="mobile-link" href="/#place">
+            <a class="mobile-link" href="/loop.html#place">
               <span class="mobile-link-title yellow-text">Place</span>
               <span class="mobile-link-desc">Run campaigns. Place labeled content agents cite.</span>
             </a>
-            <a class="mobile-link" href="/#prove">
+            <a class="mobile-link" href="/loop.html#prove">
               <span class="mobile-link-title red-text">Prove</span>
-              <span class="mobile-link-desc">Re-run the same checks. Show the lift.</span>
+              <span class="mobile-link-desc">Track your lift as AI recommends you more.</span>
             </a>
           </div>
           <div class="mobile-section">
@@ -273,20 +270,42 @@
       </div>
 
       <div class="mobile-drawer-auth">
-        <a class="btn" href="https://qekto.app/login">Get started</a>
-        <a class="btn btn-outline" href="/contact.html">Get in touch</a>
-        <a class="mobile-auth-login" href="https://qekto.app/login">Log in</a>
+        <a class="btn" href="/contact.html">Get in touch</a>
+        <a class="btn btn-outline" href="https://qekto.app/login">Log in</a>
       </div>
     </div>
 
-    <p class="company-pitch">The ad layer for AI agent recommendations</p>
+    <section class="announce" aria-label="Two ways in">
+      <div class="announce-tabs" role="tablist">
+        <span class="announce-pill" aria-hidden="true"></span>
+        <button type="button" class="announce-tab is-active" role="tab" aria-selected="true">Brands</button>
+        <button type="button" class="announce-tab" role="tab" aria-selected="false">Publishers</button>
+      </div>
+      <div class="announce-msgs">
+        <div class="announce-msg is-shown" role="tabpanel">
+          <span class="announce-line">See how ChatGPT and Claude name your brand</span>
+          <a class="announce-btn" href="https://qekto.app/login">Run free check</a>
+        </div>
+        <div class="announce-msg" role="tabpanel">
+          <span class="announce-line">Run a site AI agents cite?</span>
+          <a class="announce-btn" href="/publishers.html#apply">Join the waitlist</a>
+        </div>
+      </div>
+    </section>
 
+    <main class="hero">
+      <div class="hero-copy">
+        <h1 class="hero-title">The ad layer for AI agent recommendations</h1>
+        <p class="hero-value">See how often AI assistants recommend you, why rivals win, and how to change it.</p>
+        <div class="hero-actions">
+          <a class="btn hero-cta" href="https://qekto.app/login">Check your brand’s AI visibility</a>
+          <a class="hero-link" href="/publishers.html#apply"><strong>Publisher?</strong> Earn when AI agents cite your site <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+
+      <div class="hero-stage">
     <div class="rail" data-step="0">
       <section class="beat is-active" data-beat="0" id="measure">
-        <div class="beat-copy">
-          <h1 class="teal-text">Measure</h1>
-          <p class="lead">See your gaps, competition, and why AI won’t recommend you.</p>
-        </div>
 
         <div class="instance" aria-hidden="true">
           <div class="ui-card">
@@ -357,14 +376,12 @@
             </div>
           </div>
         </div>
+        <div class="beat-caption">
+          <p class="lead">See your gaps, competition, and why AI won’t recommend you.</p>
+        </div>
       </section>
 
       <section class="beat" data-beat="1" id="place">
-        <div class="beat-copy">
-          <h1 class="yellow-text">Place content</h1>
-          <p class="lead">Run campaigns. Place labeled content agents cite.</p>
-          <p class="beat-note">Illustrative example: here&rsquo;s what this will look like. Campaigns are next.</p>
-        </div>
 
         <div class="instance instance-place" aria-hidden="true">
           <div class="place-stage">
@@ -445,14 +462,12 @@
             </div>
           </div>
         </div>
+        <div class="beat-caption">
+          <p class="lead">Run campaigns. Place labeled content agents cite.</p>
+        </div>
       </section>
 
       <section class="beat" data-beat="2" id="prove">
-        <div class="beat-copy">
-          <h1 class="red-text">Prove the lift</h1>
-          <p class="lead">Re-run the same checks. Show the before and after.</p>
-          <p class="beat-note">Illustrative example: here&rsquo;s what this will look like. Proof runs are next.</p>
-        </div>
 
         <div class="instance" aria-hidden="true">
           <div class="ui-card lift-card">
@@ -486,8 +501,8 @@
             >
               <defs>
                 <linearGradient id="lift-fill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#c25a50" stop-opacity="0.22" />
-                  <stop offset="100%" stop-color="#c25a50" stop-opacity="0" />
+                  <stop offset="0%" stop-color="#2f7f7a" stop-opacity="0.22" />
+                  <stop offset="100%" stop-color="#2f7f7a" stop-opacity="0" />
                 </linearGradient>
               </defs>
               <line x1="40" y1="28" x2="340" y2="28" class="lift-grid" />
@@ -513,7 +528,7 @@
                 stroke-width="2.25"
               />
               <circle cx="40" cy="120.5" r="3.5" fill="#787066" />
-              <circle class="lift-end" cx="340" cy="34.4" r="4.5" fill="#c25a50" />
+              <circle class="lift-end" cx="340" cy="34.4" r="4.5" fill="#2f7f7a" />
               <text x="48" y="118" class="lift-point">11%</text>
               <text x="332" y="28" class="lift-point lift-point-end" text-anchor="end">38%</text>
             </svg>
@@ -524,34 +539,39 @@
             </ul>
           </div>
         </div>
+        <div class="beat-caption">
+          <p class="lead">Track your lift. Watch AI recommend you more, week after week.</p>
+        </div>
       </section>
     </div>
 
-    <div class="stepper" role="tablist" aria-label="Product loop">
-      <button type="button" class="step-dot is-active" data-go="0" aria-label="Measure">
-        <span class="step-fill"></span>
-      </button>
-      <button type="button" class="step-dot" data-go="1" aria-label="Place content">
-        <span class="step-fill"></span>
-      </button>
-      <button type="button" class="step-dot" data-go="2" aria-label="Prove the lift">
-        <span class="step-fill"></span>
-      </button>
-    </div>
-
-    <div class="dock">
-      <div class="dock-auth">
-        <a class="btn btn-outline" href="/contact.html">Get in touch</a>
-        <a class="btn" href="https://qekto.app/login">Get started</a>
+        <div class="hero-steps" role="tablist" aria-label="Product loop">
+          <button type="button" class="hero-step is-active" data-go="0">
+            Measure
+            <span class="step-fill"></span>
+          </button>
+          <button type="button" class="hero-step" data-go="1">
+            Place
+            <span class="step-fill"></span>
+          </button>
+          <button type="button" class="hero-step" data-go="2">
+            Prove
+            <span class="step-fill"></span>
+          </button>
+        </div>
       </div>
-    </div>
+    </main>
 
-    <p class="scroll-cue" aria-hidden="true">
-      <span class="scroll-cue-chevron"></span>
-      <span class="scroll-cue-chevron"></span>
-    </p>
+    <footer class="site-foot">
+      <div class="taglines" aria-hidden="true">
+        <p class="tagline is-shown">Your customers ask ChatGPT what to buy. Make sure it names you.</p>
+        <p class="tagline">When shoppers ask AI what to buy, see if you're named, and get named more.</p>
+        <p class="tagline">AI is the new shelf. See where you stand on it, and move up.</p>
+      </div>
+    </footer>
 
     <script src="nav.js" defer></script>
     <script src="stage.js" defer></script>
+    <script src="announce.js" defer></script>
   </body>
 </html>
