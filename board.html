@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -21,10 +21,10 @@
         --bg: #2b3038;
         --panel: #23282f;
         --ink: #ffffff;
-        --mute: #9aa3ad;
-        --mute-soft: #6f7884;
+        --mute: #a7b0bb;
+        --mute-soft: #7a8491;
         --yc: #ff6600;
-        --hair: rgba(255, 255, 255, 0.08);
+        --hair: rgba(255, 255, 255, 0.1);
       }
 
       * {
@@ -44,93 +44,93 @@
       .board {
         height: 100vh;
         width: 100%;
-        padding: clamp(12px, 1.5vw, 22px);
+        padding: 1.4vh 1.6vw;
         display: grid;
-        grid-template-rows: auto auto 1fr auto;
-        gap: clamp(10px, 1.1vw, 14px);
-      }
-
-      .brand-kicker {
-        font-size: 11px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--mute-soft);
-        font-weight: 600;
+        grid-template-rows: 18vh 1fr;
+        gap: 1.2vh;
       }
 
       .now-clocks {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: clamp(10px, 1.2vw, 16px);
+        gap: 1.2vw;
+        min-height: 0;
       }
 
       .clock-card {
         background: var(--panel);
         border: 1px solid var(--hair);
-        border-radius: 16px;
-        padding: clamp(12px, 1.4vw, 18px) clamp(16px, 1.8vw, 24px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-height: clamp(88px, 12vh, 120px);
+        border-radius: 1.2vw;
+        padding: 1.4vh 1.6vw;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 1vw;
+        min-height: 0;
       }
 
-      .clock-card .label {
-        font-size: clamp(12px, 1.1vw, 14px);
+      .clock-meta .label {
+        font-size: clamp(16px, 1.5vw, 22px);
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--mute);
-        font-weight: 600;
+        font-weight: 700;
       }
 
-      .clock-card .place {
-        margin-top: 2px;
-        font-size: clamp(15px, 1.4vw, 18px);
+      .clock-meta .place {
+        margin-top: 0.4vh;
+        font-size: clamp(28px, 2.6vw, 42px);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .clock-meta .date {
+        margin-top: 0.5vh;
+        color: var(--mute);
+        font-size: clamp(18px, 1.7vw, 26px);
         font-weight: 600;
-        color: var(--ink);
       }
 
       .clock-card .time {
-        margin-top: 6px;
-        font-size: clamp(34px, 4.2vw, 52px);
-        font-weight: 700;
+        font-size: clamp(48px, 5.4vw, 84px);
+        font-weight: 800;
         font-variant-numeric: tabular-nums;
-        letter-spacing: -0.03em;
+        letter-spacing: -0.04em;
         line-height: 1;
-      }
-
-      .clock-card .date {
-        margin-top: 6px;
-        color: var(--mute);
-        font-size: clamp(14px, 1.3vw, 17px);
-        font-weight: 500;
+        text-align: right;
       }
 
       .tracks {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: clamp(10px, 1.4vw, 18px);
+        gap: 1.2vw;
         min-height: 0;
       }
 
       .track {
         background: var(--panel);
         border: 1px solid var(--hair);
-        border-radius: 18px;
-        padding: clamp(14px, 1.8vw, 24px);
+        border-radius: 1.4vw;
+        padding: 2vh 1.5vw 2.2vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-evenly;
         text-align: center;
         min-height: 0;
-        gap: clamp(8px, 1vw, 14px);
+      }
+
+      .track-head {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2vh;
       }
 
       .logo {
-        width: clamp(48px, 4.4vw, 64px);
-        height: clamp(48px, 4.4vw, 64px);
-        border-radius: 10px;
+        width: clamp(84px, 7.5vw, 120px);
+        height: clamp(84px, 7.5vw, 120px);
+        border-radius: 1vw;
         display: grid;
         place-items: center;
         flex-shrink: 0;
@@ -139,39 +139,38 @@
       .logo.yc {
         background: var(--yc);
         color: #fff;
-        font-size: clamp(30px, 2.8vw, 40px);
-        font-weight: 700;
+        font-size: clamp(56px, 5vw, 82px);
+        font-weight: 800;
         line-height: 1;
       }
 
       .logo.a16z {
         background: #f4f1ea;
         color: #111;
-        font-size: clamp(12px, 1.1vw, 15px);
-        font-weight: 700;
+        font-size: clamp(22px, 2vw, 30px);
+        font-weight: 800;
         letter-spacing: -0.04em;
       }
 
       .program {
-        font-size: clamp(15px, 1.4vw, 18px);
-        font-weight: 600;
-        letter-spacing: -0.02em;
+        font-size: clamp(24px, 2.2vw, 34px);
+        font-weight: 800;
+        letter-spacing: -0.03em;
       }
 
       .decimal-timer {
         display: flex;
         align-items: flex-start;
         justify-content: center;
-        line-height: 0.88;
-        margin: clamp(2px, 0.6vw, 8px) 0;
+        line-height: 0.86;
         font-variant-numeric: tabular-nums;
         font-feature-settings: "tnum" 1;
       }
 
       .days-int {
-        font-size: clamp(96px, 13vw, 180px);
-        font-weight: 700;
-        letter-spacing: -0.055em;
+        font-size: clamp(120px, 14vw, 220px);
+        font-weight: 800;
+        letter-spacing: -0.06em;
         color: #fff;
       }
 
@@ -179,58 +178,51 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        margin-top: 0.14em;
+        margin-top: 0.16em;
       }
 
       .days-frac {
-        font-size: clamp(42px, 5.8vw, 84px);
-        font-weight: 600;
-        letter-spacing: -0.04em;
+        font-size: clamp(54px, 6.4vw, 102px);
+        font-weight: 700;
+        letter-spacing: -0.045em;
         color: #fff;
       }
 
       .days-label {
-        margin-top: 0.2em;
-        font-size: clamp(18px, 2vw, 30px);
-        font-weight: 500;
+        margin-top: 0.22em;
+        font-size: clamp(24px, 2.4vw, 38px);
+        font-weight: 600;
         color: var(--mute);
       }
 
       .deadline-box {
-        width: min(100%, 420px);
+        width: min(100%, 34vw);
         display: grid;
-        gap: 8px;
+        gap: 1vh;
         text-align: left;
       }
 
       .deadline-row {
-        background: rgba(0, 0, 0, 0.22);
+        background: rgba(0, 0, 0, 0.28);
         border: 1px solid var(--hair);
-        border-radius: 12px;
-        padding: 10px 12px;
+        border-radius: 0.9vw;
+        padding: 1.1vh 1.1vw;
       }
 
       .deadline-row .where {
-        font-size: 11px;
+        font-size: clamp(14px, 1.2vw, 18px);
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--mute-soft);
-        font-weight: 600;
+        color: var(--mute);
+        font-weight: 700;
       }
 
       .deadline-row .when {
-        margin-top: 3px;
-        font-size: clamp(14px, 1.3vw, 17px);
-        font-weight: 600;
+        margin-top: 0.4vh;
+        font-size: clamp(20px, 1.8vw, 28px);
+        font-weight: 700;
         color: var(--ink);
-        letter-spacing: -0.01em;
-      }
-
-      .footer {
-        color: var(--mute-soft);
-        font-size: 11px;
-        letter-spacing: 0.04em;
-        text-align: center;
+        letter-spacing: -0.02em;
       }
 
       @media (max-width: 980px) {
@@ -241,51 +233,56 @@
         .board {
           height: auto;
           min-height: 100vh;
+          grid-template-rows: auto auto;
         }
 
+        .now-clocks,
         .tracks {
           grid-template-columns: 1fr;
         }
 
-        .days-int {
-          font-size: clamp(88px, 26vw, 140px);
-        }
-
-        .days-frac {
-          font-size: clamp(40px, 11vw, 68px);
-        }
-      }
-
-      @media (max-width: 640px) {
-        .now-clocks {
+        .clock-card {
           grid-template-columns: 1fr;
+        }
+
+        .clock-card .time {
+          text-align: left;
+          margin-top: 8px;
+        }
+
+        .deadline-box {
+          width: 100%;
         }
       }
     </style>
   </head>
   <body>
     <main class="board">
-      <div class="brand-kicker">Qekto · private board</div>
-
       <section class="now-clocks" aria-live="polite" aria-label="Live clocks">
         <div class="clock-card">
-          <div class="label">India time · IST</div>
-          <div class="place">India</div>
+          <div class="clock-meta">
+            <div class="label">India time · IST</div>
+            <div class="place">India</div>
+            <div class="date" id="ist-date">—</div>
+          </div>
           <div class="time" id="ist-time">--:--:--</div>
-          <div class="date" id="ist-date">—</div>
         </div>
         <div class="clock-card">
-          <div class="label">San Francisco time · PT</div>
-          <div class="place">San Francisco</div>
+          <div class="clock-meta">
+            <div class="label">San Francisco time · PT</div>
+            <div class="place">San Francisco</div>
+            <div class="date" id="sf-date">—</div>
+          </div>
           <div class="time" id="sf-time">--:--:--</div>
-          <div class="date" id="sf-date">—</div>
         </div>
       </section>
 
       <section class="tracks" aria-label="Program countdowns">
         <article class="track" data-track="yc">
-          <div class="logo yc" aria-hidden="true">Y</div>
-          <div class="program">YC Winter 2027</div>
+          <div class="track-head">
+            <div class="logo yc" aria-hidden="true">Y</div>
+            <div class="program">YC Winter 2027</div>
+          </div>
 
           <div class="decimal-timer" aria-label="YC days remaining">
             <span class="days-int" data-int>0</span>
@@ -308,8 +305,10 @@
         </article>
 
         <article class="track" data-track="sr">
-          <div class="logo a16z" aria-hidden="true">a16z</div>
-          <div class="program">speedrun SR008</div>
+          <div class="track-head">
+            <div class="logo a16z" aria-hidden="true">a16z</div>
+            <div class="program">speedrun SR008</div>
+          </div>
 
           <div class="decimal-timer" aria-label="speedrun days remaining">
             <span class="days-int" data-int>0</span>
@@ -331,8 +330,6 @@
           </div>
         </article>
       </section>
-
-      <footer class="footer">Personal countdown · noindex</footer>
     </main>
 
     <script>
