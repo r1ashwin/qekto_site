@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /board
+Disallow: /board.html
 
 Sitemap: https://qekto.com/sitemap.xml

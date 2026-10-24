@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/board", "destination": "/board.html" }
+  ]
+}
