@@ -13,22 +13,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --bg: #07080a;
-        --panel: #101218;
-        --panel-edge: #232833;
-        --ink: #f4f1ea;
-        --mute: #9aa3b2;
-        --mute-soft: #6b7382;
+        --bg: #2b3038;
+        --panel: #23282f;
+        --ink: #ffffff;
+        --mute: #9aa3ad;
+        --mute-soft: #6f7884;
         --yc: #ff6600;
-        --a16z: #e8e6e1;
-        --go: #3dd68c;
+        --go: #5dcea0;
         --warn: #f0b429;
-        --late: #ff5c5c;
+        --late: #ff6b6b;
         --hair: rgba(255, 255, 255, 0.08);
       }
 
@@ -42,45 +40,33 @@
         min-height: 100%;
         background: var(--bg);
         color: var(--ink);
-        font-family: Inter, system-ui, sans-serif;
+        font-family: Inter, Helvetica, Arial, sans-serif;
       }
 
       body {
         min-height: 100vh;
-        background:
-          radial-gradient(ellipse 80% 50% at 20% -10%, rgba(255, 102, 0, 0.12), transparent 55%),
-          radial-gradient(ellipse 70% 45% at 85% 0%, rgba(120, 140, 180, 0.1), transparent 50%),
-          var(--bg);
       }
 
       .board {
         width: min(1760px, 100%);
         margin: 0 auto;
-        padding: clamp(18px, 2.2vw, 36px) clamp(18px, 2.4vw, 40px) clamp(16px, 2vw, 28px);
+        padding: clamp(16px, 2vw, 32px);
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        gap: clamp(14px, 1.8vw, 24px);
+        gap: clamp(12px, 1.6vw, 22px);
       }
 
       .topbar {
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
-        gap: 20px;
+        gap: 16px;
         flex-wrap: wrap;
-        border-bottom: 1px solid var(--hair);
-        padding-bottom: clamp(12px, 1.4vw, 18px);
-      }
-
-      .brand {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
       }
 
       .brand-kicker {
-        font-size: clamp(11px, 1vw, 13px);
+        font-size: 12px;
         letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--mute-soft);
@@ -88,25 +74,24 @@
       }
 
       .brand h1 {
-        margin: 0;
-        font-size: clamp(28px, 3.2vw, 44px);
+        margin: 6px 0 0;
+        font-size: clamp(24px, 2.8vw, 36px);
         font-weight: 700;
         letter-spacing: -0.03em;
-        line-height: 1.05;
       }
 
       .now-clocks {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        min-width: min(520px, 100%);
+        gap: 10px;
+        min-width: min(480px, 100%);
       }
 
       .clock-card {
-        background: var(--panel);
-        border: 1px solid var(--panel-edge);
-        border-radius: 14px;
-        padding: 12px 16px;
+        background: rgba(0, 0, 0, 0.18);
+        border: 1px solid var(--hair);
+        border-radius: 12px;
+        padding: 10px 14px;
       }
 
       .clock-card .label {
@@ -119,235 +104,174 @@
 
       .clock-card .time {
         margin-top: 4px;
-        font-family: "IBM Plex Mono", ui-monospace, monospace;
-        font-size: clamp(20px, 2.2vw, 28px);
-        font-weight: 500;
+        font-size: clamp(18px, 2vw, 24px);
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
         letter-spacing: -0.02em;
       }
 
       .clock-card .date {
         margin-top: 2px;
         color: var(--mute);
-        font-size: clamp(12px, 1.1vw, 14px);
+        font-size: 13px;
       }
 
       .tracks {
         flex: 1;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: clamp(14px, 1.8vw, 22px);
-        align-items: stretch;
+        gap: clamp(12px, 1.6vw, 20px);
       }
 
       .track {
-        background: linear-gradient(180deg, #141820 0%, #0e1117 100%);
-        border: 1px solid var(--panel-edge);
-        border-radius: 22px;
-        padding: clamp(18px, 2vw, 28px);
+        background: var(--panel);
+        border: 1px solid var(--hair);
+        border-radius: 20px;
+        padding: clamp(22px, 2.4vw, 36px);
         display: flex;
         flex-direction: column;
-        gap: clamp(14px, 1.6vw, 20px);
-        min-height: 0;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .track.yc {
-        box-shadow: inset 0 0 0 1px rgba(255, 102, 0, 0.12);
-      }
-
-      .track.sr {
-        box-shadow: inset 0 0 0 1px rgba(232, 230, 225, 0.08);
-      }
-
-      .track-head {
-        display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 16px;
+        justify-content: center;
+        text-align: center;
+        min-height: clamp(420px, 58vh, 680px);
+        gap: 18px;
       }
 
-      .org {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-      }
-
-      .yc-mark {
-        width: clamp(48px, 4.5vw, 64px);
-        height: clamp(48px, 4.5vw, 64px);
+      .logo {
+        width: clamp(56px, 5vw, 72px);
+        height: clamp(56px, 5vw, 72px);
         border-radius: 10px;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+      }
+
+      .logo.yc {
         background: var(--yc);
         color: #fff;
-        display: grid;
-        place-items: center;
-        font-family: Inter, sans-serif;
+        font-size: clamp(34px, 3.2vw, 44px);
         font-weight: 700;
-        font-size: clamp(28px, 2.8vw, 38px);
         line-height: 1;
-        flex-shrink: 0;
       }
 
-      .a16z-mark {
-        width: clamp(48px, 4.5vw, 64px);
-        height: clamp(48px, 4.5vw, 64px);
-        border-radius: 10px;
-        background: #f5f3ee;
+      .logo.a16z {
+        background: #f4f1ea;
         color: #111;
-        display: grid;
-        place-items: center;
-        font-family: Inter, sans-serif;
+        font-size: clamp(14px, 1.3vw, 16px);
         font-weight: 700;
-        font-size: clamp(13px, 1.2vw, 15px);
         letter-spacing: -0.04em;
-        flex-shrink: 0;
       }
 
-      .org-copy .program {
-        font-size: clamp(20px, 2.2vw, 28px);
-        font-weight: 700;
+      .program {
+        font-size: clamp(16px, 1.5vw, 20px);
+        font-weight: 600;
         letter-spacing: -0.02em;
       }
 
-      .org-copy .org-name {
+      .org-name {
         margin-top: 2px;
         color: var(--mute);
-        font-size: clamp(13px, 1.2vw, 15px);
+        font-size: 14px;
       }
 
       .status-pill {
-        font-family: "IBM Plex Mono", ui-monospace, monospace;
-        font-size: 12px;
+        font-size: 11px;
         font-weight: 600;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        padding: 8px 12px;
+        padding: 7px 12px;
         border-radius: 999px;
-        border: 1px solid var(--panel-edge);
+        border: 1px solid var(--hair);
         color: var(--mute);
-        white-space: nowrap;
       }
 
       .status-pill.open {
         color: var(--go);
-        border-color: rgba(61, 214, 140, 0.35);
-        background: rgba(61, 214, 140, 0.08);
+        border-color: rgba(93, 206, 160, 0.35);
       }
 
       .status-pill.warn {
         color: var(--warn);
         border-color: rgba(240, 180, 41, 0.4);
-        background: rgba(240, 180, 41, 0.08);
       }
 
       .status-pill.late {
         color: var(--late);
-        border-color: rgba(255, 92, 92, 0.4);
-        background: rgba(255, 92, 92, 0.1);
+        border-color: rgba(255, 107, 107, 0.4);
       }
 
-      .deadline-block {
-        border-top: 1px solid var(--hair);
-        border-bottom: 1px solid var(--hair);
-        padding: 12px 0;
+      .decimal-timer {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        line-height: 0.9;
+        margin: 8px 0 4px;
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum" 1;
       }
 
-      .deadline-label {
-        font-size: 11px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--mute-soft);
-        font-weight: 600;
+      .days-int {
+        font-size: clamp(96px, 14vw, 168px);
+        font-weight: 700;
+        letter-spacing: -0.05em;
+        color: #fff;
       }
 
-      .deadline-main {
-        margin-top: 6px;
-        font-size: clamp(18px, 2vw, 24px);
-        font-weight: 600;
-        letter-spacing: -0.02em;
+      .days-frac-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 0.12em;
       }
 
-      .deadline-ist {
-        margin-top: 4px;
-        color: var(--mute);
-        font-size: clamp(14px, 1.4vw, 17px);
-      }
-
-      .countdown {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: clamp(8px, 1vw, 14px);
-      }
-
-      .unit {
-        background: rgba(0, 0, 0, 0.35);
-        border: 1px solid var(--hair);
-        border-radius: 16px;
-        padding: clamp(12px, 1.4vw, 18px) 8px;
-        text-align: center;
-      }
-
-      .unit .num {
-        font-family: "IBM Plex Mono", ui-monospace, monospace;
-        font-size: clamp(40px, 6.2vw, 84px);
+      .days-frac {
+        font-size: clamp(42px, 6.2vw, 78px);
         font-weight: 600;
         letter-spacing: -0.04em;
-        line-height: 1;
-        font-variant-numeric: tabular-nums;
+        color: #fff;
       }
 
-      .track.yc .unit .num {
-        color: #ffb07a;
+      .days-label {
+        margin-top: 0.18em;
+        font-size: clamp(18px, 2vw, 28px);
+        font-weight: 500;
+        color: var(--mute);
       }
 
-      .track.sr .unit .num {
-        color: #f2efe8;
-      }
-
-      .unit .tag {
-        margin-top: 8px;
-        font-size: clamp(11px, 1vw, 13px);
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--mute-soft);
-        font-weight: 600;
-      }
-
-      .facts {
-        display: grid;
-        gap: 8px;
+      .deadline-lines {
         color: var(--mute);
         font-size: clamp(13px, 1.2vw, 15px);
         line-height: 1.45;
       }
 
-      .facts strong {
+      .deadline-lines strong {
         color: var(--ink);
         font-weight: 600;
       }
 
       .actions {
-        margin-top: auto;
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         gap: 10px;
+        margin-top: 4px;
       }
 
       .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 48px;
-        padding: 0 18px;
-        border-radius: 12px;
-        font-size: 15px;
+        min-height: 44px;
+        padding: 0 16px;
+        border-radius: 10px;
+        font-size: 14px;
         font-weight: 600;
         text-decoration: none;
         border: 1px solid transparent;
       }
 
       .btn-primary {
-        background: var(--ink);
+        background: #fff;
         color: #111;
       }
 
@@ -359,7 +283,7 @@
       .btn-ghost {
         background: transparent;
         color: var(--ink);
-        border-color: var(--panel-edge);
+        border-color: var(--hair);
       }
 
       .footer {
@@ -369,7 +293,6 @@
         flex-wrap: wrap;
         color: var(--mute-soft);
         font-size: 12px;
-        letter-spacing: 0.04em;
       }
 
       .footer a {
@@ -382,8 +305,8 @@
           grid-template-columns: 1fr;
         }
 
-        .unit .num {
-          font-size: clamp(36px, 12vw, 64px);
+        .track {
+          min-height: 360px;
         }
       }
 
@@ -419,34 +342,24 @@
 
       <section class="tracks" aria-label="Program countdowns">
         <article class="track yc" data-track="yc">
-          <div class="track-head">
-            <div class="org">
-              <div class="yc-mark" aria-hidden="true">Y</div>
-              <div class="org-copy">
-                <div class="program">YC Winter 2027</div>
-                <div class="org-name">Y Combinator · on-time apply</div>
-              </div>
-            </div>
-            <div class="status-pill open" data-status>Open</div>
+          <div class="logo yc" aria-hidden="true">Y</div>
+          <div>
+            <div class="program">YC Winter 2027</div>
+            <div class="org-name">Y Combinator · on-time apply</div>
+          </div>
+          <div class="status-pill open" data-status>Open</div>
+
+          <div class="decimal-timer" aria-label="YC days remaining">
+            <span class="days-int" data-int>0</span>
+            <span class="days-frac-wrap">
+              <span class="days-frac" data-frac>.0000000</span>
+              <span class="days-label">days</span>
+            </span>
           </div>
 
-          <div class="deadline-block">
-            <div class="deadline-label">Deadline</div>
-            <div class="deadline-main">Mon, Nov 2, 2026 · 8:00 PM PT</div>
-            <div class="deadline-ist">Tue, Nov 3, 2026 · 9:30 AM IST</div>
-          </div>
-
-          <div class="countdown" aria-label="YC countdown">
-            <div class="unit"><div class="num" data-d>00</div><div class="tag">Days</div></div>
-            <div class="unit"><div class="num" data-h>00</div><div class="tag">Hours</div></div>
-            <div class="unit"><div class="num" data-m>00</div><div class="tag">Mins</div></div>
-            <div class="unit"><div class="num" data-s>00</div><div class="tag">Secs</div></div>
-          </div>
-
-          <div class="facts">
-            <div><strong>Batch:</strong> Jan–Mar 2027 · San Francisco</div>
-            <div><strong>On-time decision:</strong> by Dec 11, 2026</div>
-            <div><strong>After deadline:</strong> still reviewed, no promised reply date</div>
+          <div class="deadline-lines">
+            <div><strong>Deadline:</strong> Mon, Nov 2, 2026 · 8:00 PM PT</div>
+            <div>Tue, Nov 3, 2026 · 9:30 AM IST</div>
           </div>
 
           <div class="actions">
@@ -460,34 +373,24 @@
         </article>
 
         <article class="track sr" data-track="sr">
-          <div class="track-head">
-            <div class="org">
-              <div class="a16z-mark" aria-hidden="true">a16z</div>
-              <div class="org-copy">
-                <div class="program">speedrun SR008</div>
-                <div class="org-name">Andreessen Horowitz · residency</div>
-              </div>
-            </div>
-            <div class="status-pill open" data-status>Open</div>
+          <div class="logo a16z" aria-hidden="true">a16z</div>
+          <div>
+            <div class="program">speedrun SR008</div>
+            <div class="org-name">Andreessen Horowitz · residency</div>
+          </div>
+          <div class="status-pill open" data-status>Open</div>
+
+          <div class="decimal-timer" aria-label="speedrun days remaining">
+            <span class="days-int" data-int>0</span>
+            <span class="days-frac-wrap">
+              <span class="days-frac" data-frac>.0000000</span>
+              <span class="days-label">days</span>
+            </span>
           </div>
 
-          <div class="deadline-block">
-            <div class="deadline-label">Deadline</div>
-            <div class="deadline-main">Sun, Nov 1, 2026 · 11:59 PM PT</div>
-            <div class="deadline-ist">Mon, Nov 2, 2026 · 1:29 PM IST</div>
-          </div>
-
-          <div class="countdown" aria-label="speedrun countdown">
-            <div class="unit"><div class="num" data-d>00</div><div class="tag">Days</div></div>
-            <div class="unit"><div class="num" data-h>00</div><div class="tag">Hours</div></div>
-            <div class="unit"><div class="num" data-m>00</div><div class="tag">Mins</div></div>
-            <div class="unit"><div class="num" data-s>00</div><div class="tag">Secs</div></div>
-          </div>
-
-          <div class="facts">
-            <div><strong>Residency:</strong> Feb 1 – Apr 16, 2027 · San Francisco</div>
-            <div><strong>Invest:</strong> up to $1M · capital, customers, talent</div>
-            <div><strong>After Nov 1:</strong> considered for the following residency</div>
+          <div class="deadline-lines">
+            <div><strong>Deadline:</strong> Sun, Nov 1, 2026 · 11:59 PM PT</div>
+            <div>Mon, Nov 2, 2026 · 1:29 PM IST</div>
           </div>
 
           <div class="actions">
@@ -502,7 +405,7 @@
       </section>
 
       <footer class="footer">
-        <div>Keep this tab open on the TV · clocks use your device time</div>
+        <div>Keep this tab open on the TV · continuously counting down in days</div>
         <div>
           <a href="/">qekto.com</a>
           · marks belong to Y Combinator / a16z · personal tracking only
@@ -518,8 +421,7 @@
         yc: Date.parse("2026-11-03T04:00:00.000Z"),
         sr: Date.parse("2026-11-02T07:59:00.000Z"),
       };
-
-      const pad = (n) => String(Math.max(0, n)).padStart(2, "0");
+      const MS_PER_DAY = 86400000;
 
       function formatZone(date, timeZone) {
         const time = new Intl.DateTimeFormat("en-IN", {
@@ -539,16 +441,6 @@
         return { time, day };
       }
 
-      function splitRemaining(ms) {
-        if (ms <= 0) return { d: 0, h: 0, m: 0, s: 0, done: true };
-        const totalSec = Math.floor(ms / 1000);
-        const d = Math.floor(totalSec / 86400);
-        const h = Math.floor((totalSec % 86400) / 3600);
-        const m = Math.floor((totalSec % 3600) / 60);
-        const s = totalSec % 60;
-        return { d, h, m, s, done: false };
-      }
-
       function setStatus(el, remainingMs) {
         el.classList.remove("open", "warn", "late");
         if (remainingMs <= 0) {
@@ -565,6 +457,21 @@
         el.classList.add("open");
       }
 
+      function renderDays(card, remainingMs) {
+        const intEl = card.querySelector("[data-int]");
+        const fracEl = card.querySelector("[data-frac]");
+        if (remainingMs <= 0) {
+          intEl.textContent = "0";
+          fracEl.textContent = ".0000000";
+          return;
+        }
+        const days = remainingMs / MS_PER_DAY;
+        const whole = Math.floor(days);
+        const frac = days - whole;
+        intEl.textContent = String(whole);
+        fracEl.textContent = "." + frac.toFixed(7).slice(2);
+      }
+
       function tick() {
         const now = new Date();
         const ist = formatZone(now, "Asia/Kolkata");
@@ -577,17 +484,15 @@
         for (const [key, deadline] of Object.entries(TRACKS)) {
           const card = document.querySelector(`[data-track="${key}"]`);
           if (!card) continue;
-          const left = splitRemaining(deadline - now.getTime());
-          card.querySelector("[data-d]").textContent = pad(left.d);
-          card.querySelector("[data-h]").textContent = pad(left.h);
-          card.querySelector("[data-m]").textContent = pad(left.m);
-          card.querySelector("[data-s]").textContent = pad(left.s);
-          setStatus(card.querySelector("[data-status]"), deadline - now.getTime());
+          const remaining = deadline - now.getTime();
+          renderDays(card, remaining);
+          setStatus(card.querySelector("[data-status]"), remaining);
         }
       }
 
       tick();
-      setInterval(tick, 250);
+      // High frequency so the decimal places keep moving.
+      setInterval(tick, 40);
     </script>
   </body>
 </html>
