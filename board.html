@@ -44,18 +44,10 @@
       .board {
         height: 100vh;
         width: 100%;
-        padding: clamp(12px, 1.6vw, 24px);
+        padding: clamp(12px, 1.5vw, 22px);
         display: grid;
-        grid-template-rows: auto 1fr auto;
-        gap: clamp(10px, 1.2vw, 16px);
-      }
-
-      .topbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        flex-wrap: wrap;
+        grid-template-rows: auto auto 1fr auto;
+        gap: clamp(10px, 1.1vw, 14px);
       }
 
       .brand-kicker {
@@ -69,37 +61,49 @@
       .now-clocks {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 8px;
-        min-width: min(420px, 100%);
+        gap: clamp(10px, 1.2vw, 16px);
       }
 
       .clock-card {
-        background: rgba(0, 0, 0, 0.18);
+        background: var(--panel);
         border: 1px solid var(--hair);
-        border-radius: 10px;
-        padding: 8px 12px;
+        border-radius: 16px;
+        padding: clamp(12px, 1.4vw, 18px) clamp(16px, 1.8vw, 24px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: clamp(88px, 12vh, 120px);
       }
 
       .clock-card .label {
-        font-size: 10px;
+        font-size: clamp(12px, 1.1vw, 14px);
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--mute-soft);
+        color: var(--mute);
         font-weight: 600;
+      }
+
+      .clock-card .place {
+        margin-top: 2px;
+        font-size: clamp(15px, 1.4vw, 18px);
+        font-weight: 600;
+        color: var(--ink);
       }
 
       .clock-card .time {
-        margin-top: 2px;
-        font-size: clamp(16px, 1.6vw, 22px);
-        font-weight: 600;
+        margin-top: 6px;
+        font-size: clamp(34px, 4.2vw, 52px);
+        font-weight: 700;
         font-variant-numeric: tabular-nums;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.03em;
+        line-height: 1;
       }
 
       .clock-card .date {
-        margin-top: 1px;
+        margin-top: 6px;
         color: var(--mute);
-        font-size: 12px;
+        font-size: clamp(14px, 1.3vw, 17px);
+        font-weight: 500;
       }
 
       .tracks {
@@ -113,19 +117,19 @@
         background: var(--panel);
         border: 1px solid var(--hair);
         border-radius: 18px;
-        padding: clamp(16px, 2vw, 28px);
+        padding: clamp(14px, 1.8vw, 24px);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
         min-height: 0;
-        gap: clamp(10px, 1.2vw, 18px);
+        gap: clamp(8px, 1vw, 14px);
       }
 
       .logo {
-        width: clamp(52px, 4.8vw, 68px);
-        height: clamp(52px, 4.8vw, 68px);
+        width: clamp(48px, 4.4vw, 64px);
+        height: clamp(48px, 4.4vw, 64px);
         border-radius: 10px;
         display: grid;
         place-items: center;
@@ -135,7 +139,7 @@
       .logo.yc {
         background: var(--yc);
         color: #fff;
-        font-size: clamp(32px, 3vw, 42px);
+        font-size: clamp(30px, 2.8vw, 40px);
         font-weight: 700;
         line-height: 1;
       }
@@ -143,7 +147,7 @@
       .logo.a16z {
         background: #f4f1ea;
         color: #111;
-        font-size: clamp(13px, 1.2vw, 15px);
+        font-size: clamp(12px, 1.1vw, 15px);
         font-weight: 700;
         letter-spacing: -0.04em;
       }
@@ -154,29 +158,18 @@
         letter-spacing: -0.02em;
       }
 
-      .deadline-lines {
-        color: var(--mute);
-        font-size: clamp(13px, 1.2vw, 16px);
-        line-height: 1.4;
-      }
-
-      .deadline-lines strong {
-        color: var(--ink);
-        font-weight: 600;
-      }
-
       .decimal-timer {
         display: flex;
         align-items: flex-start;
         justify-content: center;
         line-height: 0.88;
-        margin: clamp(4px, 0.8vw, 10px) 0;
+        margin: clamp(2px, 0.6vw, 8px) 0;
         font-variant-numeric: tabular-nums;
         font-feature-settings: "tnum" 1;
       }
 
       .days-int {
-        font-size: clamp(110px, 16vw, 210px);
+        font-size: clamp(96px, 13vw, 180px);
         font-weight: 700;
         letter-spacing: -0.055em;
         color: #fff;
@@ -190,7 +183,7 @@
       }
 
       .days-frac {
-        font-size: clamp(48px, 7vw, 96px);
+        font-size: clamp(42px, 5.8vw, 84px);
         font-weight: 600;
         letter-spacing: -0.04em;
         color: #fff;
@@ -198,9 +191,39 @@
 
       .days-label {
         margin-top: 0.2em;
-        font-size: clamp(20px, 2.4vw, 34px);
+        font-size: clamp(18px, 2vw, 30px);
         font-weight: 500;
         color: var(--mute);
+      }
+
+      .deadline-box {
+        width: min(100%, 420px);
+        display: grid;
+        gap: 8px;
+        text-align: left;
+      }
+
+      .deadline-row {
+        background: rgba(0, 0, 0, 0.22);
+        border: 1px solid var(--hair);
+        border-radius: 12px;
+        padding: 10px 12px;
+      }
+
+      .deadline-row .where {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--mute-soft);
+        font-weight: 600;
+      }
+
+      .deadline-row .when {
+        margin-top: 3px;
+        font-size: clamp(14px, 1.3vw, 17px);
+        font-weight: 600;
+        color: var(--ink);
+        letter-spacing: -0.01em;
       }
 
       .footer {
@@ -225,40 +248,39 @@
         }
 
         .days-int {
-          font-size: clamp(96px, 28vw, 160px);
+          font-size: clamp(88px, 26vw, 140px);
         }
 
         .days-frac {
-          font-size: clamp(42px, 12vw, 72px);
+          font-size: clamp(40px, 11vw, 68px);
         }
       }
 
       @media (max-width: 640px) {
         .now-clocks {
           grid-template-columns: 1fr;
-          min-width: 0;
-          width: 100%;
         }
       }
     </style>
   </head>
   <body>
     <main class="board">
-      <header class="topbar">
-        <div class="brand-kicker">Qekto · private board</div>
-        <div class="now-clocks" aria-live="polite">
-          <div class="clock-card">
-            <div class="label">India · IST</div>
-            <div class="time" id="ist-time">--:--:--</div>
-            <div class="date" id="ist-date">—</div>
-          </div>
-          <div class="clock-card">
-            <div class="label">Pacific · PT</div>
-            <div class="time" id="pt-time">--:--:--</div>
-            <div class="date" id="pt-date">—</div>
-          </div>
+      <div class="brand-kicker">Qekto · private board</div>
+
+      <section class="now-clocks" aria-live="polite" aria-label="Live clocks">
+        <div class="clock-card">
+          <div class="label">India time · IST</div>
+          <div class="place">India</div>
+          <div class="time" id="ist-time">--:--:--</div>
+          <div class="date" id="ist-date">—</div>
         </div>
-      </header>
+        <div class="clock-card">
+          <div class="label">San Francisco time · PT</div>
+          <div class="place">San Francisco</div>
+          <div class="time" id="sf-time">--:--:--</div>
+          <div class="date" id="sf-date">—</div>
+        </div>
+      </section>
 
       <section class="tracks" aria-label="Program countdowns">
         <article class="track" data-track="yc">
@@ -273,9 +295,15 @@
             </span>
           </div>
 
-          <div class="deadline-lines">
-            <div><strong>Nov 2, 2026 · 8:00 PM PT</strong></div>
-            <div>Nov 3, 2026 · 9:30 AM IST</div>
+          <div class="deadline-box">
+            <div class="deadline-row">
+              <div class="where">San Francisco deadline</div>
+              <div class="when">Mon, Nov 2, 2026 · 8:00 PM</div>
+            </div>
+            <div class="deadline-row">
+              <div class="where">India deadline</div>
+              <div class="when">Tue, Nov 3, 2026 · 9:30 AM</div>
+            </div>
           </div>
         </article>
 
@@ -291,9 +319,15 @@
             </span>
           </div>
 
-          <div class="deadline-lines">
-            <div><strong>Nov 1, 2026 · 11:59 PM PT</strong></div>
-            <div>Nov 2, 2026 · 1:29 PM IST</div>
+          <div class="deadline-box">
+            <div class="deadline-row">
+              <div class="where">San Francisco deadline</div>
+              <div class="when">Sun, Nov 1, 2026 · 11:59 PM</div>
+            </div>
+            <div class="deadline-row">
+              <div class="where">India deadline</div>
+              <div class="when">Mon, Nov 2, 2026 · 1:29 PM</div>
+            </div>
           </div>
         </article>
       </section>
@@ -311,14 +345,14 @@
       const MS_PER_DAY = 86400000;
 
       function formatZone(date, timeZone) {
-        const time = new Intl.DateTimeFormat("en-IN", {
+        const time = new Intl.DateTimeFormat("en-GB", {
           timeZone,
           hour: "2-digit",
           minute: "2-digit",
           second: "2-digit",
           hour12: false,
         }).format(date);
-        const day = new Intl.DateTimeFormat("en-IN", {
+        const day = new Intl.DateTimeFormat("en-US", {
           timeZone,
           weekday: "short",
           day: "numeric",
@@ -345,12 +379,12 @@
 
       function tick() {
         const now = new Date();
-        const ist = formatZone(now, "Asia/Kolkata");
-        const pt = formatZone(now, "America/Los_Angeles");
-        document.getElementById("ist-time").textContent = ist.time;
-        document.getElementById("ist-date").textContent = ist.day;
-        document.getElementById("pt-time").textContent = pt.time;
-        document.getElementById("pt-date").textContent = pt.day;
+        const india = formatZone(now, "Asia/Kolkata");
+        const sf = formatZone(now, "America/Los_Angeles");
+        document.getElementById("ist-time").textContent = india.time;
+        document.getElementById("ist-date").textContent = india.day;
+        document.getElementById("sf-time").textContent = sf.time;
+        document.getElementById("sf-date").textContent = sf.day;
 
         for (const [key, deadline] of Object.entries(TRACKS)) {
           const card = document.querySelector(`[data-track="${key}"]`);
