@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request a pilot | Qekto</title>
+  <meta name="description" content="How a Qekto pilot works: deploy in your infrastructure, connect one workload, review real traffic and evals with the founders. Free on one workload.">
+  <link rel="canonical" href="https://qekto.com/pilot">
+  <meta property="og:title" content="Request a pilot | Qekto">
+  <meta property="og:description" content="Free pilot on one workload, deployed in your infrastructure.">
+  <meta property="og:url" content="https://qekto.com/pilot">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Qekto home"><span class="logo" aria-hidden="true"></span>Qekto</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/product" class="hide-sm">Product</a>
+      <a href="/security" class="hide-sm">Security</a>
+      <a href="/docs" class="hide-sm">Quickstart</a>
+      <a class="btn sm primary" href="/pilot" aria-current="page">Request a pilot</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap prose">
+      <div class="eyebrow">Pilot</div>
+      <h1>Start with one workload</h1>
+      <p class="lede">We work directly with a small number of AI startups. A pilot is free on one workload, runs in your
+        infrastructure, and is reviewed against your own evals.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="mailto:founders@qekto.com?subject=Qekto%20pilot&amp;body=Company%3A%0AWhat%20your%20product%20does%20with%20AI%3A%0AProviders%20and%20models%20today%3A%0ARough%20daily%20request%20volume%3A%0AModalities%20(text%2C%20image%2C%20audio%2C%20files)%3A%0AGround%20truth%20you%20have%20(labels%2C%20outcomes)%3A">Email founders@qekto.com</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="grid g2">
+        <div class="card"><span class="step-n">Week 0</span><h3>Scope</h3><p>A short call about your product, providers, data constraints and the workload you most want to own. We agree on success criteria and on what counts as ground truth.</p></div>
+        <div class="card"><span class="step-n">Day 1</span><h3>Deploy and connect</h3><p>Qekto runs in your cloud as one container with a volume. You add your provider, create a scoped key, and change your <code>base_url</code>. Traffic flows through unchanged from the first request.</p></div>
+        <div class="card"><span class="step-n">Weeks 1–3</span><h3>Measure and label</h3><p>You see real volume, latency, tokens, estimated cost and errors per workload. Ground truth arrives through labels or outcomes you already track. The workload contract records task, schema, evaluator and training rights.</p></div>
+        <div class="card"><span class="step-n">When ready</span><h3>Graduate behind a gate</h3><p>If a compatible trainer exists, we train, evaluate on a frozen holdout, and review the release card together. A model serves traffic only after it passes the gate, a shadow run and a canary.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap grid g2 start">
+      <div>
+        <h2>A good fit if</h2>
+        <ul class="list">
+          <li>You make thousands of similar model calls a day: routing, triage, extraction or tool steps.</li>
+          <li>You have, or can collect, ground truth for that task.</li>
+          <li>You can run one container in your environment.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Terms</h2>
+        <ul class="list">
+          <li>Free on one workload during the pilot.</li>
+          <li>After the pilot, you choose between a share of measured savings and a monthly upkeep fee.</li>
+          <li>Trained weights, release cards and eval data are yours to export at any time.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div><a class="brand small" href="/"><span class="logo" aria-hidden="true"></span>Qekto</a> <span>· Self-improving AI models you own</span></div>
+    <nav aria-label="Footer">
+      <a href="/product">Product</a><a href="/security">Security</a><a href="/docs">Quickstart</a><a href="/pilot">Pilot</a>
+      <a href="mailto:founders@qekto.com">founders@qekto.com</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

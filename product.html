@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product | Qekto</title>
+  <meta name="description" content="How Qekto works: OpenAI-compatible proxy, typed multimodal data plane, workload contracts, capability-matched graduation, frozen-holdout gates, release cards, shadow and canary rollout.">
+  <link rel="canonical" href="https://qekto.com/product">
+  <meta property="og:title" content="Product | Qekto">
+  <meta property="og:description" content="Proxy, workload contracts, evaluation gates and safe rollout for models you own.">
+  <meta property="og:url" content="https://qekto.com/product">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Qekto home"><span class="logo" aria-hidden="true"></span>Qekto</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/product" class="hide-sm" aria-current="page">Product</a>
+      <a href="/security" class="hide-sm">Security</a>
+      <a href="/docs" class="hide-sm">Quickstart</a>
+      <a class="btn sm primary" href="/pilot">Request a pilot</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Product</div>
+      <h1>One control plane for every model call</h1>
+      <p class="lede">Qekto sits between your application and your model providers. You get full visibility into your
+        AI traffic from day one. Repetitive workloads graduate to models you own, but only when the evidence supports it.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head"><div class="eyebrow">Proxy</div><h2>Change one line, keep your semantics</h2>
+        <p>Model, messages, tools, tool choice, structured output options, temperature and token limits pass through untouched. Upstream status codes and error bodies are returned exactly as the provider sent them.</p></div>
+      <table>
+        <thead><tr><th>Endpoint</th><th>Behavior</th></tr></thead>
+        <tbody>
+          <tr><td><code>POST /v1/chat/completions</code></td><td>Streaming and non-streaming. Text, <code>image_url</code>, <code>input_audio</code> and file parts plus tool calls are analysed into typed metadata. Eligible requests can be served by an owned model.</td></tr>
+          <tr><td><code>POST /v1/responses</code></td><td>Pass-through (streaming and non-streaming), with typed metadata.</td></tr>
+          <tr><td><code>POST /v1/embeddings</code></td><td>Pass-through. Vectors are never stored.</td></tr>
+          <tr><td><code>GET /v1/models</code></td><td>Your provider's model list.</td></tr>
+          <tr><td>Audio, image and file endpoints</td><td>Rejected with a precise <code>501 endpoint_not_supported</code> before any upload is read, so Qekto never silently alters payloads it cannot handle.</td></tr>
+        </tbody>
+      </table>
+      <p class="muted mt">Retries happen only when a request provably never reached the provider. Timeouts and unreachable providers map to clear 504 and 502 errors. If analytics fail, traffic keeps flowing.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap grid g2 start">
+      <div>
+        <div class="eyebrow">Multimodal data plane</div>
+        <h2>Typed content, not flattened strings</h2>
+        <p>Each request is recorded as a typed envelope: modality, MIME type, size, SHA-256 and an object reference for every part, kept separately from request metadata.</p>
+        <p>By default Qekto stores metadata and PII-redacted text only. Full text and raw media storage are per-project opt-ins. Base64 media never enters the database. Qekto never fetches URLs found in payloads.</p>
+      </div>
+      <div>
+        <div class="eyebrow">Workload contracts</div>
+        <h2>Qekto learns how you use AI</h2>
+        <p>Onboarding captures your product, users, compliance constraints, modalities, latency and cost goals, success criteria, available ground truth and training rights.</p>
+        <p>Each detected workload gets a versioned contract covering task family, input and output schema, evaluator and thresholds, SLOs, privacy, and rollout policy. Unknown task families are still captured and routed to your provider.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head"><div class="eyebrow">Graduation</div><h2>Capability matching, not wishful thinking</h2>
+        <p>Plugins for trainers, evaluators and serving runtimes declare what they support. Qekto picks candidates from the workload contract. If nothing fits, it explains what is missing.</p></div>
+      <table>
+        <thead><tr><th>Plugin</th><th>Kind</th><th>Handles</th></tr></thead>
+        <tbody>
+          <tr><td><code>qekto.nb_text_classifier</code></td><td>Trainer</td><td>Text classification into a label set. CPU only, trains in seconds.</td></tr>
+          <tr><td><code>unsloth.qlora_sft</code></td><td>Trainer</td><td>Classification, extraction, generation and tool use on text. QLoRA on your NVIDIA GPU, exported to GGUF.</td></tr>
+          <tr><td><code>qekto.builtin</code>, <code>ollama</code></td><td>Runtimes</td><td>In-process serving, or Ollama for GGUF models.</td></tr>
+          <tr><td><code>exact_match</code>, <code>json_fields</code>, <code>tool_call</code>, <code>wer</code></td><td>Gating evaluators</td><td>Labels, JSON Schema plus field match, tool name plus arguments, speech word error rate.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><div class="eyebrow">Evaluation and release</div><h2>A release is a pull request for a model</h2></div>
+      <div class="grid g3">
+        <div class="card"><h3>Frozen, stratified holdout</h3><p>Holdout assignment is deterministic and persisted, and stratified by label for classification workloads. An input never moves between train and holdout.</p></div>
+        <div class="card"><h3>Three-way comparison</h3><p>The candidate is scored against the active owned model and against your provider's captured answers on the same holdout, with per-slice scores and case-by-case diffs.</p></div>
+        <div class="card"><h3>Release cards</h3><p>JSON and Markdown cards record the gate decision, regressions, dataset provenance, training-rights attestation and artifact hash.</p></div>
+        <div class="card"><h3>Shadow</h3><p>A candidate runs on live traffic after your provider answers. Agreement is measured and the candidate never serves.</p></div>
+        <div class="card"><h3>Canary and auto-rollback</h3><p>The candidate serves a configurable share of traffic. It is promoted or rolled back automatically from observed fallback rate, and invalid or low-confidence outputs fall back to your provider.</p></div>
+        <div class="card"><h3>Kill switch</h3><p>One setting or one CLI command forces all of a project's traffic back to your provider on the next request.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap grid g2 start">
+      <div>
+        <div class="eyebrow">Control plane</div>
+        <h2>Dashboard and CLI</h2>
+        <p>The dashboard shows traffic, workloads, latency, tokens, estimated cost, errors, fallback rate, model versions, release cards, jobs with logs, and the audit trail. Every number comes from your own traffic.</p>
+        <p>Everything critical is also scriptable from the CLI.</p>
+      </div>
+<pre><code>qekto workloads --project P
+qekto graduate  --project P --workload W --wait
+qekto release   --project P --version-id V
+qekto promote   --project P --workload W --version-id V --mode canary
+qekto rollback  --project P --workload W --reason "incident 42"
+qekto force-upstream --project P --on
+qekto audit     --project P --workload W</code></pre>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap cta-row">
+      <a class="btn primary" href="/pilot">Request a pilot</a>
+      <a class="btn" href="/security">Security and data handling</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div><a class="brand small" href="/"><span class="logo" aria-hidden="true"></span>Qekto</a> <span>· Self-improving AI models you own</span></div>
+    <nav aria-label="Footer">
+      <a href="/product">Product</a><a href="/security">Security</a><a href="/docs">Quickstart</a><a href="/pilot">Pilot</a>
+      <a href="mailto:founders@qekto.com">founders@qekto.com</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quickstart | Qekto</title>
+  <meta name="description" content="Install Qekto with Docker Compose, connect your model provider, create a scoped key and route your first request in about five minutes.">
+  <link rel="canonical" href="https://qekto.com/docs">
+  <meta property="og:title" content="Quickstart | Qekto">
+  <meta property="og:description" content="From docker compose up to your first proxied request.">
+  <meta property="og:url" content="https://qekto.com/docs">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Qekto home"><span class="logo" aria-hidden="true"></span>Qekto</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/product" class="hide-sm">Product</a>
+      <a href="/security" class="hide-sm">Security</a>
+      <a href="/docs" class="hide-sm" aria-current="page">Quickstart</a>
+      <a class="btn sm primary" href="/pilot">Request a pilot</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap prose">
+      <div class="eyebrow">Quickstart</div>
+      <h1>Five minutes to your first request</h1>
+      <p class="lede">Pilot customers receive the Qekto distribution from the founders. With it, you can go from an empty host to proxied production traffic like this.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap prose">
+      <h2>1 · Run Qekto</h2>
+<pre><code>cp .env.example .env
+python3 -c "import secrets; print('QEKTO_SECRET_KEY=' + secrets.token_urlsafe(48))" &gt;&gt; .env
+docker compose up -d
+docker compose logs qekto | grep "setup token"</code></pre>
+      <p class="muted mt">One container and one volume. Liveness at <code>/healthz</code>, readiness at <code>/readyz</code>. For local evaluation without Docker, run <code>uv sync &amp;&amp; QEKTO_ENV=development uv run qekto serve</code>.</p>
+
+      <h2>2 · Set up your organization</h2>
+      <p>Open <code>https://your-host/setup</code>, enter the bootstrap token, and create the owner account. Then create a project. Onboarding asks what your product does with AI, which modalities you expect, your latency and cost goals, your success criteria, what ground truth you have, and whether upstream outputs may legally be used for training.</p>
+
+      <h2>3 · Connect your provider</h2>
+      <p>Under <strong>Settings → Add upstream</strong>, enter your provider's OpenAI-compatible base URL and API key. The key is encrypted and never shown again. Click <strong>Test</strong>: the upstream receives traffic only after the connection test passes.</p>
+
+      <h2>4 · Create a key and switch your client</h2>
+<pre><code><span class="k">import</span> os
+<span class="k">from</span> openai <span class="k">import</span> OpenAI
+
+client = OpenAI(base_url=<span class="k">"https://your-host/v1"</span>, api_key=os.environ[<span class="k">"QEKTO_API_KEY"</span>])
+resp = client.chat.completions.create(
+    model=<span class="k">"gpt-4o-mini"</span>,
+    messages=[{<span class="k">"role"</span>: <span class="k">"user"</span>, <span class="k">"content"</span>: <span class="k">"Hello"</span>}],
+    extra_headers={<span class="k">"X-Qekto-Workload"</span>: <span class="k">"ticket-triage"</span>},  <span class="c"># optional explicit workload name</span>
+)</code></pre>
+      <p class="muted mt">Your request goes out unchanged and the provider's response comes back unchanged. Each response carries <code>x-qekto-request-id</code>.</p>
+
+      <h2>5 · Add ground truth and graduate</h2>
+      <p>Label captured requests from your backend with a <code>labels:write</code> key:</p>
+<pre><code>curl https://your-host/v1/qekto/labels \
+  -H "Authorization: Bearer $QEKTO_LABELS_KEY" -H "Content-Type: application/json" \
+  -d '{"request_id": "req_…", "expected": "billing"}'</code></pre>
+      <p class="muted mt">On the workload page, set the contract (task family, output schema, evaluator, training rights). The readiness panel lists anything that still blocks graduation. When nothing is missing, click <strong>Train &amp; evaluate</strong>, review the release card, and roll out with shadow → canary → full.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap cta-row">
+      <a class="btn primary" href="/pilot">Request the distribution</a>
+      <a class="btn" href="mailto:founders@qekto.com?subject=Qekto%20quickstart%20question">Ask a question</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div><a class="brand small" href="/"><span class="logo" aria-hidden="true"></span>Qekto</a> <span>· Self-improving AI models you own</span></div>
+    <nav aria-label="Footer">
+      <a href="/product">Product</a><a href="/security">Security</a><a href="/docs">Quickstart</a><a href="/pilot">Pilot</a>
+      <a href="mailto:founders@qekto.com">founders@qekto.com</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

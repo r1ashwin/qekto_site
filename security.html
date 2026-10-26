@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Security and data handling | Qekto</title>
+  <meta name="description" content="How Qekto handles customer data: self-hosted deployment, tenant isolation, hashed keys, encrypted credentials, PII redaction, retention, export and deletion, and explicit training rights.">
+  <link rel="canonical" href="https://qekto.com/security">
+  <meta property="og:title" content="Security and data handling | Qekto">
+  <meta property="og:description" content="Self-hosted, isolated, auditable. Training only on data you have the right to use.">
+  <meta property="og:url" content="https://qekto.com/security">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/assets/favicon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Qekto home"><span class="logo" aria-hidden="true"></span>Qekto</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/product" class="hide-sm">Product</a>
+      <a href="/security" class="hide-sm" aria-current="page">Security</a>
+      <a href="/docs" class="hide-sm">Quickstart</a>
+      <a class="btn sm primary" href="/pilot">Request a pilot</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap prose">
+      <div class="eyebrow">Security and data handling</div>
+      <h1>Your traffic stays yours</h1>
+      <p class="lede">Qekto is a data processor. Your traffic is used only to build and run your own models. It is never
+        mixed across customers and never used for shared models.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap grid g2">
+      <div class="card"><h3>Self-hosted</h3><p>Qekto runs in your infrastructure, as a single container with a persistent volume. Upstream provider calls go directly from your environment to your provider.</p></div>
+      <div class="card"><h3>Isolation</h3><p>Organizations, projects and environments are separate. Every query is scoped to the caller's project, and projects in other organizations do not appear to exist.</p></div>
+      <div class="card"><h3>Keys and credentials</h3><p>Project API keys are shown once and stored as salted hashes. Scoped keys can be rotated and revoked, effective on the next request. Provider credentials are encrypted at rest, never returned by any API, and replaced only after the new key passes a live test.</p></div>
+      <div class="card"><h3>Dashboard access</h3><p>Owner, admin and member roles. Sessions use HttpOnly cookies with CSRF protection and a strict content security policy, with no inline scripts.</p></div>
+      <div class="card"><h3>Storage policy</h3><p>Per project: pause capture, store no content, PII-redacted content (the default) or full text, opt-in raw media in object storage, and retention in days. Base64 media is never written to the database.</p></div>
+      <div class="card"><h3>Export and deletion</h3><p>Export a project's configuration, traffic records, labels, model artifacts, jobs and audit log as a zip, which excludes credentials and key hashes. Delete a project or organization and its data, media and artifacts are removed.</p></div>
+      <div class="card"><h3>Audit trail</h3><p>Every contract change, training run, gate decision, shadow, canary, promotion, rollback, policy change and key or credential operation is recorded with actor and time.</p></div>
+      <div class="card"><h3>Safe failure</h3><p>Unsupported endpoints are rejected before uploads are read. Qekto never fetches URLs found in payloads. If analytics fail, proxy traffic still flows.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap prose">
+      <div class="eyebrow">Training rights</div>
+      <h2>Only data you have the right to use</h2>
+      <p>Many model providers' terms prohibit training competing models on their outputs. Qekto enforces this in the data path. Before any example reaches a trainer, its source must be declared in the workload contract:</p>
+      <ul>
+        <li><strong>Customer labels</strong>: ground truth you provide.</li>
+        <li><strong>Oracle labels</strong>: answers from your own system of record.</li>
+        <li><strong>Open teachers</strong>: outputs of license-compatible open-weight models.</li>
+        <li><strong>Upstream outputs</strong>: accepted only if you also flag that upstream as training-allowed. Both declarations are audited.</li>
+      </ul>
+      <p>Provider answers can still serve as an <em>evaluation</em> baseline and shadow reference. They become training data only after both declarations above.</p>
+      <div class="callout"><strong>Scope note.</strong> PII redaction is pattern-based. It reduces stored PII but is not a compliance certification. Tell us your requirements (for example HIPAA or GDPR data residency) and we will say plainly what v1 does and does not cover.</div>
+      <p class="mt">Security questions: <a href="mailto:founders@qekto.com">founders@qekto.com</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div><a class="brand small" href="/"><span class="logo" aria-hidden="true"></span>Qekto</a> <span>· Self-improving AI models you own</span></div>
+    <nav aria-label="Footer">
+      <a href="/product">Product</a><a href="/security">Security</a><a href="/docs">Quickstart</a><a href="/pilot">Pilot</a>
+      <a href="mailto:founders@qekto.com">founders@qekto.com</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
